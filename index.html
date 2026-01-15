@@ -70,7 +70,7 @@
     <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/eastereggs.css">
     <link rel="stylesheet" href="css/paint.css">
-    
+    <link rel="stylesheet" href="css/notepad.css">
 </head>
 <body>
 
@@ -136,6 +136,12 @@
     </a>
     
     <!-- Linha 3 -->
+    <a class="desktop-icon" href="#" onclick="openNotepad(); return false;" role="button" tabindex="0" aria-label="Sobre Mim">
+        <img src="img/notepad-icon.webp" class="icon" alt="Sobre Mim - Notepad">
+        <span class="lang pt">Sobre Mim</span>
+        <span class="lang en hidden">About Me</span>
+    </a>
+    
     <a class="desktop-icon" href="#" onclick="openWindow(); return false;" role="button" tabindex="0" aria-label="Portfólio">
         <img src="img/ie-icon.png" class="icon" alt="Portfólio">
         <span class="lang pt">Portfólio</span>
@@ -323,15 +329,9 @@
         <!-- ==================== ABOUT SECTION ==================== -->
         <div id="about" class="section">
             <div class="lang pt">
-                <h2>Sobre Mim</h2>
-                <p>Desenvolvedor com experiência em desenvolvimento web, softwares e engenharia de prompts para LLM's.</p>
-                
                 <div id="skills-container-pt"></div>
             </div>
             <div class="lang en hidden">
-                <h2>About Me</h2>
-                <p>Developer with experience in web development, software and prompt engineering for LLM's.</p>
-                
                 <div id="skills-container-en"></div>
             </div>
         </div>
@@ -439,6 +439,25 @@
 </div>
 
 <!-- ==================== PAINT WINDOW ==================== -->
+<!-- ==================== NOTEPAD WINDOW ==================== -->
+<div class="window" id="notepad-window" data-window-id="notepad" style="width: 600px; height: 500px; top: 80px; left: 200px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="img/notepad-icon.webp" alt="Notepad" style="width: 16px; height: 16px;">
+            <span class="window-title">Sobre Mim - Bloco de Notas</span>
+        </div>
+        <div class="window-controls">
+            <button class="maximize-btn" onclick="WindowManager.toggleMaximize('notepad')" aria-label="Maximizar"></button>
+            <button class="close-btn disabled" onclick="return false;" aria-label="Fechar (desabilitado)" title="Esta janela não pode ser fechada"></button>
+        </div>
+    </div>
+    
+    <div class="window-content">
+        <textarea id="notepad-textarea" readonly aria-label="Conteúdo do bloco de notas"></textarea>
+    </div>
+</div>
+
+<!-- ==================== PAINT WINDOW ==================== -->
 <div class="window" id="paint-window" data-window-id="paint" style="width: 800px; height: 600px; top: 50px; left: 150px;">
     <div class="title-bar">
         <div class="title-bar-text">
@@ -508,6 +527,11 @@
             <span class="lang pt">Meu Portfólio</span>
             <span class="lang en hidden">My Portfolio</span>
         </div>
+        <div class="taskbar-item active" data-window-id="notepad" onclick="toggleWindow('notepad')">
+            <img src="img/notepad-icon.webp" alt="Notepad">
+            <span class="lang pt">Sobre Mim</span>
+            <span class="lang en hidden">About Me</span>
+        </div>
     </div>
     <div class="system-tray">
         <span class="time" id="clock">00:00</span>
@@ -526,6 +550,7 @@
 <script src="js/modules/window.js"></script>
 <script src="js/modules/accessibility.js"></script>
 <script src="js/modules/paint.js"></script>
+<script src="js/modules/notepad.js"></script>
 <script src="js/modules/clippy.js"></script>
 <script src="js/modules/minesweeper.js"></script>
 <script src="js/main.js"></script>
