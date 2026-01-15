@@ -1,0 +1,122 @@
+/**
+ * NOTEPAD STYLES - Windows XP Style
+ */
+
+/* ==================== NOTEPAD WINDOW ==================== */
+
+#notepad-window {
+  width: 600px;
+  height: 500px;
+  min-width: 400px;
+  min-height: 300px;
+}
+
+#notepad-window .window-content {
+  padding: 0;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ==================== BOTÃO CLOSE DESABILITADO ==================== */
+
+/* O botão X tem aparência normal mas não fecha a janela */
+.window-controls .close-btn.disabled {
+  /* Mantém aparência normal */
+  cursor: not-allowed;
+}
+
+.window-controls .close-btn.disabled:hover {
+  /* Fica vermelho no hover normalmente */
+  background: #e81123;
+}
+
+.window-controls .close-btn.disabled:active {
+  /* Visual de clique mas não fecha */
+  background: #c50d1c;
+}
+
+/* ==================== NOTEPAD TEXTAREA ==================== */
+
+#notepad-textarea {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  border: none;
+  margin: 0;
+  padding: 8px 12px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000000;
+  background: #ffffff;
+  resize: none;
+  outline: none;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Scrollbar customizada para o Notepad */
+#notepad-textarea::-webkit-scrollbar {
+  width: 16px;
+}
+
+#notepad-textarea::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-left: 1px solid #d4d4d4;
+}
+
+#notepad-textarea::-webkit-scrollbar-thumb {
+  background: #cdcdcd;
+  border: 1px solid #8b8b8b;
+  border-radius: 0;
+}
+
+#notepad-textarea::-webkit-scrollbar-thumb:hover {
+  background: #a6a6a6;
+}
+
+#notepad-textarea::-webkit-scrollbar-button {
+  width: 16px;
+  height: 16px;
+  background: #f0f0f0;
+  border: 1px solid #8b8b8b;
+}
+
+#notepad-textarea::-webkit-scrollbar-button:hover {
+  background: #e5e5e5;
+}
+
+/* Setas dos botões da scrollbar */
+#notepad-textarea::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 8 4 L 12 10 L 4 10 Z" fill="%23000"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#notepad-textarea::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 8 12 L 12 6 L 4 6 Z" fill="%23000"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ==================== NOTEPAD MENU BAR (opcional, removido por simplicidade) ==================== */
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 768px) {
+  #notepad-window {
+    width: 95vw;
+    height: 70vh;
+    min-width: 300px;
+  }
+  
+  #notepad-textarea {
+    font-size: 12px;
+    padding: var(--spacing-sm);
+  }
+}
