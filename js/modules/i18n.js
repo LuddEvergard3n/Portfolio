@@ -72,7 +72,30 @@ const i18n = {
       'desktop.officeHelp': 'Ajuda Office',
       'desktop.minesweeper': 'Campo Minado',
       'desktop.paint': 'Paint',
-      'desktop.portfolio': 'Portfólio'
+      'desktop.portfolio': 'Portfólio',
+      'desktop.notepad': 'Sobre Mim',
+      
+      // Notepad
+      'notepad.title': 'Sobre Mim - Bloco de Notas',
+      'notepad.content': `Prazer, eu sou o Herbert (LuddEvergard3n)
+
+Meu desenvolvimento é focado em sistemas, análise de dados e engenharia de software com ênfase em performance, determinismo e manutenção de longo prazo. Todos os meus projetos seguem uma filosofia imutável:
+
+• Deve ser otimizado;
+• Deve ser modular;
+• Deve ser bem documentado e comentado;
+
+Mexo principalmente com desenvolvimento web, desde sites estáticos até landings mais complexas e bonitas, mas gosto de mexer bastante em C, C++ e Java.
+
+A interface desse portfólio foi propositalmente inspirada em sistemas clássicos e UIs de software corporativo, priorizando clareza, estabilidade visual e familiaridade com ambientes legados.
+
+Todos os meus projetos respondem três questões:
+
+• "Por que esse projeto existe";
+• "Qual problema técnico resolve";
+• "O que eu quis demonstrar aqui";
+
+É isso. Se quiser entrar em contato, clique na aba "Contato" na janela ao lado. Vai encontrar todos os meus projetos ali também.`
     },
     
     en: {
@@ -137,7 +160,30 @@ const i18n = {
       'desktop.officeHelp': 'Office Help',
       'desktop.minesweeper': 'Minesweeper',
       'desktop.paint': 'Paint',
-      'desktop.portfolio': 'Portfolio'
+      'desktop.portfolio': 'Portfolio',
+      'desktop.notepad': 'About Me',
+      
+      // Notepad
+      'notepad.title': 'About Me - Notepad',
+      'notepad.content': `Nice to meet you, I'm Herbert (LuddEvergard3n)
+
+My development focuses on systems, data analysis, and software engineering with emphasis on performance, determinism, and long-term maintenance. All my projects follow an immutable philosophy:
+
+• Must be optimized;
+• Must be modular;
+• Must be well documented and commented;
+
+I mainly work with web development, from static sites to more complex and beautiful landing pages, but I really enjoy working with C, C++, and Java.
+
+This portfolio's interface was purposefully inspired by classic systems and corporate software UIs, prioritizing clarity, visual stability, and familiarity with legacy environments.
+
+All my projects answer three questions:
+
+• "Why does this project exist";
+• "What technical problem does it solve";
+• "What did I want to demonstrate here";
+
+That's it. If you want to get in touch, click on the "Contact" tab in the window next to it. You'll find all my projects there too.`
     }
   },
   

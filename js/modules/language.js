@@ -70,6 +70,9 @@ const Language = {
       }
     }
     
+    // Disparar evento de mudança de idioma
+    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+    
     // Atualizar barra de endereço
     this.updateAddressBar();
   },

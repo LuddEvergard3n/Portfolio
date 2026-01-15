@@ -47,18 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Window Manager (gerenciamento de janelas)
     if (window.WindowManager) {
       WindowManager.init();
-      // Registrar janela do Paint
+      // Registrar janelas
       WindowManager.register('paint');
+      WindowManager.register('notepad');
       console.log('✅ Window Manager inicializado');
     }
     
-    // 7. Accessibility (acessibilidade e navegação por teclado)
+    // 7. Notepad (bloco de notas com Sobre Mim)
+    if (window.Notepad) {
+      Notepad.init();
+      console.log('✅ Notepad inicializado');
+    }
+    
+    // 8. Accessibility (acessibilidade e navegação por teclado)
     if (window.Accessibility) {
       Accessibility.init();
       console.log('✅ Accessibility inicializado');
     }
     
-    // 8. Easter Eggs
+    // 9. Easter Eggs
     if (window.Clippy) {
       Clippy.init();
       console.log('✅ Clippy (Easter Egg) inicializado');
@@ -72,6 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     console.log('🎉 Windows XP Portfolio carregado com sucesso!');
+    
+    // Abrir Notepad automaticamente
+    if (window.Notepad) {
+      setTimeout(() => {
+        Notepad.open();
+      }, 300);
+    }
+    
     console.log('');
     console.log('📋 Comandos disponíveis:');
     console.log('  - Ctrl + Shift + C (3x) = Ativar Clippy');
