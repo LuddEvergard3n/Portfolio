@@ -43,7 +43,7 @@ const BootScreen = {
   playStartupSound() {
     try {
       const audio = new Audio('img/windows-xp-startup.mp3');
-      audio.volume = 0.2; // 25% do volume
+      audio.volume = 0.12; // 12% do volume
       
       const playPromise = audio.play();
       
