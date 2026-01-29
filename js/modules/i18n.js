@@ -45,13 +45,13 @@ const i18n = {
       'project.ares': 'ARES',
       'project.ares.desc': 'Sistema básico de gestão de dados financeiros.',
       'project.cassandra': 'Cassandra',
-      'project.cassandra.desc': 'Sistema de análise de cenários com GUI, cache e comparação.',
+      'project.cassandra.desc': 'Sistema de análise de cenários com GUI, cache e comparação (Python/Tkinter).',
       'project.deterministic': 'Mini Deterministic Engine',
-      'project.deterministic.desc': 'Engine de simulação determinística com fixed-timestep e replay bit-exact.',
+      'project.deterministic.desc': 'Game engine determinística em C++ com fixed-timestep, replay bit-exact e RNG controlado.',
       'project.banking': 'Mini Core Banking',
-      'project.banking.desc': 'Sistema bancário core em COBOL com ledger imutável e gestão de transações.',
+      'project.banking.desc': 'Sistema bancário core em COBOL (terminal-based) com ledger imutável e separação de camadas.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
-      'project.dashboard.desc': 'Dashboard Angular para monitoramento real-time via WebSocket com Signals.',
+      'project.dashboard.desc': 'Dashboard Angular otimizado para eventos real-time (WebSocket, Signals, virtual scrolling).',
       
       // Sites
       'site.law': 'Landing Advocacia Exemplo',
@@ -133,13 +133,13 @@ Todos os meus projetos respondem três questões:
       'project.ares': 'ARES',
       'project.ares.desc': 'Basic financial data management system.',
       'project.cassandra': 'Cassandra',
-      'project.cassandra.desc': 'Scenario analysis system with GUI, cache and comparison.',
+      'project.cassandra.desc': 'Scenario analysis system with GUI, cache and comparison (Python/Tkinter).',
       'project.deterministic': 'Mini Deterministic Engine',
-      'project.deterministic.desc': 'Deterministic simulation engine with fixed-timestep and bit-exact replay.',
+      'project.deterministic.desc': 'Deterministic game engine in C++ with fixed-timestep, bit-exact replay and controlled RNG.',
       'project.banking': 'Mini Core Banking',
-      'project.banking.desc': 'Core banking system in COBOL with immutable ledger and transaction management.',
+      'project.banking.desc': 'Terminal-based core banking system in COBOL with immutable ledger and layered architecture.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
-      'project.dashboard.desc': 'Angular dashboard for real-time monitoring via WebSocket with Signals.',
+      'project.dashboard.desc': 'Optimized Angular dashboard for real-time events (WebSocket, Signals, virtual scrolling).',
       
       // Sites
       'site.law': 'Law Firm Landing Example',
@@ -315,19 +315,19 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         name: this.t('project.deterministic', language),
         description: this.t('project.deterministic.desc', language),
         url: 'https://github.com/LuddEvergard3n/mini-deterministic-engine',
-        tags: ['C++', 'SDL2', 'Game Engine']
+        tags: ['C++', 'SDL2', 'Game Engine', 'Determinism']
       },
       {
         name: this.t('project.banking', language),
         description: this.t('project.banking.desc', language),
         url: 'https://github.com/LuddEvergard3n/mini-core-banking',
-        tags: ['COBOL', 'Banking', 'Terminal']
+        tags: ['COBOL', 'Banking', 'Terminal', 'File I/O']
       },
       {
         name: this.t('project.dashboard', language),
         description: this.t('project.dashboard.desc', language),
         url: 'https://github.com/LuddEvergard3n/realtime-monitoring-dashboard',
-        tags: ['Angular', 'TypeScript', 'WebSocket']
+        tags: ['Angular', 'TypeScript', 'WebSocket', 'Signals']
       }
     ];
   },
