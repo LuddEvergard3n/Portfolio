@@ -10,7 +10,7 @@
   left: var(--spacing-md);
   display: grid;
   grid-template-columns: repeat(3, 82px);
-  grid-template-rows: repeat(9, auto);
+  grid-template-rows: repeat(7, auto);
   gap: var(--spacing-lg) var(--spacing-xl);
   z-index: var(--z-index-desktop);
   max-height: calc(100vh - 60px);
