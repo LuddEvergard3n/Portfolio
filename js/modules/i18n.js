@@ -59,6 +59,22 @@ const i18n = {
       'site.primecoast': 'Prime Coast',
       'site.primecoast.desc': 'Landing page moderna para imobiliária (demonstração).',
       
+      // Ecossistema Educacional
+      'ecosystem.title': 'Ecossistema Educacional',
+      'ecosystem.description': 'Projeto pessoal onde criei um site para cada matéria essencial, mirando na dor de cada disciplina e a dificuldade que professores enfrentam ao ensinar o conteúdo.',
+      'ecosystem.euclides': 'Euclides',
+      'ecosystem.euclides.desc': 'Sistema de Matemática browser-only com 84 tópicos (EFI → ES), WebAssembly + fallback JS, PWA offline.',
+      'ecosystem.quintiliano': 'Quintiliano',
+      'ecosystem.quintiliano.desc': 'Sistema de Português e Literatura com 9 módulos: leitura estrutural, interpretação, sintaxe, etimologia.',
+      'ecosystem.johnson': 'Johnson English',
+      'ecosystem.johnson.desc': 'Plataforma de Inglês A1→C2 (177 lições, 47 módulos), método Trivium, C1-C2 full English.',
+      'ecosystem.lavoisier': 'Lavoisier',
+      'ecosystem.lavoisier.desc': 'Laboratório visual de Química com 14 módulos (Canvas 2D), do Ensino Médio ao Superior.',
+      'ecosystem.humboldt': 'Humboldt',
+      'ecosystem.humboldt.desc': 'Atlas interativo de Geografia com 8 módulos, mapas SVG, escalas local→global.',
+      'ecosystem.herodoto': 'Heródoto',
+      'ecosystem.herodoto.desc': 'Linha do tempo de História - Cronologia interativa e contexto histórico.',
+      
       // Paginação
       'pagination.previous': 'Anterior',
       'pagination.next': 'Próxima',
@@ -146,6 +162,22 @@ Todos os meus projetos respondem três questões:
       'site.law.desc': 'Landing page for law firm.',
       'site.primecoast': 'Prime Coast',
       'site.primecoast.desc': 'Modern landing page for real estate agency (demo).',
+      
+      // Educational Ecosystem
+      'ecosystem.title': 'Educational Ecosystem',
+      'ecosystem.description': 'Personal project where I created a website for each essential subject, targeting each discipline\'s pain points and the difficulties teachers face when teaching the content.',
+      'ecosystem.euclides': 'Euclides',
+      'ecosystem.euclides.desc': 'Browser-only Math system with 84 topics (Elementary → Higher Ed), WebAssembly + JS fallback, offline PWA.',
+      'ecosystem.quintiliano': 'Quintiliano',
+      'ecosystem.quintiliano.desc': 'Portuguese Language and Literature system with 9 modules: structural reading, interpretation, syntax, etymology.',
+      'ecosystem.johnson': 'Johnson English',
+      'ecosystem.johnson.desc': 'English platform A1→C2 (177 lessons, 47 modules), Trivium method, C1-C2 full English immersion.',
+      'ecosystem.lavoisier': 'Lavoisier',
+      'ecosystem.lavoisier.desc': 'Visual Chemistry lab with 14 modules (Canvas 2D), High School to Higher Education.',
+      'ecosystem.humboldt': 'Humboldt',
+      'ecosystem.humboldt.desc': 'Interactive Geography atlas with 8 modules, SVG maps, local→global scales.',
+      'ecosystem.herodoto': 'Heródoto',
+      'ecosystem.herodoto.desc': 'History timeline - Interactive chronology and historical context.',
       
       // Pagination
       'pagination.previous': 'Previous',
@@ -351,6 +383,59 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         description: this.t('site.primecoast.desc', language),
         url: 'https://luddevergard3n.github.io/Prime-Coast/',
         tags: ['HTML5', 'Tailwind', 'JavaScript']
+      }
+    ];
+  },
+  
+  /**
+   * Retorna lista do ecossistema educacional
+   * @param {string} lang - Idioma
+   * @returns {Array} Array de sites educacionais
+   */
+  getEcosystem(lang = null) {
+    const language = lang || this.currentLanguage;
+    return [
+      {
+        name: this.t('ecosystem.euclides', language),
+        description: this.t('ecosystem.euclides.desc', language),
+        url: 'https://luddevergard3n.github.io/euclides/',
+        repo: 'https://github.com/LuddEvergard3n/euclides',
+        tags: ['Math', 'WebAssembly', 'PWA', 'Canvas']
+      },
+      {
+        name: this.t('ecosystem.quintiliano', language),
+        description: this.t('ecosystem.quintiliano.desc', language),
+        url: 'https://luddevergard3n.github.io/quintiliano/',
+        repo: 'https://github.com/LuddEvergard3n/quintiliano',
+        tags: ['Portuguese', 'Literature', 'ES Modules']
+      },
+      {
+        name: this.t('ecosystem.johnson', language),
+        description: this.t('ecosystem.johnson.desc', language),
+        url: 'https://luddevergard3n.github.io/johnson-english/',
+        repo: 'https://github.com/LuddEvergard3n/johnson-english',
+        tags: ['English', 'A1-C2', 'Trivium', 'TTS']
+      },
+      {
+        name: this.t('ecosystem.lavoisier', language),
+        description: this.t('ecosystem.lavoisier.desc', language),
+        url: 'https://luddevergard3n.github.io/lavoisier/',
+        repo: 'https://github.com/LuddEvergard3n/lavoisier',
+        tags: ['Chemistry', 'Canvas 2D', 'Simulation']
+      },
+      {
+        name: this.t('ecosystem.humboldt', language),
+        description: this.t('ecosystem.humboldt.desc', language),
+        url: 'https://luddevergard3n.github.io/humboldt/',
+        repo: 'https://github.com/LuddEvergard3n/humboldt',
+        tags: ['Geography', 'SVG Maps', 'Interactive']
+      },
+      {
+        name: this.t('ecosystem.herodoto', language),
+        description: this.t('ecosystem.herodoto.desc', language),
+        url: 'https://luddevergard3n.github.io/Herodoto/',
+        repo: 'https://github.com/LuddEvergard3n/Herodoto',
+        tags: ['History', 'Timeline', 'Chronology']
       }
     ];
   }

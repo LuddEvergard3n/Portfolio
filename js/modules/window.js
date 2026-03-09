@@ -361,9 +361,9 @@ const WindowManager = {
     const win = this.windows[id];
     if (!win) return;
     
-    const closeBtn = win.element.querySelector('.btn-close');
-    const minimizeBtn = win.element.querySelector('.btn-minimize');
-    const maximizeBtn = win.element.querySelector('.btn-maximize');
+    const closeBtn = win.element.querySelector('.close-btn');
+    const minimizeBtn = win.element.querySelector('.minimize-btn');
+    const maximizeBtn = win.element.querySelector('.maximize-btn');
     
     if (closeBtn) {
       closeBtn.addEventListener('click', () => this.close(id));
@@ -382,8 +382,10 @@ const WindowManager = {
    * Inicializa todas as janelas
    */
   init() {
-    // Registrar janela principal
+    // Registrar todas as janelas
     this.register('main');
+    this.register('notepad');
+    this.register('paint');
     
     // Abrir janela principal
     this.open('main');

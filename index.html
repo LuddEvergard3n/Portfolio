@@ -345,6 +345,7 @@
                 <div class="project-tabs">
                     <button class="project-tab-btn active" onclick="showProjectTab('sites', event)">Sites</button>
                     <button class="project-tab-btn" onclick="showProjectTab('projects', event)">Projetos</button>
+                    <button class="project-tab-btn" onclick="showProjectTab('ecosystem', event)">Ecossistema Educacional</button>
                 </div>
                 
                 <!-- Sites Tab -->
@@ -356,6 +357,11 @@
                 <div class="project-tab-content" id="tab-projects-pt">
                     <div id="projects-list-pt"></div>
                 </div>
+                
+                <!-- Ecosystem Tab -->
+                <div class="project-tab-content" id="tab-ecosystem-pt">
+                    <div id="ecosystem-list-pt"></div>
+                </div>
             </div>
             
             <div class="lang en hidden">
@@ -365,6 +371,7 @@
                 <div class="project-tabs">
                     <button class="project-tab-btn active" onclick="showProjectTab('sites', event)">Sites</button>
                     <button class="project-tab-btn" onclick="showProjectTab('projects', event)">Projects</button>
+                    <button class="project-tab-btn" onclick="showProjectTab('ecosystem', event)">Educational Ecosystem</button>
                 </div>
                 
                 <!-- Sites Tab -->
@@ -375,6 +382,11 @@
                 <!-- Projects Tab -->
                 <div class="project-tab-content" id="tab-projects-en">
                     <div id="projects-list-en"></div>
+                </div>
+                
+                <!-- Ecosystem Tab -->
+                <div class="project-tab-content" id="tab-ecosystem-en">
+                    <div id="ecosystem-list-en"></div>
                 </div>
             </div>
         </div>
@@ -447,7 +459,8 @@
             <span class="window-title">Sobre Mim - Bloco de Notas</span>
         </div>
         <div class="window-controls">
-            <button class="maximize-btn" onclick="WindowManager.toggleMaximize('notepad')" aria-label="Maximizar"></button>
+            <button class="minimize-btn" aria-label="Minimizar"></button>
+            <button class="maximize-btn" aria-label="Maximizar"></button>
             <button class="close-btn disabled" onclick="return false;" aria-label="Fechar (desabilitado)" title="Esta janela não pode ser fechada"></button>
         </div>
     </div>
@@ -466,9 +479,9 @@
             <span class="lang en hidden">Paint</span>
         </div>
         <div class="window-controls">
-            <button class="minimize-btn" onclick="WindowManager.minimize('paint')" aria-label="Minimizar"></button>
-            <button class="maximize-btn" onclick="WindowManager.toggleMaximize('paint')" aria-label="Maximizar"></button>
-            <button class="close-btn" onclick="WindowManager.close('paint')" aria-label="Fechar"></button>
+            <button class="minimize-btn" aria-label="Minimizar"></button>
+            <button class="maximize-btn" aria-label="Maximizar"></button>
+            <button class="close-btn" aria-label="Fechar"></button>
         </div>
     </div>
     

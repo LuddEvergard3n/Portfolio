@@ -8,6 +8,7 @@ const Pagination = {
   itemsPerPage: 5,
   currentProjectsPage: 1,
   currentSitesPage: 1,
+  currentEcosystemPage: 1,
   
   /**
    * Inicializa o sistema de paginação
@@ -32,6 +33,11 @@ const Pagination = {
       const page = parseInt(hash.split('-')[2]);
       if (!isNaN(page)) {
         this.currentSitesPage = page;
+      }
+    } else if (hash.startsWith('#ecosystem-page-')) {
+      const page = parseInt(hash.split('-')[2]);
+      if (!isNaN(page)) {
+        this.currentEcosystemPage = page;
       }
     }
   },
@@ -156,6 +162,36 @@ const Pagination = {
   },
   
   /**
+   * Renderiza ecossistema educacional com paginação
+   * @param {string} containerId - ID do container
+   */
+  renderEcosystem(containerId = 'ecosystem-list-pt') {
+    const ecosystem = window.i18n.getEcosystem();
+    const paginated = this.paginate(ecosystem, this.currentEcosystemPage);
+    
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    // Limpar container
+    container.innerHTML = '';
+    
+    // Renderizar items
+    paginated.items.forEach(site => {
+      const card = this.createProjectCard(site); // Usa mesma estrutura
+      container.appendChild(card);
+    });
+    
+    // Atualizar controles de paginação
+    this.updatePaginationControls('ecosystem', paginated, containerId);
+    
+    // Atualizar URL hash
+    window.location.hash = `ecosystem-page-${paginated.currentPage}`;
+    
+    // Animação fade-in
+    this.animateFadeIn(container);
+  },
+  
+  /**
    * Cria card de projeto/site (usa mesma estrutura do Navigation)
    * @param {Object} item - Projeto ou site
    * @returns {HTMLElement}
@@ -272,8 +308,10 @@ const Pagination = {
       prevBtn.onclick = () => {
         if (type === 'projects') {
           this.prevProjectsPage();
-        } else {
+        } else if (type === 'sites') {
           this.prevSitesPage();
+        } else if (type === 'ecosystem') {
+          this.prevEcosystemPage();
         }
       };
     }
@@ -282,8 +320,10 @@ const Pagination = {
       nextBtn.onclick = () => {
         if (type === 'projects') {
           this.nextProjectsPage();
-        } else {
+        } else if (type === 'sites') {
           this.nextSitesPage();
+        } else if (type === 'ecosystem') {
+          this.nextEcosystemPage();
         }
       };
     }
@@ -344,6 +384,33 @@ const Pagination = {
   },
   
   /**
+   * Próxima página de ecosystem
+   */
+  nextEcosystemPage() {
+    const ecosystem = window.i18n.getEcosystem();
+    const totalPages = Math.ceil(ecosystem.length / this.itemsPerPage);
+    
+    if (this.currentEcosystemPage < totalPages) {
+      this.currentEcosystemPage++;
+      const lang = window.Language ? window.Language.getCurrent() : 'pt';
+      this.renderEcosystem(`ecosystem-list-${lang}`);
+      this.scrollToTop();
+    }
+  },
+  
+  /**
+   * Página anterior de ecosystem
+   */
+  prevEcosystemPage() {
+    if (this.currentEcosystemPage > 1) {
+      this.currentEcosystemPage--;
+      const lang = window.Language ? window.Language.getCurrent() : 'pt';
+      this.renderEcosystem(`ecosystem-list-${lang}`);
+      this.scrollToTop();
+    }
+  },
+  
+  /**
    * Scroll suave para o topo do conteúdo
    */
   scrollToTop() {
@@ -377,6 +444,7 @@ const Pagination = {
   reset() {
     this.currentProjectsPage = 1;
     this.currentSitesPage = 1;
+    this.currentEcosystemPage = 1;
   }
 };
 

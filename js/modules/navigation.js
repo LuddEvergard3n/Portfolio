@@ -74,6 +74,8 @@ const Navigation = {
           Pagination.renderProjects('projects-list-' + lang);
         } else if (tabId === 'sites') {
           Pagination.renderSites('sites-list-' + lang);
+        } else if (tabId === 'ecosystem') {
+          Pagination.renderEcosystem('ecosystem-list-' + lang);
         }
       }
     }
@@ -96,6 +98,10 @@ const Navigation = {
     // Renderizar Projetos
     this.renderProjectList('projects-list-pt', config.projects.pt);
     this.renderProjectList('projects-list-en', config.projects.en);
+    
+    // Renderizar Ecossistema Educacional
+    this.renderProjectList('ecosystem-list-pt', config.ecosystem.pt);
+    this.renderProjectList('ecosystem-list-en', config.ecosystem.en);
   },
   
   /**
@@ -224,11 +230,13 @@ const Navigation = {
     // Inicializar paginação
     if (window.Pagination) {
       Pagination.init();
-      // Renderizar primeira página de sites e projetos em ambos idiomas
+      // Renderizar primeira página de sites, projetos e ecosystem em ambos idiomas
       Pagination.renderSites('sites-list-pt');
       Pagination.renderSites('sites-list-en');
       Pagination.renderProjects('projects-list-pt');
       Pagination.renderProjects('projects-list-en');
+      Pagination.renderEcosystem('ecosystem-list-pt');
+      Pagination.renderEcosystem('ecosystem-list-en');
     }
     
     // Mostrar primeira aba de projetos

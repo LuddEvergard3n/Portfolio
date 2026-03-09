@@ -51,6 +51,17 @@ const CONFIG = {
     get en() {
       return window.i18n ? window.i18n.getProjects('en') : [];
     }
+  },
+
+  // ==================== ECOSSISTEMA EDUCACIONAL ====================
+  // Agora usa i18n.getEcosystem(lang)
+  ecosystem: {
+    get pt() {
+      return window.i18n ? window.i18n.getEcosystem('pt') : [];
+    },
+    get en() {
+      return window.i18n ? window.i18n.getEcosystem('en') : [];
+    }
   }
 };
 
