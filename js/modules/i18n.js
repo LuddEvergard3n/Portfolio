@@ -13,22 +13,35 @@ const i18n = {
     pt: {
       // Sobre
       'about.title': 'Sobre Mim',
-      'about.description': 'Desenvolvedor com experiência em desenvolvimento web, softwares e engenharia de prompts para LLM\'s.',
-      
+      'about.description': 'Desenvolvedor focado em sistemas, web e engenharia de software. Trabalho do baixo nível em C++ ao front-end em HTML/CSS/JS, com ênfase em performance, determinismo e código que dura.',
+
       // Categorias de skills
-      'skills.programming': 'Linguagens de Programação',
-      'skills.web': 'Desenvolvimento Web',
+      'skills.programming': 'Linguagens',
+      'skills.web': 'Web',
+      'skills.systems': 'Sistemas e Engenharia',
       'skills.ai': 'Inteligência Artificial',
-      
-      // Skills individuais
-      'skill.c': 'C - Programação de sistemas, manipulação de memória e estruturas de dados de baixo nível',
-      'skill.cobol': 'COBOL - Sistemas legados, processamento de dados financeiros',
-      'skill.java': 'Java - Desenvolvimento orientado a objetos, aplicações enterprise',
-      'skill.javascript': 'JavaScript - Desenvolvimento web full-stack, Node.js, manipulação DOM',
-      'skill.python': 'Python - Scripts de automação, análise de dados, integração com LLMs',
-      'skill.html5': 'HTML5 - Estruturação semântica, acessibilidade',
-      'skill.css3': 'CSS3 - Layouts responsivos, animações, design systems',
-      'skill.wasm': 'WebAssembly (WASM) - Otimização de performance, portar código C/C++ para web',
+
+      // Skills individuais — Linguagens
+      'skill.cpp': 'C++ — Programação de sistemas, gerenciamento manual de memória, estruturas de baixo nível. Linguagem principal em projetos como ATHENA (motor de wargaming determinístico) e Mini Deterministic Engine.',
+      'skill.c': 'C — Núcleo de sistemas, integração com WebAssembly. Usado nos motores físicos do Archimedes e Lavoisier.',
+      'skill.python': 'Python — Automação, análise de dados, integração com LLMs e pipelines de geração de documentos (PDF Builder).',
+      'skill.objc': 'Objective-C — Por interesse e proximidade com C/C++; familiaridade com runtime e mensageria.',
+      'skill.java': 'Java — Programação orientada a objetos, aplicações de longa duração e GUIs Swing (ARES, Cassandra).',
+      'skill.javascript': 'JavaScript — Front-end full-stack sem framework, ES Modules nativos, Web Workers, Canvas, IndexedDB. Usado em todos os projetos web do portfólio.',
+
+      // Skills individuais — Web
+      'skill.html5': 'HTML5 — Marcação semântica, acessibilidade, SEO técnico (meta tags, JSON-LD, OpenGraph).',
+      'skill.css3': 'CSS3 — Layouts responsivos com Flexbox e Grid, design systems via CSS variables, animações sem dependência.',
+      'skill.webdev': 'Desenvolvimento Web — Sites estáticos, landings, SPAs sem framework, PWAs. Filosofia browser-first: zero build, ES Modules nativos, funcionamento offline.',
+      'skill.typescript': 'TypeScript — Tipagem estrita em projetos Angular e ferramentas internas.',
+
+      // Skills individuais — Sistemas
+      'skill.wasm': 'WebAssembly — Compilação de C/C++ para web; usado para mover lógica pesada do JS para WASM com fallback.',
+      'skill.determinism': 'Determinismo numérico — IEEE-754 strict, fixed-timestep, replay bit-exact, Velocity Verlet em integradores conservativos.',
+      'skill.build': 'Build systems — CMake, Makefile multiplataforma (Linux/macOS/MinGW), empacotamento Windows (Launch4j, NSIS).',
+      'skill.docs': 'Geração de documentos — DOCX OOXML manual via Web Worker, PDF via ReportLab e via janela de impressão. Conformidade ABNT (Norma).',
+
+      // Skills individuais — IA
       'skill.prompt': 'Engenharia de Prompts para LLMs - Claude, GPT, modelos open-source',
       'skill.llm-integration': 'Integração de LLMs em aplicações web',
       'skill.llm-optimization': 'Otimização de contexto e fine-tuning de respostas',
@@ -176,22 +189,35 @@ Todos os meus projetos respondem três questões:
     en: {
       // About
       'about.title': 'About Me',
-      'about.description': 'Developer with experience in web development, software and prompt engineering for LLM\'s.',
-      
+      'about.description': 'Developer focused on systems, web, and software engineering. I work from low-level C++ to front-end HTML/CSS/JS, with emphasis on performance, determinism, and code that lasts.',
+
       // Skill categories
-      'skills.programming': 'Programming Languages',
-      'skills.web': 'Web Development',
+      'skills.programming': 'Languages',
+      'skills.web': 'Web',
+      'skills.systems': 'Systems and Engineering',
       'skills.ai': 'Artificial Intelligence',
-      
-      // Individual skills
-      'skill.c': 'C - Systems programming, memory manipulation, and low-level data structures',
-      'skill.cobol': 'COBOL - Legacy systems, financial data processing',
-      'skill.java': 'Java - Object-oriented development, enterprise applications',
-      'skill.javascript': 'JavaScript - Full-stack web development, Node.js, DOM manipulation',
-      'skill.python': 'Python - Automation scripts, data analysis, LLM integration',
-      'skill.html5': 'HTML5 - Semantic structure, accessibility',
-      'skill.css3': 'CSS3 - Responsive layouts, animations, design systems',
-      'skill.wasm': 'WebAssembly (WASM) - Performance optimization, porting C/C++ code to web',
+
+      // Individual skills — Languages
+      'skill.cpp': 'C++ — Systems programming, manual memory management, low-level structures. Primary language in projects like ATHENA (deterministic wargaming engine) and Mini Deterministic Engine.',
+      'skill.c': 'C — Core systems, WebAssembly integration. Used in the physics engines of Archimedes and Lavoisier.',
+      'skill.python': 'Python — Automation, data analysis, LLM integration, and document generation pipelines (PDF Builder).',
+      'skill.objc': 'Objective-C — Out of interest and proximity to C/C++. Familiar with the runtime and messaging.',
+      'skill.java': 'Java — Object-oriented programming, long-running applications, Swing GUIs (ARES, Cassandra).',
+      'skill.javascript': 'JavaScript — Framework-free full-stack front-end, native ES Modules, Web Workers, Canvas, IndexedDB. Used across every web project in this portfolio.',
+
+      // Individual skills — Web
+      'skill.html5': 'HTML5 — Semantic markup, accessibility, technical SEO (meta tags, JSON-LD, OpenGraph).',
+      'skill.css3': 'CSS3 — Responsive layouts with Flexbox and Grid, design systems via CSS variables, dependency-free animations.',
+      'skill.webdev': 'Web Development — Static sites, landings, framework-free SPAs, PWAs. Browser-first philosophy: no build, native ES Modules, offline operation.',
+      'skill.typescript': 'TypeScript — Strict typing in Angular projects and internal tooling.',
+
+      // Individual skills — Systems
+      'skill.wasm': 'WebAssembly — C/C++ compiled for the web; used to move heavy logic out of JS into WASM with a fallback.',
+      'skill.determinism': 'Numerical determinism — IEEE-754 strict, fixed-timestep, bit-exact replay, Velocity Verlet for conservative integrators.',
+      'skill.build': 'Build systems — CMake, multi-platform Makefiles (Linux/macOS/MinGW), Windows packaging (Launch4j, NSIS).',
+      'skill.docs': 'Document generation — Manual DOCX OOXML in a Web Worker, PDF via ReportLab and via the print window. ABNT compliance (Norma).',
+
+      // Individual skills — AI
       'skill.prompt': 'Prompt Engineering for LLMs - Claude, GPT, open-source models',
       'skill.llm-integration': 'LLM integration in web applications',
       'skill.llm-optimization': 'Context optimization and response fine-tuning',
@@ -367,7 +393,10 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
   },
   
   /**
-   * Constrói a estrutura de skills usando traduções
+   * Constrói a estrutura de skills usando traduções.
+   * Quatro categorias: Linguagens, Web, Sistemas e IA. A ordem de
+   * declaração é a ordem de renderização.
+   *
    * @param {string} lang - Idioma
    * @returns {Array} Array de skills estruturadas
    */
@@ -377,19 +406,30 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
       {
         category: this.t('skills.programming', language),
         items: [
+          this.t('skill.cpp', language),
           this.t('skill.c', language),
-          this.t('skill.cobol', language),
+          this.t('skill.python', language),
+          this.t('skill.objc', language),
           this.t('skill.java', language),
-          this.t('skill.javascript', language),
-          this.t('skill.python', language)
+          this.t('skill.javascript', language)
         ]
       },
       {
         category: this.t('skills.web', language),
         items: [
+          this.t('skill.webdev', language),
           this.t('skill.html5', language),
           this.t('skill.css3', language),
-          this.t('skill.wasm', language)
+          this.t('skill.typescript', language)
+        ]
+      },
+      {
+        category: this.t('skills.systems', language),
+        items: [
+          this.t('skill.wasm', language),
+          this.t('skill.determinism', language),
+          this.t('skill.build', language),
+          this.t('skill.docs', language)
         ]
       },
       {

@@ -211,10 +211,12 @@ const Pagination = {
    * Cria card de projeto/site/ecossistema.
    *
    * Suporta os flags opcionais:
-   *   - `featured: true`  → adiciona classe .project--featured + badge "Destaque"
-   *     e, se houver, renderiza item.longDescription em um <p> secundario.
+   *   - `featured: true`  → adiciona classe .project--featured (borda azul,
+   *     fundo destacado). Eh tratamento puramente visual; o card NAO recebe
+   *     badge textual. Se houver, renderiza item.longDescription em um <p>
+   *     secundario.
    *   - `wip: true`       → badge "Em desenvolvimento" no canto do card.
-   *   - `repo`            → adiciona um segundo link "Código-fonte".
+   *   - `repo`            → adiciona um segundo link "Codigo-fonte".
    *
    * @param {Object} item - Projeto, site ou item do ecossistema
    * @returns {HTMLElement}
@@ -235,12 +237,10 @@ const Pagination = {
     title.textContent = item.name;
     header.appendChild(title);
 
-    if (item.featured) {
-      const badge = document.createElement('span');
-      badge.className = 'project-badge project-badge--featured';
-      badge.textContent = lang === 'pt' ? 'Destaque' : 'Featured';
-      header.appendChild(badge);
-    }
+    // Cards com `featured: true` recebem destaque visual via classe
+    // .project--featured (borda azul, fundo, prioridade no topo da lista),
+    // mas SEM badge textual — o destaque eh implicito pelo posicionamento
+    // e pelo estilo do card.
 
     if (item.wip) {
       const badgeWip = document.createElement('span');
