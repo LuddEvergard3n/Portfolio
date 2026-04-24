@@ -26,7 +26,11 @@ const Language = {
     }
     
     this.currentLang = lang;
-    
+
+    // Atualiza o atributo lang da raiz HTML para leitores de tela e SEO.
+    // Sem isso, <html lang="pt-BR"> fica fixo mesmo em modo EN.
+    document.documentElement.lang = (lang === 'pt') ? 'pt-BR' : 'en';
+
     // Atualizar i18n
     if (window.i18n) {
       window.i18n.setLanguage(lang);

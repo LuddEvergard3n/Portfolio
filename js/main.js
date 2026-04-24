@@ -1,117 +1,79 @@
 /**
  * MAIN.JS
- * 
- * Arquivo principal que inicializa todos os módulos do portfólio
+ *
+ * Inicializador principal. Orquestra a ordem de boot dos módulos.
+ *
+ * Contrato com os módulos:
+ *   - Cada módulo expõe um objeto global (ex.: window.BootScreen) com init().
+ *   - Em caso de ausência de um módulo, o boot continua mas registra warning
+ *     (o try/catch global anterior escondia qual módulo falhou).
+ *
+ * Decisão: NÃO chamar WindowManager.register() aqui para notepad/paint. O
+ * próprio WindowManager.init() já registra todas as janelas conhecidas;
+ * registrar duas vezes anexava handles/listeners em duplicata.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🖥️ Windows XP Portfolio inicializando...');
-  
-  // Inicializar módulos na ordem correta
-  try {
-    // 0. i18n (deve ser o primeiro para que outros módulos possam usar)
-    if (window.i18n) {
-      console.log('✅ i18n inicializado');
-    }
-    
-    // 1. Boot Screen (tela de inicialização)
-    if (window.BootScreen) {
-      BootScreen.init();
-      console.log('✅ Boot Screen inicializado');
-    }
-    
-    // 2. Clock (relógio da taskbar)
-    if (window.Clock) {
-      Clock.init();
-      console.log('✅ Clock inicializado');
-    }
-    
-    // 3. Language (gerenciamento de idiomas)
-    if (window.Language) {
-      Language.init();
-      console.log('✅ Language inicializado');
-    }
-    
-    // 4. Start Menu (menu iniciar)
-    if (window.StartMenu) {
-      StartMenu.init();
-      console.log('✅ Start Menu inicializado');
-    }
-    
-    // 5. Navigation (navegação entre seções)
-    if (window.Navigation) {
-      Navigation.init();
-      console.log('✅ Navigation inicializado');
-    }
-    
-    // 6. Window Manager (gerenciamento de janelas)
-    if (window.WindowManager) {
-      WindowManager.init();
-      // Registrar janelas
-      WindowManager.register('paint');
-      WindowManager.register('notepad');
-      console.log('✅ Window Manager inicializado');
-    }
-    
-    // 7. Notepad (bloco de notas com Sobre Mim)
-    if (window.Notepad) {
-      Notepad.init();
-      console.log('✅ Notepad inicializado');
-    }
-    
-    // 8. Accessibility (acessibilidade e navegação por teclado)
-    if (window.Accessibility) {
-      Accessibility.init();
-      console.log('✅ Accessibility inicializado');
-    }
-    
-    // 9. Easter Eggs
-    if (window.Clippy) {
-      Clippy.init();
-      console.log('✅ Clippy (Easter Egg) inicializado');
-      console.log('💡 Dica: Ctrl + Shift + C (3x) para ativar Clippy');
-    }
-    
-    if (window.Minesweeper) {
-      Minesweeper.init();
-      console.log('✅ Minesweeper (Easter Egg) inicializado');
-      console.log('💡 Dica: Ctrl + Shift + M (3x) para ativar Minesweeper');
-    }
-    
-    console.log('🎉 Windows XP Portfolio carregado com sucesso!');
-    
-    // Abrir Notepad automaticamente
-    if (window.Notepad) {
-      setTimeout(() => {
-        Notepad.open();
-      }, 300);
-    }
-    
-    console.log('');
-    console.log('📋 Comandos disponíveis:');
-    console.log('  - Ctrl + Shift + C (3x) = Ativar Clippy');
-    console.log('  - Ctrl + Shift + M (3x) = Ativar Minesweeper');
-    console.log('  - ESC = Fechar janela ativa');
-    console.log('  - Alt + F4 = Fechar janela ativa');
-    console.log('  - Tab = Navegar pelos ícones');
-    console.log('  - Setas = Navegar pelos ícones do desktop');
-    console.log('  - Enter = Ativar ícone focado');
-    console.log('');
-    
-  } catch (error) {
-    console.error('❌ Erro ao inicializar:', error);
-  }
-});
+(function () {
+  'use strict';
 
-// Prevenir menu de contexto padrão em toda a página (para funcionar o clique direito no Minesweeper)
-document.addEventListener('contextmenu', (e) => {
-  if (e.target.closest('.minesweeper-cell')) {
-    e.preventDefault();
+  /**
+   * Inicializa um módulo global pelo nome, se existir.
+   * Isola falhas: um módulo que lança erro não impede os demais.
+   *
+   * @param {string} name - Nome do módulo em window (ex.: 'BootScreen')
+   * @returns {boolean} true se o módulo foi encontrado e init() executou sem erro
+   */
+  function initModule(name) {
+    const mod = window[name];
+    if (!mod) {
+      console.warn('[main] modulo ausente:', name);
+      return false;
+    }
+    // i18n é um objeto de dados: não possui init() e isso é OK.
+    if (typeof mod.init !== 'function') {
+      return true;
+    }
+    try {
+      mod.init();
+      return true;
+    } catch (err) {
+      console.error('[main] falha ao inicializar', name, err);
+      return false;
+    }
   }
-});
 
-// Adicionar informações de debug no console
-console.log('%c👋 Bem-vindo ao meu portfólio!', 'font-size: 20px; color: #0058ee; font-weight: bold;');
-console.log('%cDesenvolvido com HTML, CSS e JavaScript vanilla', 'font-size: 14px; color: #666;');
-console.log('%cGitHub: https://github.com/LuddEvergard3n', 'font-size: 12px; color: #0066cc;');
-console.log('');
+  document.addEventListener('DOMContentLoaded', () => {
+    // Ordem importa: i18n antes de qualquer coisa que consulte traduções;
+    // Language depois de i18n; Navigation depois de Language; WindowManager
+    // antes de Notepad (que chama WindowManager.open).
+    const bootOrder = [
+      'i18n',
+      'BootScreen',
+      'Clock',
+      'Language',
+      'StartMenu',
+      'Navigation',
+      'WindowManager',
+      'Notepad',
+      'Accessibility',
+      'Clippy',
+      'Minesweeper'
+    ];
+
+    bootOrder.forEach(initModule);
+
+    // Abrir Notepad automaticamente após o boot.
+    // 300ms é um delay para a animacao da boot screen nao sobrepor.
+    if (window.Notepad && typeof window.Notepad.open === 'function') {
+      setTimeout(() => window.Notepad.open(), 300);
+    }
+  });
+
+  // Menu de contexto nativo: bloqueamos apenas dentro das células do
+  // Minesweeper (clique direito lá marca bandeira). Fora disso, preservar.
+  document.addEventListener('contextmenu', (e) => {
+    if (e.target.closest('.minesweeper-cell')) {
+      e.preventDefault();
+    }
+  });
+})();

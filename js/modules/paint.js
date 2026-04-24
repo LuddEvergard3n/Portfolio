@@ -35,7 +35,7 @@ const Paint = {
     this.setupEventListeners();
     this.saveState();
     
-    console.log('🎨 Paint inicializado');
+    console.log('[Paint] inicializado');
   },
   
   /**
@@ -370,7 +370,7 @@ const Paint = {
       font-size: 32px;
       flex-shrink: 0;
     `;
-    icon.textContent = '❓';
+    icon.textContent = '?';
     
     // Message
     const msg = document.createElement('div');
@@ -436,6 +436,54 @@ const Paint = {
   },
   
   /**
+   * Renderiza a paleta de cores no DOM (idempotente).
+   *
+   * Pré-condição: #paint-palette existe no DOM.
+   * Se a paleta já foi renderizada antes (detectado pela presença de filhos),
+   * é no-op.
+   */
+  renderPalette() {
+    const palette = document.getElementById('paint-palette');
+    if (!palette || palette.children.length > 0) return;
+
+    this.colors.forEach((color) => {
+      const colorDiv = document.createElement('div');
+      colorDiv.className = 'paint-color';
+      colorDiv.style.backgroundColor = color;
+      colorDiv.dataset.color = color;
+      palette.appendChild(colorDiv);
+    });
+  },
+
+  /**
+   * Abre a janela do Paint. Inicializa canvas + paleta na primeira chamada.
+   *
+   * Substitui a função openPaint() que antes vivia num <script> inline no
+   * index.html, violando a separação de responsabilidades que o resto do
+   * projeto segue.
+   *
+   * Ordem intencional: renderPalette() ANTES de init(). O init() chama
+   * setupEventListeners(), que procura .paint-color no DOM; portanto a
+   * paleta precisa existir antes.
+   */
+  open() {
+    const paintWindow = document.getElementById('paint-window');
+    if (!paintWindow) return;
+
+    paintWindow.style.display = 'flex';
+
+    if (window.WindowManager) {
+      window.WindowManager.open('paint');
+    }
+
+    // Inicialização tardia: só monta canvas/paleta na primeira abertura.
+    if (!this.canvas) {
+      this.renderPalette();
+      this.init();
+    }
+  },
+
+  /**
    * Salvar como PNG
    */
   save() {
@@ -448,3 +496,9 @@ const Paint = {
 
 // Exportar para uso global
 window.Paint = Paint;
+
+// Função global para compatibilidade com onclick inline no HTML.
+// (A migração completa para event delegation é um refactor separado.)
+function openPaint() {
+  Paint.open();
+}

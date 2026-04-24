@@ -1,546 +1,369 @@
-#  Windows XP Portfolio
+# Portfólio Windows XP
 
-Portfólio pessoal com tema nostálgico do Windows XP, desenvolvido com HTML, CSS e JavaScript vanilla. Inclui funcionalidades interativas, suporte a múltiplos idiomas (PT/EN) e easter eggs.
+Portfólio pessoal com tema Windows XP. HTML + CSS + JavaScript baunilha, sem
+frameworks, sem bundler, sem etapa de build. Internacionalização PT/EN
+centralizada, janelas arrastáveis/redimensionáveis, três easter eggs
+(Clippy, Campo Minado, Paint).
 
-![Version](https://img.shields.io/badge/version-2.5.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.5.1-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+---
 
 ## Índice
 
-- [Características](#-características)
-- [Tecnologias](#-tecnologias)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Instalação](#-instalação)
-- [Uso](#-uso)
-- [Arquitetura](#-arquitetura)
-- [Configuração](#-configuração)
-- [Easter Eggs](#-easter-eggs)
-- [Desempenho](#-desempenho)
-- [Responsividade](#-responsividade)
-- [Contribuindo](#-contribuindo)
-- [Licença](#-licença)
+- [Visão geral](#visao-geral)
+- [Tecnologias](#tecnologias)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Como executar](#como-executar)
+- [Arquitetura](#arquitetura)
+- [Sistema de conteúdo](#sistema-de-conteudo)
+- [Paginação](#paginacao)
+- [Configuração](#configuracao)
+- [Atalhos de teclado](#atalhos-de-teclado)
+- [Easter eggs](#easter-eggs)
+- [Responsividade](#responsividade)
+- [Acessibilidade](#acessibilidade)
+- [SEO](#seo)
+- [Licença](#licenca)
+- [Contato](#contato)
 
-## Características
+---
 
-### Funcionalidades Principais
-- **Tela de Boot**: Animação autêntica do Windows XP na inicialização
-- **Janelas Arrastáveis**: Arraste janelas pela barra de título com performance otimizada
-- **Redimensionamento**: Redimensione janelas pelos cantos e bordas
-- **Maximizar/Minimizar**: Controles totalmente funcionais
-- **Menu Iniciar**: Menu com design fiel ao Windows XP
-- **Barra de Tarefas**: Com relógio em tempo real e múltiplas janelas
-- **Múltiplos Idiomas**: Suporte para Português e Inglês com sistema i18n centralizado
-- **Sistema de Paginação**: Navegação por páginas com 5 projetos por vez (botões + teclado)
-- **Notepad "Sobre Mim"**: Bloco de Notas dedicado com biografia completa e filosofia de desenvolvimento
-- **Separação de Projetos**: Organizado em "Sites" (2) e "Projetos" (9)
-- **Acessibilidade**: Navegação por teclado completa (Tab, Setas, Enter, ESC, Alt+F4)
+## Visão geral
 
-### Easter Eggs
-- **Clippy**: Assistente nostálgico do Office
-- **Campo Minado**: Jogo completamente funcional
-- **Paint**: Versão simplificada do Paint do Windows XP com ferramentas básicas de desenho
+Simulação leve do desktop do Windows XP no navegador. Decisões de design:
 
-### Otimizações
-- CSS modularizado com variáveis
-- JavaScript modular e reutilizável
-- Animações suaves com transições CSS e requestAnimationFrame
-- Sem dependências externas
-- Configuração centralizada para fácil manutenção
-- Sistema de internacionalização (i18n) sem duplicação
-- SEO otimizado com meta tags completas e Schema.org structured data
-- Navegação por teclado e ARIA labels para acessibilidade
+- Zero dependências em runtime. Nenhum framework, nenhuma lib externa.
+- Nenhuma etapa de build. O repositório pode ser servido como está.
+- Um módulo por responsabilidade; estado mantido em objetos globais simples
+  (sem classes, sem reatividade).
+- Strings traduzíveis vivem **em um único lugar** (`js/modules/i18n.js`).
+  `config.js` e os demais módulos consultam o i18n via getters — não há
+  duplicação PT/EN entre data files.
+
+### O que está implementado
+
+- Boot screen (animação + som opcional).
+- Taskbar com relógio em tempo real, botão Iniciar, tray de janelas abertas.
+- Menu Iniciar com header de usuário, atalhos fixados e footer de logoff/desligar.
+- Gerenciador de janelas: abrir, fechar, minimizar, maximizar/restaurar,
+  arrastar pela title bar, redimensionar pelos 8 cantos/bordas, touch support.
+- i18n PT/EN com troca em tempo de execução. Atualiza o atributo `lang` da
+  raiz HTML para leitores de tela e SEO.
+- Janela "Sobre Mim" (Bloco de Notas): abre automaticamente após o boot,
+  botão fechar desabilitado por design, conteúdo PT/EN.
+- Seção de projetos com três abas: **Sites**, **Projetos**, **Ecossistema
+  Educacional**. Cada aba pagina independentemente (5 itens por página).
+- Easter eggs: Clippy (assistente nostálgico), Campo Minado (jogo completo
+  9×9 com 10 minas), Paint (pincel/lápis/borracha/balde, paleta XP, salvar
+  como PNG, Ctrl+Z).
+- Acessibilidade: foco visível, ARIA labels, navegação por Tab/setas,
+  atalhos de teclado, região `sr-only` para leitores de tela.
+
+---
 
 ## Tecnologias
 
-- **HTML5**: Estrutura semântica
-- **CSS3**: Variáveis CSS, Flexbox, Grid, Animações
-- **JavaScript (ES6+)**: Módulos, Classes, Arrow Functions
-- **Sem Frameworks**: Vanilla JS puro
+| Camada     | Escolha                                             |
+|------------|-----------------------------------------------------|
+| Marcação   | HTML5 semântico                                     |
+| Estilo     | CSS3 com variáveis (`:root`), Flexbox, Grid         |
+| Lógica     | JavaScript ES2015+ (objetos globais, arrow fns)     |
+| Empacote   | Nenhum — arquivos servidos diretamente              |
+| Transporte | `<script src>` em ordem; sem `type="module"`        |
 
-##  Estrutura do Projeto
+> **Nota:** o projeto usa o padrão "objeto global + `window.Foo = Foo`".
+> Não usa ES Modules (`import`/`export`). A escolha foi intencional para
+> manter o site funcional também via `file://` (sem CORS).
+
+---
+
+## Estrutura do projeto
 
 ```
-portfolio/
-│
-├── index.html              # HTML principal
-├── sitemap.xml            # Sitemap para SEO
-├── robots.txt             # Configuração para crawlers
-│
-├── css/                    # Estilos modulares
-│   ├── variables.css      # Variáveis CSS (cores, tamanhos, etc) + acessibilidade
-│   ├── boot.css           # Tela de inicialização
-│   ├── desktop.css        # Desktop, ícones, taskbar, menu
-│   ├── window.css         # Janelas e controles
-│   ├── content.css        # Conteúdo (projetos, skills, contato)
-│   ├── eastereggs.css     # Clippy e Minesweeper
-│   ├── paint.css          # Paint do Windows XP
-│   └── notepad.css        # Bloco de Notas "Sobre Mim"
-│
-├── js/                     # JavaScript modular
-│   ├── config.js          # Configurações (usa i18n)
-│   ├── main.js            # Inicializador principal
-│   │
-│   └── modules/           # Módulos organizados
-│       ├── i18n.js        # Sistema de internacionalização
-│       ├── boot.js        # Gerencia tela de boot
-│       ├── clock.js       # Relógio da taskbar
-│       ├── language.js    # Troca de idiomas
-│       ├── startMenu.js   # Menu Iniciar
-│       ├── pagination.js  # Sistema de paginação de projetos
-│       ├── navigation.js  # Navegação entre seções
-│       ├── window.js      # Gerenciamento de janelas (com requestAnimationFrame)
-│       ├── accessibility.js # Navegação por teclado e ARIA
-│       ├── notepad.js     # Bloco de Notas "Sobre Mim"
-│       ├── paint.js       # Paint do Windows XP
-│       ├── clippy.js      # Easter egg: Clippy
-│       └── minesweeper.js # Easter egg: Campo Minado
-│
-└── img/                    # Imagens
-    ├── bliss.jpg          # Wallpaper Windows XP
-    ├── windows-logo.png   # Logo Windows
-    ├── ie-icon.png        # Ícone IE
-    ├── notepad-icon.webp  # Ícone Notepad
-    ├── folder.png         # Ícone pasta
-    ├── my-computer.png    # Ícone computador
-    ├── recycle-bin.png    # Ícone lixeira
-    └── Clippy.webp        # Clippy animado
+portfolio-xp/
+├── index.html                    # HTML principal (única página)
+├── README.md
+├── css/
+│   ├── variables.css             # Tokens: cores, tamanhos, tipografia, z-index
+│   ├── boot.css                  # Tela de boot + animações
+│   ├── desktop.css               # Desktop, ícones, taskbar, menu Iniciar
+│   ├── window.css                # Janelas, title bar, controles, resize handles
+│   ├── content.css               # Conteúdo do portfólio (abas, cards, skills)
+│   ├── eastereggs.css            # Clippy e Campo Minado
+│   ├── paint.css                 # Paint
+│   └── notepad.css               # Bloco de Notas "Sobre Mim"
+├── js/
+│   ├── main.js                   # Inicializador / orquestrador
+│   ├── config.js                 # Dados pessoais + getters delegando ao i18n
+│   └── modules/
+│       ├── i18n.js               # Traduções + providers de dados por idioma
+│       ├── boot.js               # Boot screen
+│       ├── clock.js              # Relógio da taskbar
+│       ├── language.js           # Troca de idioma (atualiza <html lang>)
+│       ├── startMenu.js          # Menu Iniciar
+│       ├── navigation.js         # Abas Sobre/Projetos/Contato + sub-abas
+│       ├── pagination.js         # Paginação dentro das sub-abas de projetos
+│       ├── window.js             # WindowManager (drag/resize/min/max/close)
+│       ├── notepad.js            # Bloco de Notas "Sobre Mim"
+│       ├── paint.js              # Paint + função open() e openPaint() global
+│       ├── accessibility.js      # Navegação por teclado no desktop
+│       ├── clippy.js             # Easter egg: Clippy
+│       └── minesweeper.js        # Easter egg: Campo Minado
+└── img/                          # Ícones .ico do XP, wallpaper, áudio de boot
 ```
 
-##  Instalação
+> **Não presentes** (apesar de versões antigas deste README mencionarem):
+> `sitemap.xml` e `robots.txt` não fazem parte do repositório.
 
-### Opção 1: Clone do Repositório
+---
+
+## Como executar
+
+O projeto roda em `file://`, mas um servidor local é recomendado para
+evitar qualquer comportamento diferente de CORS com áudio/ícones.
 
 ```bash
-git clone https://github.com/LuddEvergard3n/portfolio-xp.git
-cd portfolio-xp
-```
+# Python 3
+python3 -m http.server 8000
 
-### Opção 2: Download Direto
+# Node.js
+npx http-server -p 8000 .
 
-Baixe o arquivo ZIP do repositório e extraia.
-
-### Executar Localmente
-
-Não é necessário servidor web para desenvolvimento, mas é recomendado:
-
-```bash
-# Com Python 3
-python -m http.server 8000
-
-# Com Node.js (http-server)
-npx http-server -p 8000
-
-# Com PHP
+# PHP
 php -S localhost:8000
 ```
 
-Acesse: `http://localhost:8000`
+Acesse `http://localhost:8000`.
 
-## Uso
-
-### Navegação Básica
-
-1. Aguarde a tela de boot (3 segundos)
-2. Use o menu Iniciar ou clique nos ícones do desktop
-3. **Notepad "Sobre Mim"** abre automaticamente com a janela principal
-4. Arraste janelas pela barra de título
-5. Redimensione pelas bordas e cantos
-6. Troque idiomas com os botões PT/EN
-7. **Navegue pelos projetos** usando os botões "← Anterior" / "Próxima →" ou setas do teclado
-
-### Atalhos de Teclado
-
-- **Tab**: Navega entre os elementos focáveis
-- **Setas (Desktop)**: Navega entre ícones do desktop
-- **Setas ← → (Projetos)**: Navega entre páginas de projetos
-- **Enter**: Ativa o elemento focado
-- **ESC**: Fecha a janela ativa
-- **Alt + F4**: Fecha a janela ativa
-
-### Sistema de Paginação
-
-O portfólio exibe **5 projetos por página**. Para navegar:
-
-1. **Botões**: Clique em "← Anterior" ou "Próxima →"
-2. **Teclado**: Use as setas ← e → quando estiver na aba Projetos
-3. **URL**: Acesse diretamente via hash: `#projects-page-2`
-4. **Indicador**: Mostra "Página 1 de 2" ou "Page 1 of 2"
-
-### Notepad "Sobre Mim"
-
-- **Abre automaticamente** com a janela principal
-- **Não pode ser fechado** (botão X desabilitado)
-- **Pode ser maximizado** e redimensionado
-- **Multi-idioma**: Conteúdo muda automaticamente ao trocar PT/EN
-- **Taskbar**: Aparece como "Sobre Mim" / "About Me"
-
-### Adicionar Novos Projetos
-
-Edite o arquivo `js/modules/i18n.js` na seção de traduções:
-
-```javascript
-translations: {
-  pt: {
-    'project.meuProjeto': 'Nome do Projeto',
-    'project.meuProjeto.desc': 'Descrição do projeto',
-  },
-  en: {
-    'project.meuProjeto': 'Project Name',
-    'project.meuProjeto.desc': 'Project description',
-  }
-}
-```
-
-E adicione no método `getProjects()`:
-
-```javascript
-getProjects(lang = null) {
-  const language = lang || this.currentLanguage;
-  return [
-    // ... projetos existentes
-    {
-      name: this.t('project.meuProjeto', language),
-      description: this.t('project.meuProjeto.desc', language),
-      url: 'https://exemplo.com',
-      tags: ['HTML', 'CSS', 'JS']
-    }
-  ];
-}
-```
-
-**Nota:** Se ultrapassar 5 projetos, a paginação criará automaticamente uma nova página.
-
-### Personalizar Skills
-
-Edite `js/modules/i18n.js`:
-
-```javascript
-translations: {
-  pt: {
-    'skills.novaCategoria': 'Nova Categoria',
-    'skill.novaSkill': 'Nova Skill - Descrição detalhada',
-  }
-}
-```
-
-### Editar Texto do Notepad
-
-O texto biográfico do Notepad está em `js/modules/i18n.js`:
-
-```javascript
-'notepad.content': `Seu texto aqui em português...`,  // PT
-'notepad.content': `Your text here in English...`,    // EN
-```
+---
 
 ## Arquitetura
 
-### Padrão de Design
+### Fluxo de inicialização
 
-O projeto segue uma arquitetura modular com separação de responsabilidades:
+`main.js` espera `DOMContentLoaded` e chama `init()` em cada módulo em
+ordem fixa, isolando falhas (um módulo que lança erro não impede os demais).
+A ordem é:
 
 ```
-Camada de Apresentação (HTML/CSS)
-    ↓
-Camada de Lógica (JavaScript Modules)
-    ↓
-Camada de Dados (i18n.js)
+i18n → BootScreen → Clock → Language → StartMenu → Navigation
+     → WindowManager → Notepad → Accessibility → Clippy → Minesweeper
 ```
 
-### Módulos JavaScript
+Depois de 300 ms, `main.js` abre o Notepad "Sobre Mim" automaticamente —
+tempo suficiente para a boot screen sair de cena.
 
-Cada módulo é independente e exporta suas funcionalidades:
+### Padrão dos módulos
 
 ```javascript
 const ModuleName = {
-  // Estado privado
-  property: value,
-  
-  // Métodos públicos
-  init() { /* ... */ },
-  method() { /* ... */ }
+  // Estado do módulo
+  someState: null,
+
+  // API pública
+  init() { /* registra listeners, lê DOM */ },
+  doSomething() { /* ... */ }
 };
 
 window.ModuleName = ModuleName;
 ```
 
-### Fluxo de Inicialização
+### WindowManager
 
-1. `DOMContentLoaded` event
-2. `main.js` carrega configuração
-3. Módulos são inicializados em ordem:
-   - **i18n** (sistema de traduções) 
-   - **BootScreen** (tela de boot)
-   - **Clock** (relógio)
-   - **Language** (gerenciamento de idiomas)
-   - **StartMenu** (menu iniciar)
-   - **Navigation** (navegação entre seções)
-   - **WindowManager** (gerenciamento de janelas)
-   - **Notepad** (bloco de notas "Sobre Mim")
-   - **Accessibility** (navegação por teclado)
-   - **Easter Eggs** (Clippy, Minesweeper, Paint)
-4. **Notepad abre automaticamente** (300ms após carregar)
-5. Conteúdo dinâmico é renderizado
-6. Event listeners são registrados
-7. Navegação por teclado ativada
+`WindowManager.register(id)` é **idempotente**: chamar duas vezes para o
+mesmo id é no-op. Isso protege contra o erro (corrigido nesta versão) em
+que `main.js` registrava notepad/paint depois de `init()` já ter registrado,
+resultando em handles de resize duplicados e listeners de `document`
+anexados em dobro.
 
-### Sistema de Paginação
+Os limites mínimos de redimensionamento (`--window-min-width` e
+`--window-min-height` em `css/variables.css`) são lidos uma única vez
+em `WindowManager.init()` via `getComputedStyle`. O JS respeita a mesma
+fonte de verdade que o README. Fallbacks: 600×400.
 
-A paginação é gerenciada pelo módulo `pagination.js`:
+### i18n + config
 
-```javascript
-const Pagination = {
-  itemsPerPage: 5,  // Configurável
-  currentProjectsPage: 1,
-  currentSitesPage: 1,
-  
-  paginate(items, page) {
-    // Retorna items da página específica
-  },
-  
-  renderProjects(containerId) {
-    // Renderiza projetos com controles
-  }
-};
+```
+i18n.js            config.js                demais módulos
+─────────          ─────────                ──────────────
+translations ◄───── about.pt/en getter ──── window.PORTFOLIO_CONFIG
+getProjects()      projects.pt/en getter
+getSites()         sites.pt/en getter
+getEcosystem()     ecosystem.pt/en getter
 ```
 
-**Funcionalidades:**
-- Divide projetos em páginas de 5 itens
-- Botões de navegação habilitados/desabilitados automaticamente
-- Suporte a navegação por teclado (setas ← →)
-- URLs com hash para deep linking (`#projects-page-2`)
-- Animações suaves de fade-in ao trocar página
-- Scroll automático ao topo ao mudar página
+`config.js` não duplica strings. Todo texto traduzível passa por `i18n.t()`
+ou por um provider nomeado (`getProjects`, `getSites`, `getEcosystem`,
+`getAboutData`).
 
-### Gerenciamento de Estado
+---
 
-Estado é mantido em cada módulo sem framework:
+## Sistema de conteúdo
 
-```javascript
-const WindowManager = {
-  windows: {},  // Estado das janelas
-  
-  register(id) {
-    this.windows[id] = {
-      element: el,
-      isMaximized: false,
-      prevState: {}
-    };
-  }
-};
-```
+A seção "Projetos" possui três abas independentes:
+
+| Aba                         | Fonte no i18n          | Provider               |
+|-----------------------------|------------------------|------------------------|
+| Sites                       | `site.*`               | `i18n.getSites(lang)`  |
+| Projetos                    | `project.*`            | `i18n.getProjects(lang)` |
+| Ecossistema Educacional     | `ecosystem.*`          | `i18n.getEcosystem(lang)` |
+
+Para adicionar um novo projeto, edite duas coisas em `js/modules/i18n.js`:
+
+1. Strings PT e EN na seção `translations`:
+   ```js
+   pt: {
+     'project.meuProjeto': 'Nome do Projeto',
+     'project.meuProjeto.desc': 'Descrição curta.',
+   },
+   en: {
+     'project.meuProjeto': 'Project Name',
+     'project.meuProjeto.desc': 'Short description.',
+   }
+   ```
+
+2. Entrada no array retornado por `getProjects()`:
+   ```js
+   {
+     name: this.t('project.meuProjeto', language),
+     description: this.t('project.meuProjeto.desc', language),
+     url: 'https://exemplo.com',
+     tags: ['HTML', 'CSS', 'JS']
+   }
+   ```
+
+Os mesmos passos valem para `getSites()` e `getEcosystem()` com os
+prefixos `site.` e `ecosystem.`.
+
+---
+
+## Paginação
+
+`pagination.js` pagina cada aba independentemente (5 itens por página,
+configurável em `Pagination.itemsPerPage`).
+
+- **Botões**: "Anterior" / "Próxima" renderizados abaixo da lista.
+- **Teclado**: `←` e `→` paginam a aba ativa quando a seção "Projetos"
+  está visível e o foco não está num input/textarea.
+- **Hash na URL**: `#projects-page-2`, `#sites-page-2`,
+  `#ecosystem-page-2` restauram a página na abertura.
+- **Indicador**: "Página N de M" no idioma corrente.
+
+---
 
 ## Configuração
 
 ### Variáveis CSS
 
-Todas as cores e tamanhos estão centralizados em `css/variables.css`:
+Todas as cores e tamanhos vivem em `css/variables.css`:
 
 ```css
 :root {
   --xp-blue-primary: #0058ee;
-  --taskbar-height: 30px;
+  --taskbar-height: 40px;
+  --window-min-width: 600px;
+  --window-min-height: 400px;
   --transition-normal: 0.3s ease;
   /* ... */
 }
 ```
 
-### Configuração de Paginação
+Alterar o mínimo da janela em CSS afeta também o JS (o módulo lê essas
+variáveis em boot).
 
-Para alterar quantos projetos aparecem por página:
+### Itens por página
 
 ```javascript
 // js/modules/pagination.js
 const Pagination = {
-  itemsPerPage: 5,  // Altere este valor
+  itemsPerPage: 5,
   // ...
 };
 ```
 
-### Personalização Rápida
+---
 
-**Mudar cores do tema:**
-```css
-/* css/variables.css */
---xp-blue-primary: #ff0000;  /* Azul → Vermelho */
-```
+## Atalhos de teclado
 
-**Ajustar tamanho da janela:**
-```css
---window-min-width: 800px;
---window-min-height: 500px;
-```
+| Atalho                   | Ação                                             |
+|--------------------------|--------------------------------------------------|
+| `Tab`                    | Navegar entre elementos focáveis                 |
+| `Setas` (no desktop)     | Navegar entre ícones do desktop                  |
+| `← / →` (em Projetos)    | Paginar a sub-aba ativa                          |
+| `Enter`                  | Ativar elemento focado                           |
+| `Esc`                    | Fechar janela ativa                              |
+| `Alt + F4`               | Fechar janela ativa                              |
+| `Ctrl + Z` (no Paint)    | Desfazer último traço                            |
 
-**Modificar animações:**
-```css
---transition-normal: 0.5s ease;  /* Mais lento */
-```
+---
 
-## Easter Eggs
+## Easter eggs
 
-### Clippy
+**Clippy.** Assistente animado com mensagens nostálgicas em PT/EN.
+Clicar no personagem troca a mensagem; clicar no X fecha.
 
-- Assistente animado com frases nostálgicas
-- Mensagens contextuais em PT/EN
-- Clique no Clippy para trocar mensagens
-- Fechar com botão X no canto
+**Campo Minado.** Grade 9×9 com 10 minas. Botão esquerdo revela, botão
+direito alterna bandeira, clicar no rosto reinicia.
 
-### Campo Minado
+**Paint.** Lápis, pincel, borracha e balde; paleta de 28 cores do XP;
+controle de tamanho de traço; Ctrl+Z; salvar como PNG. Inicialização
+tardia — só monta o canvas quando o usuário abre pela primeira vez.
 
-- Jogo completamente funcional
-- Grade 9×9 com 10 minas
-- Clique esquerdo para revelar
-- Clique direito para colocar bandeira
-- Clique no rosto para reiniciar
-
-### Paint
-
-- Ferramentas: Lápis, Pincel, Borracha, Balde
-- Canvas de desenho funcional
-- Botões limpar e salvar
-- Paleta de cores
-
-### Notepad "Sobre Mim"
-
-Embora não seja um easter egg, o Notepad é uma feature destacada:
-- **Visual autêntico** do Bloco de Notas XP
-- **Scrollbar customizada** estilo Windows XP
-- **Fonte monoespaçada** (Consolas/Courier New)
-- **Não pode ser fechado** - Janela permanente
-- **Multi-idioma** - Texto completo PT/EN
-
-## Desempenho
-
-### Otimizações Implementadas
-
-- **CSS**: Uso de `transform` e `opacity` para animações (GPU-accelerated)
-- **JavaScript**: 
-  - Event delegation onde possível
-  - `requestAnimationFrame` para drag e animações suaves
-  - Módulos carregados de forma otimizada
-  - Renderização paginada (apenas 5 projetos por vez)
-- **Imagens**: WebP para Clippy e Notepad, PNG otimizado para ícones
-- **Sem reflow**: Mudanças de estilo em batch
-- **Lazy rendering**: Conteúdo renderizado sob demanda
-- **i18n**: Sistema centralizado evita duplicação de código
-
-### Métricas Estimadas
-
-- **First Contentful Paint**: ~0.5s
-- **Time to Interactive**: ~1.0s
-- **Total Bundle Size**: ~175KB (sem compressão)
-- **JavaScript**: ~12KB (modularizado)
-- **CSS**: ~18KB (variáveis centralizadas)
+---
 
 ## Responsividade
 
-### Breakpoints
+Breakpoints principais em `css/content.css` e `css/desktop.css`:
 
-```css
-/* Tablet */
-@media (max-width: 900px) {
-  .window { width: calc(100vw - 20px); }
-  .pagination-btn { padding: 6px 12px; }
-}
+- `max-width: 900px` — tablet: janela ocupa viewport com pequena margem.
+- `max-width: 600px` — mobile: janela fullscreen entre taskbar e topo,
+  controles de paginação empilhados verticalmente.
 
-/* Mobile */
-@media (max-width: 600px) {
-  .window { 
-    top: 10px;
-    bottom: 40px;
-    left: 5px;
-    right: 5px;
-  }
-  .pagination-controls {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-```
+Touch events estão presentes em drag de janela e no Paint.
 
-### Adaptações Mobile
-
-- Taskbar responsiva (oculta textos)
-- Menu Iniciar em largura total
-- Touch events para drag/resize
-- Grid de projetos adaptativo
-- Controles de paginação empilhados verticalmente
-- Notepad com tamanho ajustado
-
-## Projetos Incluídos
-
-### Projetos (9 total - 2 páginas)
-
-**Página 1:**
-1. **Computabilis** - Sistema de gestão financeira pessoal
-2. **Studium** - Ferramenta de auxílio na concentração para estudar
-3. **ATLAS** - Dashboard e laboratório técnico para gestão de investimentos
-4. **Fastlog Analyzer** - Ferramenta de análise de logs em tempo real
-5. **ARES** - Sistema básico de gestão de dados financeiros
-
-**Página 2:**
-6. **Cassandra** - Sistema de análise de cenários com GUI, cache e comparação
-7. **Mini Deterministic Engine** - Engine de simulação determinística com fixed-timestep e replay bit-exact
-8. **Mini Core Banking** - Sistema bancário core em COBOL com ledger imutável
-9. **Real-Time Monitoring Dashboard** - Dashboard Angular para monitoramento real-time via WebSocket
-
-### Sites (2 total - 1 página)
-
-1. **Landing Advocacia Exemplo** - Landing page para escritório de advocacia
-2. **Prime Coast** - Landing page moderna para imobiliária (demonstração)
-
-## SEO
-
-### Otimizações Implementadas
-
-- **Meta Tags Completas**: Description, keywords, Open Graph, Twitter Card
-- **URLs Canônicas**: Previne conteúdo duplicado
-- **Alt Tags**: Todas as imagens com textos alternativos
-- **Semantic HTML**: Tags semânticas (nav, header, main, article)
-- **Schema.org**: Structured data com informações de pessoa/desenvolvedor
+---
 
 ## Acessibilidade
 
-### Recursos de Acessibilidade
+- `role="button"` e `aria-label` em ícones do desktop e controles.
+- Foco visível via `*:focus-visible` (em `variables.css`).
+- Atributo `lang` da raiz HTML é atualizado dinamicamente em
+  `Language.set()` (`pt-BR` ↔ `en`), refletindo no DOM para leitores de
+  tela e SEO.
+- Navegação por teclado cobre: ícones do desktop, controles de janela,
+  abas de navegação, paginação de projetos.
+- O Bloco de Notas é `readonly`, mas o texto é selecionável e navegável.
+- Paleta atende contraste WCAG 2.1 AA para texto sobre fundos principais.
 
-- **Navegação por Teclado**: 
-  - Tab, Setas, Enter, ESC, Alt+F4
-  - Setas ← → para paginação
-  - Foco visível em todos os elementos interativos
-- **ARIA Labels**: 
-  - role="button" em ícones
-  - aria-label em elementos interativos
-  - aria-live regions para anúncios dinâmicos
-- **Screen Readers**:
-  - Classe .sr-only para conteúdo exclusivo
-  - Estrutura semântica correta
-  - Anúncios de mudanças de estado
-  - Indicadores de página acessíveis
-- **Contraste**: Cores atendem WCAG 2.1 AA
-- **Focus Management**: Foco gerenciado em janelas modais
-- **Textarea Readonly**: Notepad com conteúdo não editável mas navegável
+---
 
-### Convenções de Código
+## SEO
 
-- **CSS**: BEM methodology para classes
-- **JavaScript**: camelCase para variáveis, PascalCase para módulos
-- **Commits**: Conventional Commits (feat:, fix:, docs:, etc)
+- Meta tags Description / Keywords / Author.
+- Open Graph completo e Twitter Card.
+- `<link rel="canonical">` previne conteúdo duplicado.
+- JSON-LD Schema.org (`@type: Person`) com campos `name`, `jobTitle`,
+  `email`, `telephone`, `sameAs`, `knowsAbout`.
+- Todas as imagens possuem `alt`.
+
+---
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+MIT. Veja `LICENSE`.
 
 ---
 
 ## Contato
 
-**Ludd**
-- Email: hbrslud@gmail.com
-- GitHub: [@LuddEvergard3n](https://github.com/LuddEvergard3n)
-- LinkedIn: [herbertbr-sorg-ludka](https://www.linkedin.com/in/herbertbr-sorg-ludka/)
+- **Email:** hbrslud@gmail.com
+- **Telefone:** +55 (47) 9 9783-3118
+- **GitHub:** [@LuddEvergard3n](https://github.com/LuddEvergard3n)
+- **LinkedIn:** [herbertbr-sorg-ludka](https://www.linkedin.com/in/herbertbr-sorg-ludka/)
 
 ---
 
-<div align="center">
-  <p>Feito com nostalgia dos anos 2000</p>
-  <p>Windows XP © Microsoft Corporation</p>
-</div>
+Windows XP é marca registrada da Microsoft Corporation. Este projeto é um
+tributo afetivo e não é afiliado à Microsoft.

@@ -10,7 +10,7 @@ const CONFIG = {
   personal: {
     name: 'Ludd',
     email: 'hbrslud@gmail.com',
-    phone: '+55 (47) 9 9963-3905',
+    phone: '+55 (47) 9 9783-3118',
     github: 'https://github.com/LuddEvergard3n',
     linkedin: 'https://www.linkedin.com/in/herbertbr-sorg-ludka/'
   },

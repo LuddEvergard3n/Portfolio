@@ -41,11 +41,13 @@
 }
 
 .desktop-icon.easter-egg::after {
-  content: '✨';
+  content: '★';
   position: absolute;
   top: -5px;
   right: -5px;
-  font-size: 16px;
+  font-size: 14px;
+  color: #ffd84d;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
   animation: sparkle 2s ease-in-out infinite;
 }
 

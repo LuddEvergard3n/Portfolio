@@ -50,10 +50,10 @@ const BootScreen = {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('🔊 Som de boot tocando!');
+            console.log('[BootScreen] som de boot tocando');
           })
           .catch(err => {
-            console.log('⚠️ Som bloqueado. Clique em qualquer lugar para ouvir.');
+            console.log('[BootScreen] som bloqueado pelo navegador; aguardando interacao do usuario');
             // Mostrar dica visual
             this.showAudioHint();
           });
@@ -83,7 +83,7 @@ const BootScreen = {
       cursor: pointer;
       animation: fadeIn 0.3s;
     `;
-    hint.innerHTML = '🔊 Clique para ouvir o som de boot';
+    hint.textContent = 'Clique para ouvir o som de boot';
     hint.onclick = () => {
       this.playStartupSound();
       hint.remove();

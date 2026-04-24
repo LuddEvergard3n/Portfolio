@@ -17,6 +17,18 @@ const Minesweeper = {
   gameOver: false,
   activationCount: 0,
   activationTimer: null,
+
+  // Glyphs do jogo. Substituem os emojis originais (carinhas, bomba,
+  // bandeira) por caracteres tipograficos. Mantemos centralizado para
+  // que ajustes esteticos (inclusive voltar a usar sprites/imagens)
+  // sejam feitos em um so lugar.
+  glyphs: {
+    faceHappy: ':)',
+    faceDead:  'X(',
+    faceCool:  'B)',
+    mine:      '\u25CF', // circulo preto, U+25CF
+    flag:      '\u2691'  // bandeira, U+2691
+  },
   
   /**
    * Cria a estrutura HTML do jogo
@@ -40,7 +52,7 @@ const Minesweeper = {
     
     const closeBtn = document.createElement('button');
     closeBtn.className = 'minesweeper-close-btn';
-    closeBtn.textContent = '✕';
+    closeBtn.textContent = '\u00D7';
     closeBtn.addEventListener('click', () => this.hide());
     
     titleBar.appendChild(title);
@@ -62,7 +74,7 @@ const Minesweeper = {
     const face = document.createElement('div');
     face.className = 'minesweeper-face';
     face.id = 'minesweeper-face';
-    face.textContent = '🙂';
+    face.textContent = this.glyphs.faceHappy;
     face.addEventListener('click', () => this.reset());
     
     const timer = document.createElement('div');
@@ -220,7 +232,7 @@ const Minesweeper = {
         if (cellData.isRevealed) {
           cell.classList.add('revealed');
           if (cellData.isMine) {
-            cell.textContent = '💣';
+            cell.textContent = this.glyphs.mine;
             cell.classList.add('mine');
           } else if (cellData.neighborMines > 0) {
             cell.textContent = cellData.neighborMines;
@@ -228,7 +240,7 @@ const Minesweeper = {
           }
         } else if (cellData.isFlagged) {
           cell.classList.add('flagged');
-          cell.textContent = '🚩';
+          cell.textContent = this.glyphs.flag;
         }
         
         cell.addEventListener('click', () => this.revealCell(i, j));
@@ -264,7 +276,7 @@ const Minesweeper = {
     if (cell.isMine) {
       this.gameOver = true;
       this.revealAllMines();
-      this.setFace('😵');
+      this.setFace(this.glyphs.faceDead);
       return;
     }
     
@@ -278,7 +290,7 @@ const Minesweeper = {
     // Verificar vitória
     if (this.revealed === (this.rows * this.cols - this.mines)) {
       this.gameOver = true;
-      this.setFace('😎');
+      this.setFace(this.glyphs.faceCool);
     }
   },
   
@@ -355,7 +367,7 @@ const Minesweeper = {
   reset() {
     this.initGrid();
     this.renderGrid();
-    this.setFace('🙂');
+    this.setFace(this.glyphs.faceHappy);
   },
   
   /**

@@ -6,18 +6,50 @@
 
 const WindowManager = {
   windows: {},
+
+  // Limites mínimos de redimensionamento. Lidos de CSS variables em init()
+  // para permitir ajuste via css/variables.css sem tocar no JS.
+  // Fallbacks só entram se as variáveis não existirem.
+  minWidth: 600,
+  minHeight: 400,
   
   /**
-   * Registra uma janela para gerenciamento
-   * @param {string} id - ID da janela
+   * Lê um tamanho em pixels de uma CSS variable do :root.
+   * Aceita valores como "600px"; ignora unidades diferentes (retorna fallback).
+   *
+   * @param {string} varName - Nome da variável (ex.: '--window-min-width')
+   * @param {number} fallback - Valor em px se a variável não existir ou não for px
+   * @returns {number} inteiro em pixels
+   */
+  readCssPxVar(varName, fallback) {
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue(varName)
+      .trim();
+    if (!raw.endsWith('px')) return fallback;
+    const n = parseInt(raw, 10);
+    return Number.isFinite(n) ? n : fallback;
+  },
+  
+  /**
+   * Registra uma janela para gerenciamento.
+   *
+   * Idempotente: chamar duas vezes para o mesmo id é no-op. Antes dessa guarda,
+   * uma segunda chamada anexava 8 handles de resize duplicados no DOM e
+   * duplicava listeners em document (mousemove/mouseup), causando jitter.
+   *
+   * @param {string} id - ID da janela (valor de data-window-id)
    */
   register(id) {
+    if (this.windows[id]) {
+      return; // já registrada
+    }
+
     const windowElement = document.querySelector(`[data-window-id="${id}"]`);
     if (!windowElement) {
-      console.warn(`Janela ${id} não encontrada`);
+      console.warn(`[WindowManager] janela nao encontrada: ${id}`);
       return;
     }
-    
+
     this.windows[id] = {
       element: windowElement,
       isMaximized: false,
@@ -29,7 +61,7 @@ const WindowManager = {
         height: windowElement.style.height || 'auto'
       }
     };
-    
+
     this.initDrag(id);
     this.initResize(id);
     this.initButtons(id);
@@ -322,18 +354,15 @@ const WindowManager = {
           newTop = startTop + deltaY;
         }
         
-        // Aplicar dimensões mínimas
-        const minWidth = 600;
-        const minHeight = 400;
-        
-        if (newWidth >= minWidth) {
+        // Aplicar dimensões mínimas (lidas de CSS variables em init())
+        if (newWidth >= WindowManager.minWidth) {
           win.element.style.width = `${newWidth}px`;
           if (position.includes('w')) {
             win.element.style.left = `${newLeft}px`;
           }
         }
         
-        if (newHeight >= minHeight) {
+        if (newHeight >= WindowManager.minHeight) {
           win.element.style.height = `${newHeight}px`;
           if (position.includes('n')) {
             win.element.style.top = `${newTop}px`;
@@ -379,14 +408,21 @@ const WindowManager = {
   },
   
   /**
-   * Inicializa todas as janelas
+   * Inicializa todas as janelas.
+   *
+   * Lê os limites mínimos do CSS (:root --window-min-width / --window-min-height)
+   * uma única vez, para que o JS respeite a mesma fonte de verdade que o
+   * README aponta.
    */
   init() {
-    // Registrar todas as janelas
+    this.minWidth = this.readCssPxVar('--window-min-width', 600);
+    this.minHeight = this.readCssPxVar('--window-min-height', 400);
+
+    // Registrar todas as janelas conhecidas. register() é idempotente.
     this.register('main');
     this.register('notepad');
     this.register('paint');
-    
+
     // Abrir janela principal
     this.open('main');
   }

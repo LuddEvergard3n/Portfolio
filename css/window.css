@@ -145,8 +145,8 @@
 }
 
 .close-btn::before {
-  content: '✕';
-  font-size: 12px;
+  content: '\00D7';
+  font-size: 14px;
   font-family: Arial, sans-serif;
   font-weight: bold;
 }

@@ -43,36 +43,52 @@ const Pagination = {
   },
   
   /**
-   * Setup event listeners para navegação por teclado
+   * Setup event listeners para navegacao por teclado.
+   *
+   * As setas so devem paginar quando a secao "Projetos" esta visivel E a aba
+   * atual eh de projects/sites/ecosystem. O codigo anterior procurava um
+   * elemento com id "projects-content" / "sites-content" que NAO existe no
+   * HTML — a estrutura real usa .project-tab-content com ids tab-<nome>-<lang>.
+   * Resultado: o listener retornava cedo sempre e as setas nao paginavam nada.
    */
   setupEventListeners() {
     document.addEventListener('keydown', (e) => {
-      // Apenas se estiver na seção de projetos ou sites
-      const activeSection = document.querySelector('.window-content.active');
-      if (!activeSection) return;
-      
-      const isProjects = activeSection.id === 'projects-content';
-      const isSites = activeSection.id === 'sites-content';
-      
-      if (!isProjects && !isSites) return;
-      
-      // Seta direita = próxima página
-      if (e.key === 'ArrowRight' && !e.ctrlKey && !e.altKey && !e.shiftKey) {
-        if (isProjects) {
-          this.nextProjectsPage();
-        } else if (isSites) {
-          this.nextSitesPage();
-        }
-        e.preventDefault();
+      // Ignorar combinacoes com modificadores
+      if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+      // A secao "Projetos" precisa estar visivel
+      const projectsSection = document.getElementById('projects');
+      if (!projectsSection || projectsSection.classList.contains('hidden')) return;
+
+      // Nao interferir quando o foco esta num campo de texto
+      const ae = document.activeElement;
+      if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable)) {
+        return;
       }
-      
-      // Seta esquerda = página anterior
-      if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.altKey && !e.shiftKey) {
-        if (isProjects) {
-          this.prevProjectsPage();
-        } else if (isSites) {
-          this.prevSitesPage();
-        }
+
+      // Identificar a aba ativa dentro do container do idioma atual
+      const lang = window.Language ? window.Language.getCurrent() : 'pt';
+      const activeTab = document.querySelector(
+        `#projects .lang.${lang} .project-tab-content.active`
+      );
+      if (!activeTab) return;
+
+      // activeTab.id e da forma "tab-<nome>-<lang>"
+      const parts = activeTab.id.split('-');
+      const tabName = parts[1]; // 'sites' | 'projects' | 'ecosystem'
+
+      if (e.key === 'ArrowRight') {
+        if (tabName === 'projects') this.nextProjectsPage();
+        else if (tabName === 'sites') this.nextSitesPage();
+        else if (tabName === 'ecosystem') this.nextEcosystemPage();
+        else return;
+        e.preventDefault();
+      } else { // ArrowLeft
+        if (tabName === 'projects') this.prevProjectsPage();
+        else if (tabName === 'sites') this.prevSitesPage();
+        else if (tabName === 'ecosystem') this.prevEcosystemPage();
+        else return;
         e.preventDefault();
       }
     });
