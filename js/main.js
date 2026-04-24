@@ -55,6 +55,8 @@
       'Navigation',
       'WindowManager',
       'Notepad',
+      'Docs',
+      'Ratio',
       'Accessibility',
       'Clippy',
       'Minesweeper'

@@ -10,7 +10,7 @@ const CONFIG = {
   personal: {
     name: 'Ludd',
     email: 'hbrslud@gmail.com',
-    phone: '+55 (47) 9 9783-3118',
+    phone: '+55 (47) 9 9963-3905',
     github: 'https://github.com/LuddEvergard3n',
     linkedin: 'https://www.linkedin.com/in/herbertbr-sorg-ludka/'
   },
@@ -61,6 +61,28 @@ const CONFIG = {
     },
     get en() {
       return window.i18n ? window.i18n.getEcosystem('en') : [];
+    }
+  },
+
+  // ==================== CERTIFICADOS / DOCUMENTOS ====================
+  docs: {
+    get pt() {
+      return window.i18n ? window.i18n.getDocs('pt') : [];
+    },
+    get en() {
+      return window.i18n ? window.i18n.getDocs('en') : [];
+    }
+  },
+
+  // ==================== RATIO (empresa + Norma) ====================
+  // URLs sao constantes; textos saem do i18n via Ratio.render() em ratio.js.
+  ratio: {
+    company: {
+      url: 'https://ratio-systems.hbludka.workers.dev/'
+    },
+    norma: {
+      url: 'https://www.norma-app.com.br/',
+      phone: '+55 (47) 9 9783-3118'
     }
   }
 };

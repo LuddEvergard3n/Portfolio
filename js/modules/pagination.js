@@ -208,50 +208,99 @@ const Pagination = {
   },
   
   /**
-   * Cria card de projeto/site (usa mesma estrutura do Navigation)
-   * @param {Object} item - Projeto ou site
+   * Cria card de projeto/site/ecossistema.
+   *
+   * Suporta os flags opcionais:
+   *   - `featured: true`  → adiciona classe .project--featured + badge "Destaque"
+   *     e, se houver, renderiza item.longDescription em um <p> secundario.
+   *   - `wip: true`       → badge "Em desenvolvimento" no canto do card.
+   *   - `repo`            → adiciona um segundo link "Código-fonte".
+   *
+   * @param {Object} item - Projeto, site ou item do ecossistema
    * @returns {HTMLElement}
    */
   createProjectCard(item) {
     const card = document.createElement('div');
     card.className = 'project';
-    
-    // Título
+    const lang = window.Language ? window.Language.getCurrent() : 'pt';
+
+    if (item.featured) card.classList.add('project--featured');
+    if (item.wip) card.classList.add('project--wip');
+
+    // Header (titulo + badges)
+    const header = document.createElement('div');
+    header.className = 'project-header';
+
     const title = document.createElement('h3');
     title.textContent = item.name;
-    card.appendChild(title);
-    
-    // Descrição
+    header.appendChild(title);
+
+    if (item.featured) {
+      const badge = document.createElement('span');
+      badge.className = 'project-badge project-badge--featured';
+      badge.textContent = lang === 'pt' ? 'Destaque' : 'Featured';
+      header.appendChild(badge);
+    }
+
+    if (item.wip) {
+      const badgeWip = document.createElement('span');
+      badgeWip.className = 'project-badge project-badge--wip';
+      badgeWip.textContent = window.i18n.t('ecosystem.wip', lang);
+      header.appendChild(badgeWip);
+    }
+
+    card.appendChild(header);
+
+    // Descricao principal
     const description = document.createElement('p');
     description.textContent = item.description;
     card.appendChild(description);
-    
-    // Tags (se existirem)
+
+    // Descricao estendida (apenas featured que fornecer)
+    if (item.featured && item.longDescription) {
+      const long = document.createElement('p');
+      long.className = 'project-long';
+      long.textContent = item.longDescription;
+      card.appendChild(long);
+    }
+
+    // Tags
     if (item.tags && item.tags.length > 0) {
       const tagsContainer = document.createElement('div');
       tagsContainer.className = 'project-tags';
-      
       item.tags.forEach(tag => {
         const tagElement = document.createElement('span');
         tagElement.className = 'project-tag';
         tagElement.textContent = tag;
         tagsContainer.appendChild(tagElement);
       });
-      
       card.appendChild(tagsContainer);
     }
-    
-    // Link
-    const lang = window.Language ? window.Language.getCurrent() : 'pt';
+
+    // Links (project-link principal + repo opcional)
+    const linksWrap = document.createElement('div');
+    linksWrap.className = 'project-links';
+
     const link = document.createElement('a');
     link.href = item.url;
     link.className = 'project-link';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.textContent = lang === 'pt' ? 'Ver projeto' : 'View project';
-    
-    card.appendChild(link);
-    
+    linksWrap.appendChild(link);
+
+    if (item.repo && item.repo !== item.url) {
+      const repoLink = document.createElement('a');
+      repoLink.href = item.repo;
+      repoLink.className = 'project-link project-link--secondary';
+      repoLink.target = '_blank';
+      repoLink.rel = 'noopener noreferrer';
+      repoLink.textContent = lang === 'pt' ? 'Código-fonte' : 'Source code';
+      linksWrap.appendChild(repoLink);
+    }
+
+    card.appendChild(linksWrap);
+
     return card;
   },
   

@@ -422,6 +422,7 @@ const WindowManager = {
     this.register('main');
     this.register('notepad');
     this.register('paint');
+    this.register('docs');
 
     // Abrir janela principal
     this.open('main');

@@ -1,144 +1,164 @@
-# Changelog — 2.5.0 → 2.5.1
+# Changelog — 2.5.1 → 2.6.0
 
-Correções aplicadas nesta iteração, em ordem de impacto.
+Incrementos nesta iteração: conteúdo novo + refinamentos arquiteturais.
 
-## Removido
+## Conteúdo adicionado
 
-- `js/modules/script.js` (267 linhas). Reimplementava boot, start menu,
-  navegação, language, window e clock — todos já refatorados em módulos
-  próprios. Não era carregado pelo `index.html`; era código morto.
+### Ecossistema Educacional (+3 itens)
 
-## Corrigido
+- **Archimedes** — Laboratório interativo de Física. 7 módulos, 23
+  experimentos, 22 simulações a 60 fps. Motor WebAssembly (C) com fallback
+  JS; integrador Velocity Verlet. Alinhado à BNCC.
+- **Aristóteles** — Sistema de Filosofia para EM/ES. 9 módulos, 42 lições,
+  37 textos primários anotados. Foco em prática filosófica (reconstrução
+  de argumentos, classificação de posições).
+- **Darwin** — Atlas dos Processos da Vida (Biologia por escalas).
+  Marcado com `wip: true` → card exibe badge "Em desenvolvimento".
 
-### 1. Registro duplicado de janelas (bug de runtime)
+### Projetos (+1 em destaque)
 
-`main.js` chamava `WindowManager.register('notepad')` e `register('paint')`
-**depois** de `WindowManager.init()` já ter registrado as mesmas janelas.
-Consequências eliminadas:
+- **ATHENA** — Motor de wargaming determinístico em C++17. 1.238
+  plataformas militares, Monte Carlo com Sobol indices, 6 sistemas de
+  simulação. Zero dependências externas, bit-exact reproducibility.
+  Marcado com `featured: true` → card aparece no topo da aba Projetos
+  com borda azul, badge "Destaque" e descrição estendida.
 
-- 8 handles de resize duplicados no DOM por janela.
-- Listeners de `mousemove`/`mouseup`/`touchmove` em `document` anexados
-  duas vezes.
-- Jitter em drag/resize perceptível especialmente em mobile.
+### Sites (+1)
 
-**Fix:** `WindowManager.register(id)` agora é idempotente (guard-clause em
-`this.windows[id]`). As chamadas redundantes em `main.js` foram removidas.
+- **Linda Estética** — Landing page moderna para salão de estética.
 
-### 2. Paginação por teclado silenciosamente quebrada
+### Nova aba de topo: Ratio
 
-`pagination.js:54-55` filtrava aba ativa por `id === 'projects-content'` /
-`'sites-content'` — IDs que **nunca existiram** no HTML. As setas ← →
-retornavam cedo 100% das vezes.
+Irmã de Sobre / Projetos / Contato. Contém:
 
-**Fix:** passou a localizar a aba ativa via
-`#projects .lang.${lang} .project-tab-content.active`, extrair o nome da
-aba do próprio id (`tab-<nome>-<lang>`) e paginar a aba correta. Agora
-funciona para as 3 sub-abas: sites, projects, ecosystem. Também ignora
-quando o foco está em `<input>`/`<textarea>`/`contenteditable`.
+- **Norma** (produto principal, em destaque) — descrição completa em 5
+  seções: o que é, para quem, features (14 itens em grid), decisões de
+  arquitetura, normas ABNT cobertas, contato comercial dedicado
+  `+55 (47) 9 9783-3118`.
+- **Site institucional** Ratio Sistemas Educacionais — card simples.
 
-### 3. Atributo `<html lang>` fixo em `pt-BR`
+### Nova janela: Meus Documentos
 
-Não era atualizado ao trocar idioma. Impacto em leitores de tela e SEO.
+Ícone do desktop "Meus Documentos" agora funcional. Clicar abre janela
+draggable/resizable (mesmo padrão de Paint/Notepad) listando 5
+certificações em cards:
 
-**Fix:** `Language.set()` agora faz `document.documentElement.lang = ...`.
+1. Nivelamento Hackers do Bem (80h, SENAI SP/MCTI)
+2. Curso Básico Hackers do Bem (64h, SENAI SP/MCTI)
+3. Trilha Rápida Dev de Software (16h, SCTEC/ASCTI)
+4. Trilha Rápida Análise de Dados (16h, SCTEC/ASCTI)
+5. Trilha Rápida Inteligência Artificial (16h, SCTEC/ASCTI)
 
-### 4. Limites mínimos de janela hardcoded vs documentados em CSS
+PDFs em `img/docs/` com nomes normalizados (sem acentos/espaços).
 
-`window.js` tinha `minWidth = 600`/`minHeight = 400` hardcoded em
-`initResize`, enquanto o README documentava `--window-min-width` /
-`--window-min-height` em `css/variables.css` como fonte de verdade.
+## Arquitetura
 
-**Fix:** `WindowManager.init()` lê as CSS vars uma única vez (via
-`getComputedStyle`) e cacheia em `WindowManager.minWidth`/`.minHeight`.
-Fallbacks 600/400 se as variáveis não existirem. `readCssPxVar()` é o
-helper dedicado.
+### Eliminação de duplicação de `createProjectCard`
 
-### 5. `openPaint()` inline no `index.html`
+Havia duas implementações divergentes (navigation.js e pagination.js).
+`Navigation.createProjectCard` agora **delega** para
+`Pagination.createProjectCard`, que é a fonte única de verdade. Com
+fallback minimal caso Pagination não esteja carregado.
 
-Violava a separação de responsabilidades que o resto do projeto segue
-(tudo em módulos; zero lógica no HTML).
+Motivação direta: princípio declarado "se uma função já existe, apenas
+referencie — não reimplemente".
 
-**Fix:**
+### Flags de card
 
-- Criado `Paint.open()` e `Paint.renderPalette()` em `paint.js`.
-- `<script>` inline removido do HTML.
-- Ordem dentro de `open()` invertida: `renderPalette()` antes de `init()`
-  (o `init()` procura `.paint-color` no DOM, então a paleta precisa
-  existir antes).
-- `renderPalette()` é idempotente (checa `palette.children.length`).
+`Pagination.createProjectCard` agora aceita flags opcionais:
 
-### 6. Telefone inconsistente entre documentação e UI
+| Flag              | Efeito                                             |
+|-------------------|----------------------------------------------------|
+| `featured: true`  | Classe `.project--featured` + badge "Destaque". Renderiza `longDescription` em bloco secundário. |
+| `wip: true`       | Badge "Em desenvolvimento" + opacidade reduzida.  |
+| `repo: <url>`     | Link secundário "Código-fonte" além do principal. |
 
-Cinco ocorrências no repo, com dois números diferentes. Padronizado para
-`+55 (47) 9 9783-3118` em:
+Zero breaking changes: cards existentes sem essas flags continuam iguais.
 
-- `index.html` — JSON-LD Schema.org (`telephone`)
-- `index.html` — contato PT (`tel:` + label)
-- `index.html` — contato EN (`tel:` + label)
-- `js/config.js` — `personal.phone`
-- `README.md` — bloco de contato
+### Fonte única de telefone
 
-**Suposição declarada:** assumi que `9783-3118` é o correto, baseado em
-convenção anterior. Se for o outro, ajuste nesses 5 lugares.
+Dois números cadastrados: `9963-3905` (contato geral) e `9783-3118`
+(Norma). Cada um vive em um lugar só:
 
-### 7. Emojis no código e UI
+- `9963-3905` → `CONFIG.personal.phone`, HTML contact blocks (PT/EN),
+  JSON-LD Schema.org.
+- `9783-3118` → `CONFIG.ratio.norma.phone` (consumido apenas por
+  `ratio.js` ao renderizar o bloco Norma).
 
-Removidos ou substituídos por equivalentes tipográficos:
+Isso elimina a inconsistência anterior onde README e JSON-LD divergiam.
 
-- `main.js` — 18 emojis em `console.log` decorativos, todos removidos
-  junto com reescrita do bootstrap.
-- `boot.js` — 🔊 e ⚠️ removidos de logs e da dica visual (HTML → text).
-- `paint.js` — 🎨 removido de log; ❓ trocado por `?`.
-- `index.html` — 🗑️ 💾 ✏️ 🖌️ 🧹 🪣 da toolbar/ferramentas do Paint
-  substituídos por rótulos textuais bilíngues (`Limpar/Clear`,
-  `Salvar/Save`, `L`, `P`, `B`, `T`).
-- `desktop.css` — ✨ do marker de easter egg → `★` (U+2605) estilizado
-  com cor amarela e text-shadow.
-- `window.css` — ✕ do close button → `×` (U+00D7 via escape `\00D7`).
-- `minesweeper.js` — ✕ do close button → `×` (U+00D7 via `\u00D7`).
-  Emojis de estado do jogo (🙂😵😎💣🚩) centralizados numa tabela
-  `Minesweeper.glyphs` e substituídos por `:)`, `X(`, `B)`, `●`
-  (U+25CF), `⚑` (U+2691). Centralização permite trocar por sprites
-  depois sem hunt-and-peck pelo arquivo.
+### Correção do re-render de idioma
 
-### 8. Tratamento de falha no bootstrap
+`Language.set()` tinha dois bugs:
 
-`main.js` tinha um `try/catch` envolvendo o boot inteiro — uma falha num
-módulo escondia qual e pulava os seguintes com pouca informação.
+1. `activeTab.id.includes('sites')` / `.includes('projects')` — 
+   `includes('projects')` dispara **também** quando o id contém apenas
+   o token "projects" no contexto `projects-list-*`, mas não dispara
+   para ecosystem. Trocado por `startsWith('tab-sites' | 'tab-projects'
+   | 'tab-ecosystem')`, que é mais preciso.
+2. Aba Ecossistema não tinha re-render configurado ao trocar idioma →
+   corrigido.
 
-**Fix:** cada módulo é inicializado via `initModule(name)`, que isola sua
-falha e loga o nome e o erro. Módulo ausente vira warning, módulo
-quebrado vira `console.error` com contexto.
+Adicionado re-render de `Docs.render()` e `Ratio.render()` dentro de
+`Language.set()`, mantendo idempotência.
+
+### Address bar
+
+URL placeholder `http://ludd.portfolio/ratio` adicionada para a nova aba.
+
+## Novos módulos
+
+- `js/modules/docs.js` (~115 linhas) — renderização da janela Meus
+  Documentos, com escape HTML defensivo.
+- `js/modules/ratio.js` (~110 linhas) — renderização da seção Ratio com
+  destaque para Norma.
+
+Ambos idempotentes, ambos com padrão `window.Modulo = Modulo`, ambos
+registrados em `main.js` na ordem de boot.
+
+## CSS
+
+Adicionado ~250 linhas no final de `css/content.css` para:
+
+- `.project-header`, `.project-badge--featured`, `.project-badge--wip`,
+  `.project--featured`, `.project--wip`, `.project-long`, `.project-links`,
+  `.project-link--secondary`.
+- `.ratio-description`, `.ratio-card`, `.ratio-card--featured`,
+  `.ratio-card-header`, `.ratio-card-subtitle`, `.ratio-card-section`,
+  `.ratio-features` (grid responsivo), `.ratio-card-contact`.
+- `.docs-title`, `.docs-intro`, `.docs-list`, `.doc-item`,
+  `.doc-item-title`, `.doc-item-meta`, `.doc-item-link`.
+- Breakpoint mobile (`max-width: 600px`) para grid de features e layout
+  vertical dos cards de docs.
+
+Paleta consistente com variables existentes. Sem emojis.
 
 ## Documentação
 
-- `README.md` reescrito. Reflete a arquitetura real (3 abas, não
-  paginação linear). Remove menções a `sitemap.xml`/`robots.txt` que não
-  existem. Inclui aba "Ecossistema Educacional". Documenta o i18n como
-  fonte única de strings traduzíveis. Detalha o padrão de módulos
-  (objeto global + `window.Foo = Foo`, sem ES Modules — por escolha,
-  para rodar via `file://`).
+`README.md` atualizado: árvore de diretórios (docs.js, ratio.js,
+img/docs/), seção "Sistema de conteúdo" expandida com flags de card e
+instruções para adicionar certificações, bullets de "O que está
+implementado" incluem aba Ratio e janela Meus Documentos.
 
-## Não incluído (escopo para próxima passagem)
+## Validação executada
 
-- Refatoração dos 21 `onclick="..."` inline para event delegation via
-  `data-action`. É mudança arquitetural maior, merece commit isolado.
-- `console.log` informativos em `paint.js` e `pagination.js` permanecem
-  (úteis em dev; em produção podem ser removidos por um stripper de
-  build se quiser — mas isso contraria o princípio de zero-build).
-- Substituir glyphs do Minesweeper por sprites PNG. A tabela
-  `Minesweeper.glyphs` deixa o caminho pronto; só não foi feito porque
-  não tinha sprites disponíveis.
-
-## Validação feita
-
-- `node --check` em todos os 15 arquivos `.js`: OK.
+- `node --check` nos 17 `.js`: todos OK.
 - `html.parser` em `index.html`: sem erros.
-- `json.loads()` no JSON-LD Schema.org: válido.
-- Checagem de referências: todas as funções/objetos chamados via
-  `onclick` têm definição correspondente nos módulos.
-- Grep de emojis (ranges Unicode 1F300-1F9FF e 1F600-1F64F): 0
-  ocorrências em `.js`/`.html`/`.css`/`.md`.
-- Grep do telefone antigo (`9963-3905`): 0 ocorrências.
-- Grep de IDs fantasmas (`projects-content`, `sites-content`): só em
-  comentário explicativo em `pagination.js`.
+- JSON-LD: válido; telefone correto.
+- 119 chaves em PT × 119 em EN, zero desbalanceadas.
+- Todas as chaves usadas por `ratio.js` e `docs.js` existem nas
+  translations.
+- Cross-check de `onclick="..."`: todas as funções chamadas têm
+  definição.
+- Referências locais em `index.html` (`src`/`href`): 45/45 resolvem no
+  disco.
+- 0 emojis nos ranges Unicode 1F300–1F9FF e 1F600–1F64F.
+- 5 PDFs em `img/docs/` × 5 referências no i18n: casam.
+
+## Suposição declarada
+
+- Telefone de contato geral confirmado como `9963-3905`; `9783-3118`
+  restrito ao bloco comercial Norma (conforme sua confirmação explícita).
+- ATHENA foi marcado como `featured` porque você pediu "bastante
+  destaque". Se quiser outro critério (ex: tamanho da descrição),
+  edite `project.athena.long` em `i18n.js`.

@@ -55,6 +55,13 @@ Simulação leve do desktop do Windows XP no navegador. Decisões de design:
   botão fechar desabilitado por design, conteúdo PT/EN.
 - Seção de projetos com três abas: **Sites**, **Projetos**, **Ecossistema
   Educacional**. Cada aba pagina independentemente (5 itens por página).
+  Cards suportam flags `featured` e `wip`. ATHENA aparece em destaque em
+  Projetos; Darwin aparece em WIP no Ecossistema.
+- Seção **Ratio** (aba de topo): empresa + produto principal Norma com
+  descrição técnica completa (14 features, decisões de arquitetura,
+  normas ABNT cobertas, contato comercial dedicado).
+- Janela **Meus Documentos**: aberta pelo ícone do desktop, lista as
+  certificações (SENAI/Hackers do Bem, SCTEC/ASCTI) com link para os PDFs.
 - Easter eggs: Clippy (assistente nostálgico), Campo Minado (jogo completo
   9×9 com 10 minas), Paint (pincel/lápis/borracha/balde, paleta XP, salvar
   como PNG, Ctrl+Z).
@@ -108,10 +115,14 @@ portfolio-xp/
 │       ├── window.js             # WindowManager (drag/resize/min/max/close)
 │       ├── notepad.js            # Bloco de Notas "Sobre Mim"
 │       ├── paint.js              # Paint + função open() e openPaint() global
+│       ├── docs.js               # Janela "Meus Documentos" (certificações PDF)
+│       ├── ratio.js              # Seção Ratio (empresa) + destaque da Norma
 │       ├── accessibility.js      # Navegação por teclado no desktop
 │       ├── clippy.js             # Easter egg: Clippy
 │       └── minesweeper.js        # Easter egg: Campo Minado
-└── img/                          # Ícones .ico do XP, wallpaper, áudio de boot
+└── img/
+    ├── docs/                      # Certificações em PDF (5 arquivos)
+    └── (…)                        # Ícones .ico do XP, wallpaper, áudio de boot
 ```
 
 > **Não presentes** (apesar de versões antigas deste README mencionarem):
@@ -210,7 +221,27 @@ A seção "Projetos" possui três abas independentes:
 | Projetos                    | `project.*`            | `i18n.getProjects(lang)` |
 | Ecossistema Educacional     | `ecosystem.*`          | `i18n.getEcosystem(lang)` |
 
-Para adicionar um novo projeto, edite duas coisas em `js/modules/i18n.js`:
+Os seguintes conteúdos vivem fora das abas:
+
+| Conteúdo             | Fonte no i18n                      | Provider              |
+|----------------------|------------------------------------|-----------------------|
+| Ratio + Norma        | `ratio.*`, `norma.*`               | `Ratio.render()`      |
+| Meus Documentos      | `docs.*`                           | `i18n.getDocs(lang)`  |
+
+### Flags de card
+
+Os providers de projetos podem retornar itens com flags opcionais:
+
+| Flag              | Efeito                                                   |
+|-------------------|----------------------------------------------------------|
+| `featured: true`  | Adiciona classe `.project--featured` + badge "Destaque". Se `longDescription` existir, renderiza em bloco secundário. |
+| `wip: true`       | Badge "Em desenvolvimento" no card (opacidade reduzida). |
+| `repo: <url>`     | Renderiza link secundário "Código-fonte" além do principal. |
+| `longDescription` | Texto estendido mostrado apenas em cards `featured`.     |
+
+### Adicionando um projeto
+
+Edite duas coisas em `js/modules/i18n.js`:
 
 1. Strings PT e EN na seção `translations`:
    ```js
@@ -230,12 +261,27 @@ Para adicionar um novo projeto, edite duas coisas em `js/modules/i18n.js`:
      name: this.t('project.meuProjeto', language),
      description: this.t('project.meuProjeto.desc', language),
      url: 'https://exemplo.com',
-     tags: ['HTML', 'CSS', 'JS']
+     tags: ['HTML', 'CSS', 'JS'],
+     featured: true,                      // opcional
+     longDescription: this.t('project.meuProjeto.long', language)  // se featured
    }
    ```
 
 Os mesmos passos valem para `getSites()` e `getEcosystem()` com os
 prefixos `site.` e `ecosystem.`.
+
+### Adicionando uma certificação
+
+Edite duas coisas:
+
+1. Colocar o PDF em `img/docs/` (nome sem acentos/espaços).
+2. Adicionar strings `docs.<slug>` e `docs.<slug>.meta` no i18n PT/EN, e
+   uma entrada no array de `getDocs()`:
+   ```js
+   { title: this.t('docs.slug', language),
+     meta:  this.t('docs.slug.meta', language),
+     file:  'img/docs/meu-certificado.pdf' }
+   ```
 
 ---
 
@@ -359,7 +405,7 @@ MIT. Veja `LICENSE`.
 ## Contato
 
 - **Email:** hbrslud@gmail.com
-- **Telefone:** +55 (47) 9 9783-3118
+- **Telefone:** +55 (47) 9 9963-3905 (contato geral) · +55 (47) 9 9783-3118 (Norma)
 - **GitHub:** [@LuddEvergard3n](https://github.com/LuddEvergard3n)
 - **LinkedIn:** [herbertbr-sorg-ludka](https://www.linkedin.com/in/herbertbr-sorg-ludka/)
 

@@ -34,6 +34,9 @@ const i18n = {
       'skill.llm-optimization': 'Otimização de contexto e fine-tuning de respostas',
       
       // Projetos
+      'project.athena': 'ATHENA',
+      'project.athena.desc': 'Motor de wargaming determinístico em C++17. 1238 plataformas militares, simulação Monte Carlo com Sobol indices, 6 sistemas de simulação (movimento, combate, logística, detecção, C2, IA tática). Zero dependências externas, bit-exact reproducibility, sem machine learning — regras explícitas e auditáveis.',
+      'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinismo em precisão IEEE-754 (sem fast-math). ImGui embutido, geração de relatórios PDF sem lib externa. Dados auditáveis (Jane\'s, IISS, SIPRI). Builds Linux, Windows (MinGW) e macOS. Versão atual: 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
       'project.computabilis.desc': 'Sistema de gestão financeira pessoal fácil.',
       'project.studium': 'Studium',
@@ -52,13 +55,15 @@ const i18n = {
       'project.banking.desc': 'Sistema bancário core em COBOL (terminal-based) com ledger imutável e separação de camadas.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
       'project.dashboard.desc': 'Dashboard Angular otimizado para eventos real-time (WebSocket, Signals, virtual scrolling).',
-      
+
       // Sites
       'site.law': 'Landing Advocacia Exemplo',
       'site.law.desc': 'Landing page para escritório de advocacia.',
       'site.primecoast': 'Prime Coast',
       'site.primecoast.desc': 'Landing page moderna para imobiliária (demonstração).',
-      
+      'site.linda': 'Linda Estética',
+      'site.linda.desc': 'Landing page moderna demonstrativa para salão de estética.',
+
       // Ecossistema Educacional
       'ecosystem.title': 'Ecossistema Educacional',
       'ecosystem.description': 'Projeto pessoal onde criei um site para cada matéria essencial, mirando na dor de cada disciplina e a dificuldade que professores enfrentam ao ensinar o conteúdo.',
@@ -73,8 +78,62 @@ const i18n = {
       'ecosystem.humboldt': 'Humboldt',
       'ecosystem.humboldt.desc': 'Atlas interativo de Geografia com 8 módulos, mapas SVG, escalas local→global.',
       'ecosystem.herodoto': 'Heródoto',
-      'ecosystem.herodoto.desc': 'Linha do tempo de História - Cronologia interativa e contexto histórico.',
-      
+      'ecosystem.herodoto.desc': 'Linha do tempo de História — cronologia interativa e contexto histórico.',
+      'ecosystem.archimedes': 'Archimedes',
+      'ecosystem.archimedes.desc': 'Laboratório interativo de Física para EF II e EM. 7 módulos, 23 experimentos, 22 simulações a 60 fps. Motor WebAssembly (C) com fallback JS; integrador Velocity Verlet para sistemas conservativos. Alinhado à BNCC.',
+      'ecosystem.aristoteles': 'Aristóteles',
+      'ecosystem.aristoteles.desc': 'Sistema de Filosofia para EM e início do ES. 9 módulos, 42 lições, 37 textos primários anotados. Foco em prática filosófica: reconstruir argumentos, classificar posições, identificar objeções. 70-90h de conteúdo.',
+      'ecosystem.darwin': 'Darwin',
+      'ecosystem.darwin.desc': 'Atlas dos Processos da Vida — sistema de Biologia por escalas (molecular → ecológica) e relações. 6 módulos v1: célula, DNA/hereditariedade, respiração/fotossíntese, sistemas do corpo, ecologia, evolução.',
+      'ecosystem.wip': 'Em desenvolvimento',
+
+      // Ratio (empresa + Norma)
+      'ratio.title': 'Ratio Sistemas Educacionais',
+      'ratio.description': 'Empresa própria (CNPJ 65.560.944/0001-69, Blumenau/SC). Infraestrutura digital do conhecimento: ferramentas browser-first para educação e pesquisa acadêmica.',
+      'ratio.site': 'Site institucional',
+      'ratio.site.desc': 'Site da empresa Ratio Sistemas Educacionais. HTML/CSS/JS puros, cinco camadas CSS, três módulos JS. Identidade: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; tipografia Cormorant Garamond + Source Sans 3.',
+      'norma.title': 'Norma — Plataforma ABNT',
+      'norma.subtitle': 'Estruturação documental acadêmica 100% no navegador',
+      'norma.what.title': 'O que é',
+      'norma.what.text': 'Norma é uma aplicação web estática (HTML + ES Modules) que gera documentos .docx conformes NBR 14724:2011 inteiramente no navegador. O servidor nunca toca o conteúdo do documento — ele só autentica o usuário e registra downloads.',
+      'norma.who.title': 'Para quem',
+      'norma.who.text': 'Estudantes de graduação, pós-graduação e pesquisadores que precisam entregar TCCs, dissertações, teses, artigos e relatórios em conformidade ABNT sem gastar horas com formatação manual no Word.',
+      'norma.features.title': 'O que faz',
+      'norma.features.1': 'Geração de .docx conforme NBR 14724:2011 via Web Worker',
+      'norma.features.2': 'Exportação PDF via janela de impressão dedicada',
+      'norma.features.3': 'Preview paginado fiel a A4 (Times 12pt, margens ABNT)',
+      'norma.features.4': 'Validação ABNT por grupo (6 grupos, ~15 regras cada)',
+      'norma.features.5': 'Wizard guiado com 14 tipos de trabalho em 6 grupos',
+      'norma.features.6': 'Busca de referências via DOI (CrossRef API)',
+      'norma.features.7': 'Gerador de referências NBR 6023 (livro, artigo, site, lei)',
+      'norma.features.8': 'Verificador de citações NBR 10520 com cruzamento automático',
+      'norma.features.9': 'Gerador automático de sumário (NBR 6027)',
+      'norma.features.10': 'APA 7 Student Paper (title page, headings, author-date)',
+      'norma.features.11': 'Hierarquia de 5 níveis de subseções (NBR 6024)',
+      'norma.features.12': 'Exportação TeX/LaTeX (classes abntex2 e apa7)',
+      'norma.features.13': 'Persistência local via IndexedDB (autosave a cada 1s)',
+      'norma.features.14': 'Modo Leve automático para hardware limitado',
+      'norma.arch.title': 'Decisões técnicas',
+      'norma.arch.text': 'Princípio central: o servidor nunca toca o conteúdo do documento. Client-side puro para geração; backend (Vercel Functions + Neon Postgres) apenas para entitlement JWT (Clerk) e webhook Stripe. Fallback STORE para browsers sem CompressionStream. Fingerprint reforçado com canvas hash + WebGL renderer.',
+      'norma.norms.title': 'Normas ABNT cobertas',
+      'norma.norms.list': 'NBR 14724:2011 (trabalhos acadêmicos), NBR 6023:2018 (referências), NBR 6027:2012 (sumário), NBR 6028:2021 (resumo/abstract), NBR 6022:2018 (artigos), NBR 10520:2002 (citações).',
+      'norma.visit': 'Acessar norma-app.com.br',
+
+      // Documentos (certificações)
+      'docs.title': 'Meus Documentos',
+      'docs.intro': 'Certificações e declarações de participação em cursos técnicos.',
+      'docs.sctec.dev': 'Trilha Rápida — Desenvolvimento de Software',
+      'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · 9, 10, 11, 19 e 20 de fevereiro de 2026 · HTML, CSS, JavaScript',
+      'docs.sctec.dados': 'Trilha Rápida — Análise de Dados',
+      'docs.sctec.dados.meta': 'SCTEC / ASCTI · 16h · 23 a 27 de fevereiro de 2026 · Dados, Python, Dashboards',
+      'docs.sctec.ia': 'Trilha Rápida — Inteligência Artificial',
+      'docs.sctec.ia.meta': 'SCTEC / ASCTI · 16h · 2 a 6 de março de 2026 · Criação de modelos, Bibliotecas para IA, Ética',
+      'docs.hb.niv': 'Nivelamento — Hackers do Bem',
+      'docs.hb.niv.meta': 'SENAI SP / Softex / RNP / MCTI · 80h · 22 de janeiro de 2024 a 12 de março de 2026 · redes, SO Windows/Linux, lógica, scripts',
+      'docs.hb.bas': 'Curso Básico — Hackers do Bem',
+      'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · 25 de março de 2024 a 25 de março de 2026 · nuvem, ameaças, vulnerabilidades, criptografia, GRC',
+      'docs.open': 'Abrir PDF',
+
       // Paginação
       'pagination.previous': 'Anterior',
       'pagination.next': 'Próxima',
@@ -138,6 +197,9 @@ Todos os meus projetos respondem três questões:
       'skill.llm-optimization': 'Context optimization and response fine-tuning',
       
       // Projects
+      'project.athena': 'ATHENA',
+      'project.athena.desc': 'Deterministic wargaming engine in C++17. 1,238 military platforms, Monte Carlo simulation with Sobol indices, 6 simulation systems (movement, combat, logistics, detection, C2, tactical AI). Zero external dependencies, bit-exact reproducibility, no machine learning — explicit and auditable rules.',
+      'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinism at IEEE-754 strict precision (no fast-math). ImGui embedded, PDF report generation without external libs. Auditable data (Jane\'s, IISS, SIPRI). Builds on Linux, Windows (MinGW), and macOS. Current version: 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
       'project.computabilis.desc': 'Easy personal financial management system.',
       'project.studium': 'Studium',
@@ -156,13 +218,15 @@ Todos os meus projetos respondem três questões:
       'project.banking.desc': 'Terminal-based core banking system in COBOL with immutable ledger and layered architecture.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
       'project.dashboard.desc': 'Optimized Angular dashboard for real-time events (WebSocket, Signals, virtual scrolling).',
-      
+
       // Sites
       'site.law': 'Law Firm Landing Example',
       'site.law.desc': 'Landing page for law firm.',
       'site.primecoast': 'Prime Coast',
       'site.primecoast.desc': 'Modern landing page for real estate agency (demo).',
-      
+      'site.linda': 'Linda Estética',
+      'site.linda.desc': 'Modern demo landing page for a beauty salon.',
+
       // Educational Ecosystem
       'ecosystem.title': 'Educational Ecosystem',
       'ecosystem.description': 'Personal project where I created a website for each essential subject, targeting each discipline\'s pain points and the difficulties teachers face when teaching the content.',
@@ -177,8 +241,62 @@ Todos os meus projetos respondem três questões:
       'ecosystem.humboldt': 'Humboldt',
       'ecosystem.humboldt.desc': 'Interactive Geography atlas with 8 modules, SVG maps, local→global scales.',
       'ecosystem.herodoto': 'Heródoto',
-      'ecosystem.herodoto.desc': 'History timeline - Interactive chronology and historical context.',
-      
+      'ecosystem.herodoto.desc': 'History timeline — interactive chronology and historical context.',
+      'ecosystem.archimedes': 'Archimedes',
+      'ecosystem.archimedes.desc': 'Interactive Physics lab for middle and high school. 7 modules, 23 experiments, 22 simulations at 60 fps. WebAssembly engine (C) with JS fallback; Velocity Verlet integrator for conservative systems. BNCC-aligned.',
+      'ecosystem.aristoteles': 'Aristóteles',
+      'ecosystem.aristoteles.desc': 'Philosophy system for high school and early college. 9 modules, 42 lessons, 37 annotated primary texts. Focus on philosophical practice: reconstruct arguments, classify positions, identify objections. 70-90h of content.',
+      'ecosystem.darwin': 'Darwin',
+      'ecosystem.darwin.desc': 'Atlas of Life Processes — Biology system by scales (molecular → ecological) and relations. 6 v1 modules: cell, DNA/heredity, respiration/photosynthesis, body systems, ecology, evolution.',
+      'ecosystem.wip': 'Work in progress',
+
+      // Ratio (company + Norma)
+      'ratio.title': 'Ratio Sistemas Educacionais',
+      'ratio.description': 'My company (CNPJ 65.560.944/0001-69, Blumenau/SC, Brazil). Digital infrastructure for knowledge: browser-first tools for education and academic research.',
+      'ratio.site': 'Institutional site',
+      'ratio.site.desc': 'Ratio Sistemas Educacionais company site. Pure HTML/CSS/JS, five CSS layers, three JS modules. Identity: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; typography Cormorant Garamond + Source Sans 3.',
+      'norma.title': 'Norma — ABNT Platform',
+      'norma.subtitle': 'Academic document structuring, 100% in the browser',
+      'norma.what.title': 'What it is',
+      'norma.what.text': 'Norma is a static web application (HTML + ES Modules) that generates .docx documents compliant with NBR 14724:2011 entirely in the browser. The server never touches document content — it only authenticates users and records downloads.',
+      'norma.who.title': 'Who it\'s for',
+      'norma.who.text': 'Undergrad and grad students and researchers who must deliver capstone projects, dissertations, theses, articles and reports in ABNT compliance without spending hours on manual Word formatting.',
+      'norma.features.title': 'What it does',
+      'norma.features.1': '.docx generation per NBR 14724:2011 via Web Worker',
+      'norma.features.2': 'PDF export via dedicated print window',
+      'norma.features.3': 'A4-faithful paginated preview (Times 12pt, ABNT margins)',
+      'norma.features.4': 'ABNT validation by group (6 groups, ~15 rules each)',
+      'norma.features.5': 'Guided wizard with 14 work types across 6 groups',
+      'norma.features.6': 'Reference search via DOI (CrossRef API)',
+      'norma.features.7': 'NBR 6023 reference generator (book, article, site, law)',
+      'norma.features.8': 'NBR 10520 citation checker with automatic cross-reference',
+      'norma.features.9': 'Automatic table of contents (NBR 6027)',
+      'norma.features.10': 'APA 7 Student Paper (title page, headings, author-date)',
+      'norma.features.11': '5-level subsection hierarchy (NBR 6024)',
+      'norma.features.12': 'TeX/LaTeX export (abntex2 and apa7 classes)',
+      'norma.features.13': 'Local persistence via IndexedDB (1s autosave)',
+      'norma.features.14': 'Automatic Lite Mode for low-end hardware',
+      'norma.arch.title': 'Technical decisions',
+      'norma.arch.text': 'Central principle: the server never touches document content. Pure client-side generation; backend (Vercel Functions + Neon Postgres) only for JWT entitlement (Clerk) and Stripe webhook. STORE fallback for browsers without CompressionStream. Reinforced fingerprint with canvas hash + WebGL renderer.',
+      'norma.norms.title': 'ABNT norms covered',
+      'norma.norms.list': 'NBR 14724:2011 (academic papers), NBR 6023:2018 (references), NBR 6027:2012 (table of contents), NBR 6028:2021 (abstract/resumo), NBR 6022:2018 (journal articles), NBR 10520:2002 (citations).',
+      'norma.visit': 'Visit norma-app.com.br',
+
+      // Documents (certifications)
+      'docs.title': 'My Documents',
+      'docs.intro': 'Certifications and participation declarations for technical courses.',
+      'docs.sctec.dev': 'Fast Track — Software Development',
+      'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · Feb 9, 10, 11, 19, 20, 2026 · HTML, CSS, JavaScript',
+      'docs.sctec.dados': 'Fast Track — Data Analysis',
+      'docs.sctec.dados.meta': 'SCTEC / ASCTI · 16h · Feb 23-27, 2026 · Data, Python, Dashboards',
+      'docs.sctec.ia': 'Fast Track — Artificial Intelligence',
+      'docs.sctec.ia.meta': 'SCTEC / ASCTI · 16h · Mar 2-6, 2026 · Model creation, AI libraries, Ethics',
+      'docs.hb.niv': 'Leveling — Hackers do Bem',
+      'docs.hb.niv.meta': 'SENAI SP / Softex / RNP / MCTI · 80h · Jan 22, 2024 to Mar 12, 2026 · networking, Windows/Linux, logic, scripting',
+      'docs.hb.bas': 'Basic Course — Hackers do Bem',
+      'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · Mar 25, 2024 to Mar 25, 2026 · cloud, threats, vulnerabilities, cryptography, GRC',
+      'docs.open': 'Open PDF',
+
       // Pagination
       'pagination.previous': 'Previous',
       'pagination.next': 'Next',
@@ -300,13 +418,22 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
   },
   
   /**
-   * Retorna lista de projetos
+   * Retorna lista de projetos. O primeiro item pode ter `featured: true`
+   * para receber destaque visual (usado pelo pagination.js ao renderizar).
    * @param {string} lang - Idioma
    * @returns {Array} Array de projetos
    */
   getProjects(lang = null) {
     const language = lang || this.currentLanguage;
     return [
+      {
+        name: this.t('project.athena', language),
+        description: this.t('project.athena.desc', language),
+        longDescription: this.t('project.athena.long', language),
+        url: 'https://github.com/LuddEvergard3n/ATHENA',
+        tags: ['C++17', 'CMake', 'ImGui', 'Monte Carlo', 'Determinism', 'Wargaming'],
+        featured: true
+      },
       {
         name: this.t('project.computabilis', language),
         description: this.t('project.computabilis.desc', language),
@@ -383,12 +510,21 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         description: this.t('site.primecoast.desc', language),
         url: 'https://luddevergard3n.github.io/Prime-Coast/',
         tags: ['HTML5', 'Tailwind', 'JavaScript']
+      },
+      {
+        name: this.t('site.linda', language),
+        description: this.t('site.linda.desc', language),
+        url: 'https://luddevergard3n.github.io/Linda-Estetica/',
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'Landing']
       }
     ];
   },
   
   /**
-   * Retorna lista do ecossistema educacional
+   * Retorna lista do ecossistema educacional.
+   * Projetos com `wip: true` são renderizados com badge "Em desenvolvimento"
+   * e sem link de Pages (apenas repo), se necessário.
+   *
    * @param {string} lang - Idioma
    * @returns {Array} Array de sites educacionais
    */
@@ -436,6 +572,65 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         url: 'https://luddevergard3n.github.io/Herodoto/',
         repo: 'https://github.com/LuddEvergard3n/Herodoto',
         tags: ['History', 'Timeline', 'Chronology']
+      },
+      {
+        name: this.t('ecosystem.archimedes', language),
+        description: this.t('ecosystem.archimedes.desc', language),
+        url: 'https://luddevergard3n.github.io/archimedes/',
+        repo: 'https://github.com/LuddEvergard3n/archimedes',
+        tags: ['Physics', 'WebAssembly', 'Canvas', 'PWA', 'BNCC']
+      },
+      {
+        name: this.t('ecosystem.aristoteles', language),
+        description: this.t('ecosystem.aristoteles.desc', language),
+        url: 'https://luddevergard3n.github.io/aristoteles/',
+        repo: 'https://github.com/LuddEvergard3n/aristoteles',
+        tags: ['Philosophy', 'Primary Texts', 'Argument Analysis']
+      },
+      {
+        name: this.t('ecosystem.darwin', language),
+        description: this.t('ecosystem.darwin.desc', language),
+        url: 'https://luddevergard3n.github.io/darwin/',
+        repo: 'https://github.com/LuddEvergard3n/darwin',
+        tags: ['Biology', 'Scales', 'Processes'],
+        wip: true
+      }
+    ];
+  },
+
+  /**
+   * Retorna lista de documentos/certificações do recrutador.
+   *
+   * @param {string} lang - Idioma
+   * @returns {Array} Array com título, metadados e caminho do PDF
+   */
+  getDocs(lang = null) {
+    const language = lang || this.currentLanguage;
+    return [
+      {
+        title: this.t('docs.hb.niv', language),
+        meta: this.t('docs.hb.niv.meta', language),
+        file: 'img/docs/cert-hackers-bem-nivelamento.pdf'
+      },
+      {
+        title: this.t('docs.hb.bas', language),
+        meta: this.t('docs.hb.bas.meta', language),
+        file: 'img/docs/cert-hackers-bem-basico.pdf'
+      },
+      {
+        title: this.t('docs.sctec.dev', language),
+        meta: this.t('docs.sctec.dev.meta', language),
+        file: 'img/docs/sctec-dev-software.pdf'
+      },
+      {
+        title: this.t('docs.sctec.dados', language),
+        meta: this.t('docs.sctec.dados.meta', language),
+        file: 'img/docs/sctec-analise-dados.pdf'
+      },
+      {
+        title: this.t('docs.sctec.ia', language),
+        meta: this.t('docs.sctec.ia.meta', language),
+        file: 'img/docs/sctec-ia.pdf'
       }
     ];
   }

@@ -59,35 +59,46 @@ const Language = {
       if (btn) btn.classList.add('active');
     }
     
-    // Resetar paginação e re-renderizar
+    // Resetar paginação e re-renderizar a aba ativa
     if (window.Pagination) {
       Pagination.reset();
-      
-      // Re-renderizar a aba ativa
+
       const activeTab = document.querySelector('.project-tab-content.active');
       if (activeTab) {
-        if (activeTab.id.includes('sites')) {
+        // activeTab.id segue o padrao "tab-<nome>-<lang>"
+        if (activeTab.id.startsWith('tab-sites')) {
           Pagination.renderSites('sites-list-' + lang);
-        } else if (activeTab.id.includes('projects')) {
+        } else if (activeTab.id.startsWith('tab-projects')) {
           Pagination.renderProjects('projects-list-' + lang);
+        } else if (activeTab.id.startsWith('tab-ecosystem')) {
+          Pagination.renderEcosystem('ecosystem-list-' + lang);
         }
       }
     }
-    
+
+    // Re-renderizar conteudos estaticos que dependem do idioma.
+    // Docs e Ratio sao idempotentes; render() substitui innerHTML.
+    if (window.Docs && typeof window.Docs.render === 'function') {
+      window.Docs.render();
+    }
+    if (window.Ratio && typeof window.Ratio.render === 'function') {
+      window.Ratio.render();
+    }
+
     // Disparar evento de mudança de idioma
     document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
-    
+
     // Atualizar barra de endereço
     this.updateAddressBar();
   },
-  
+
   /**
    * Atualiza a barra de endereço com base na seção e idioma atuais
    */
   updateAddressBar() {
     const currentSection = document.querySelector('.section:not(.hidden)');
     if (!currentSection) return;
-    
+
     const sectionId = currentSection.id;
     const urls = {
       about: {
@@ -98,12 +109,16 @@ const Language = {
         pt: 'http://ludd.portfolio/projetos',
         en: 'http://ludd.portfolio/projects'
       },
+      ratio: {
+        pt: 'http://ludd.portfolio/ratio',
+        en: 'http://ludd.portfolio/ratio'
+      },
       contact: {
         pt: 'http://ludd.portfolio/contato',
         en: 'http://ludd.portfolio/contact'
       }
     };
-    
+
     const addressInput = document.getElementById('address');
     if (addressInput && urls[sectionId]) {
       addressInput.value = urls[sectionId][this.currentLang] || '';

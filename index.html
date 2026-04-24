@@ -36,7 +36,7 @@
       "jobTitle": "Desenvolvedor Full-Stack",
       "description": "Desenvolvedor com experiência em desenvolvimento web, C, Java e integração com LLMs",
       "email": "hbrslud@gmail.com",
-      "telephone": "+55-47-9-9783-3118",
+      "telephone": "+55-47-9-9963-3905",
       "sameAs": [
         "https://github.com/LuddEvergard3n",
         "https://www.linkedin.com/in/herbertbr-sorg-ludka/"
@@ -104,7 +104,7 @@
         <span class="lang en hidden">My Computer</span>
     </a>
     
-    <a class="desktop-icon" href="#" onclick="event.preventDefault();" role="button" tabindex="0" aria-label="Meus Documentos">
+    <a class="desktop-icon" href="#" onclick="openDocs(); return false;" role="button" tabindex="0" aria-label="Meus Documentos">
         <img src="img/Folder_Closed.ico" class="icon" alt="Meus Documentos">
         <span class="lang pt">Meus Documentos</span>
         <span class="lang en hidden">My Documents</span>
@@ -318,6 +318,10 @@
             <span class="lang pt">Projetos</span>
             <span class="lang en hidden">Projects</span>
         </button>
+        <button class="nav-tab" onclick="showSection('ratio', event)">
+            <span class="lang pt">Ratio</span>
+            <span class="lang en hidden">Ratio</span>
+        </button>
         <button class="nav-tab" onclick="showSection('contact', event)">
             <span class="lang pt">Contato</span>
             <span class="lang en hidden">Contact</span>
@@ -391,6 +395,21 @@
             </div>
         </div>
 
+        <!-- ==================== RATIO SECTION ==================== -->
+        <!--
+          Conteudo renderizado por js/modules/ratio.js via Ratio.render().
+          Placeholders sao substituidos em ambos os idiomas no boot e no
+          switch de idioma.
+        -->
+        <div id="ratio" class="section hidden">
+            <div class="lang pt">
+                <div id="ratio-content-pt"></div>
+            </div>
+            <div class="lang en hidden">
+                <div id="ratio-content-en"></div>
+            </div>
+        </div>
+
         <!-- ==================== CONTACT SECTION ==================== -->
         <div id="contact" class="section hidden">
             <div class="lang pt">
@@ -398,7 +417,7 @@
                 
                 <div class="contact-item">
                     <span>Telefone:</span>
-                    <a href="tel:+5547997833118">+55 (47) 9 9783-3118</a>
+                    <a href="tel:+5547999633905">+55 (47) 9 9963-3905</a>
                 </div>
                 
                 <div class="contact-item">
@@ -422,7 +441,7 @@
                 
                 <div class="contact-item">
                     <span>Phone:</span>
-                    <a href="tel:+5547997833118">+55 (47) 9 9783-3118</a>
+                    <a href="tel:+5547999633905">+55 (47) 9 9963-3905</a>
                 </div>
                 
                 <div class="contact-item">
@@ -450,7 +469,36 @@
     </div>
 </div>
 
-<!-- ==================== PAINT WINDOW ==================== -->
+<!-- ==================== DOCS WINDOW ==================== -->
+<!--
+  Janela "Meus Documentos". Conteudo renderizado por js/modules/docs.js
+  (Docs.render). Segue o mesmo padrao de paint/notepad: data-window-id,
+  .title-bar, .window-controls, .window-content.
+-->
+<div class="window" id="docs-window" data-window-id="docs" style="width: 720px; height: 560px; top: 70px; left: 180px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="img/Folder_Open.ico" alt="Documentos" style="width: 16px; height: 16px;">
+            <span class="window-title lang pt">Meus Documentos</span>
+            <span class="window-title lang en hidden">My Documents</span>
+        </div>
+        <div class="window-controls">
+            <button class="minimize-btn" aria-label="Minimizar"></button>
+            <button class="maximize-btn" aria-label="Maximizar"></button>
+            <button class="close-btn" aria-label="Fechar"></button>
+        </div>
+    </div>
+
+    <div class="window-content">
+        <div class="lang pt">
+            <div id="docs-content-pt"></div>
+        </div>
+        <div class="lang en hidden">
+            <div id="docs-content-en"></div>
+        </div>
+    </div>
+</div>
+
 <!-- ==================== NOTEPAD WINDOW ==================== -->
 <div class="window" id="notepad-window" data-window-id="notepad" style="width: 600px; height: 500px; top: 80px; left: 200px; display: none;">
     <div class="title-bar">
@@ -570,6 +618,8 @@
 <script src="js/modules/accessibility.js"></script>
 <script src="js/modules/paint.js"></script>
 <script src="js/modules/notepad.js"></script>
+<script src="js/modules/docs.js"></script>
+<script src="js/modules/ratio.js"></script>
 <script src="js/modules/clippy.js"></script>
 <script src="js/modules/minesweeper.js"></script>
 <script src="js/main.js"></script>

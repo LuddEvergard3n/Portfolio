@@ -127,51 +127,28 @@ const Navigation = {
   },
   
   /**
-   * Cria um card de projeto
+   * Cria um card de projeto.
+   *
+   * Delega para Pagination.createProjectCard, que é a fonte única de verdade
+   * para a estrutura do card (suporta featured, wip, repo, tags etc.).
+   * Fallback local minimo caso Pagination ainda nao esteja carregado.
+   *
    * @param {Object} project - Dados do projeto
    * @returns {HTMLElement} - Elemento do card
    */
   createProjectCard(project) {
+    if (window.Pagination && typeof window.Pagination.createProjectCard === 'function') {
+      return window.Pagination.createProjectCard(project);
+    }
+    // Fallback conservador (nao deveria acontecer — Pagination eh carregado antes)
     const card = document.createElement('div');
     card.className = 'project';
-    
-    // Título
     const title = document.createElement('h3');
     title.textContent = project.name;
     card.appendChild(title);
-    
-    // Descrição
-    const description = document.createElement('p');
-    description.textContent = project.description;
-    card.appendChild(description);
-    
-    // Tags (se existirem)
-    if (project.tags && project.tags.length > 0) {
-      const tagsContainer = document.createElement('div');
-      tagsContainer.className = 'project-tags';
-      
-      project.tags.forEach(tag => {
-        const tagElement = document.createElement('span');
-        tagElement.className = 'project-tag';
-        tagElement.textContent = tag;
-        tagsContainer.appendChild(tagElement);
-      });
-      
-      card.appendChild(tagsContainer);
-    }
-    
-    // Link
-    const link = document.createElement('a');
-    link.href = project.url;
-    link.className = 'project-link';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    
-    const lang = Language.getCurrent();
-    link.textContent = lang === 'pt' ? 'Ver projeto' : 'View project';
-    
-    card.appendChild(link);
-    
+    const p = document.createElement('p');
+    p.textContent = project.description;
+    card.appendChild(p);
     return card;
   },
   
@@ -226,7 +203,7 @@ const Navigation = {
   init() {
     // Renderizar skills (mantido)
     this.renderSkills();
-    
+
     // Inicializar paginação
     if (window.Pagination) {
       Pagination.init();
@@ -238,7 +215,12 @@ const Navigation = {
       Pagination.renderEcosystem('ecosystem-list-pt');
       Pagination.renderEcosystem('ecosystem-list-en');
     }
-    
+
+    // Renderizar secao Ratio em ambos idiomas
+    if (window.Ratio && typeof window.Ratio.render === 'function') {
+      window.Ratio.render();
+    }
+
     // Mostrar primeira aba de projetos
     this.showProjectTab('sites');
   }
