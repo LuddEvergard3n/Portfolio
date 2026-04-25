@@ -4,16 +4,34 @@
 
 /* ==================== ÍCONES DO DESKTOP ==================== */
 
+/*
+ * Grid adaptativo. O JS (desktopGrid.js) calcula a contagem ideal de
+ * colunas (--desktop-cols) e linhas (--desktop-rows) para a viewport
+ * atual e seta ambas no :root. O CSS apenas consome essas variaveis.
+ *
+ * Por que --desktop-rows tambem?
+ *   grid-auto-flow: column SO funciona corretamente quando as linhas
+ *   estao definidas. Sem grid-template-rows, o navegador cria 1 linha
+ *   automaticamente e os icones extravasam horizontalmente. Esse era
+ *   o bug em 2.6.3 (icones em fileira horizontal unica).
+ *
+ * Fallback: --desktop-cols=3, --desktop-rows=7 (definidos em
+ * css/variables.css). Se o JS falhar ou nao executar, layout XP
+ * classico permanece.
+ *
+ * grid-auto-flow: column garante que os icones preenchem coluna a coluna
+ * (estilo Windows XP), nao linha a linha.
+ */
 .desktop-icons {
   position: absolute;
   top: var(--spacing-md);
   left: var(--spacing-md);
   display: grid;
-  grid-template-columns: repeat(3, 82px);
-  grid-template-rows: repeat(7, auto);
+  grid-template-columns: repeat(var(--desktop-cols, 3), 82px);
+  grid-template-rows: repeat(var(--desktop-rows, 7), 75px);
   gap: var(--spacing-lg) var(--spacing-xl);
   z-index: var(--z-index-desktop);
-  max-height: calc(100vh - 60px);
+  max-height: calc(100vh - var(--taskbar-height, 40px) - var(--spacing-md) * 2);
   grid-auto-flow: column;
 }
 

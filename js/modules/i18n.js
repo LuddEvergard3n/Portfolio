@@ -25,7 +25,6 @@ const i18n = {
       'skill.cpp': 'C++ — Programação de sistemas, gerenciamento manual de memória, estruturas de baixo nível. Linguagem principal em projetos como ATHENA (motor de wargaming determinístico) e Mini Deterministic Engine.',
       'skill.c': 'C — Núcleo de sistemas, integração com WebAssembly. Usado nos motores físicos do Archimedes e Lavoisier.',
       'skill.python': 'Python — Automação, análise de dados, integração com LLMs e pipelines de geração de documentos (PDF Builder).',
-      'skill.objc': 'Objective-C — Por interesse e proximidade com C/C++; familiaridade com runtime e mensageria.',
       'skill.java': 'Java — Programação orientada a objetos, aplicações de longa duração e GUIs Swing (ARES, Cassandra).',
       'skill.javascript': 'JavaScript — Front-end full-stack sem framework, ES Modules nativos, Web Workers, Canvas, IndexedDB. Usado em todos os projetos web do portfólio.',
 
@@ -133,7 +132,7 @@ const i18n = {
       'norma.visit': 'Acessar norma-app.com.br',
 
       // Documentos (certificações)
-      'docs.title': 'Meus Documentos',
+      'docs.title': 'Certificados',
       'docs.intro': 'Certificações e declarações de participação em cursos técnicos.',
       'docs.sctec.dev': 'Trilha Rápida — Desenvolvimento de Software',
       'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · 9, 10, 11, 19 e 20 de fevereiro de 2026 · HTML, CSS, JavaScript',
@@ -147,6 +146,20 @@ const i18n = {
       'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · 25 de março de 2024 a 25 de março de 2026 · nuvem, ameaças, vulnerabilidades, criptografia, GRC',
       'docs.open': 'Abrir PDF',
 
+      // Webcam
+      'webcam.title': 'Câmera e Scanner',
+      'webcam.intro': 'Easter egg: este "scanner" é a webcam do seu dispositivo. Permita o acesso quando o navegador pedir.',
+      'webcam.start': 'Ligar câmera',
+      'webcam.stop': 'Parar câmera',
+      'webcam.snapshot': 'Capturar imagem',
+      'webcam.idle': 'Câmera desligada.',
+      'webcam.requesting': 'Solicitando permissão...',
+      'webcam.live': 'Transmitindo ao vivo',
+      'webcam.error.denied': 'Permissão negada. Para usar este easter egg, autorize o acesso à câmera nas configurações do navegador.',
+      'webcam.error.notfound': 'Nenhuma câmera detectada neste dispositivo.',
+      'webcam.error.insecure': 'Acesso à câmera só funciona em HTTPS ou em localhost. Em http:// padrão, navegadores bloqueiam.',
+      'webcam.error.generic': 'Não foi possível acessar a câmera.',
+
       // Paginação
       'pagination.previous': 'Anterior',
       'pagination.next': 'Próxima',
@@ -155,7 +168,7 @@ const i18n = {
       
       // UI Elements
       'desktop.myComputer': 'Meu Computador',
-      'desktop.myDocuments': 'Meus Documentos',
+      'desktop.myDocuments': 'Certificados',
       'desktop.recycleBin': 'Lixeira',
       'desktop.officeHelp': 'Ajuda Office',
       'desktop.minesweeper': 'Campo Minado',
@@ -201,7 +214,6 @@ Todos os meus projetos respondem três questões:
       'skill.cpp': 'C++ — Systems programming, manual memory management, low-level structures. Primary language in projects like ATHENA (deterministic wargaming engine) and Mini Deterministic Engine.',
       'skill.c': 'C — Core systems, WebAssembly integration. Used in the physics engines of Archimedes and Lavoisier.',
       'skill.python': 'Python — Automation, data analysis, LLM integration, and document generation pipelines (PDF Builder).',
-      'skill.objc': 'Objective-C — Out of interest and proximity to C/C++. Familiar with the runtime and messaging.',
       'skill.java': 'Java — Object-oriented programming, long-running applications, Swing GUIs (ARES, Cassandra).',
       'skill.javascript': 'JavaScript — Framework-free full-stack front-end, native ES Modules, Web Workers, Canvas, IndexedDB. Used across every web project in this portfolio.',
 
@@ -309,7 +321,7 @@ Todos os meus projetos respondem três questões:
       'norma.visit': 'Visit norma-app.com.br',
 
       // Documents (certifications)
-      'docs.title': 'My Documents',
+      'docs.title': 'Certificates',
       'docs.intro': 'Certifications and participation declarations for technical courses.',
       'docs.sctec.dev': 'Fast Track — Software Development',
       'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · Feb 9, 10, 11, 19, 20, 2026 · HTML, CSS, JavaScript',
@@ -323,6 +335,20 @@ Todos os meus projetos respondem três questões:
       'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · Mar 25, 2024 to Mar 25, 2026 · cloud, threats, vulnerabilities, cryptography, GRC',
       'docs.open': 'Open PDF',
 
+      // Webcam
+      'webcam.title': 'Camera and Scanner',
+      'webcam.intro': 'Easter egg: this "scanner" is your device camera. Allow access when the browser asks.',
+      'webcam.start': 'Turn camera on',
+      'webcam.stop': 'Stop camera',
+      'webcam.snapshot': 'Capture image',
+      'webcam.idle': 'Camera off.',
+      'webcam.requesting': 'Requesting permission...',
+      'webcam.live': 'Live',
+      'webcam.error.denied': 'Permission denied. To use this easter egg, allow camera access in your browser settings.',
+      'webcam.error.notfound': 'No camera detected on this device.',
+      'webcam.error.insecure': 'Camera access only works on HTTPS or localhost. Browsers block it on plain http://.',
+      'webcam.error.generic': 'Unable to access the camera.',
+
       // Pagination
       'pagination.previous': 'Previous',
       'pagination.next': 'Next',
@@ -331,7 +357,7 @@ Todos os meus projetos respondem três questões:
       
       // UI Elements
       'desktop.myComputer': 'My Computer',
-      'desktop.myDocuments': 'My Documents',
+      'desktop.myDocuments': 'Certificates',
       'desktop.recycleBin': 'Recycle Bin',
       'desktop.officeHelp': 'Office Help',
       'desktop.minesweeper': 'Minesweeper',
@@ -409,7 +435,6 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
           this.t('skill.cpp', language),
           this.t('skill.c', language),
           this.t('skill.python', language),
-          this.t('skill.objc', language),
           this.t('skill.java', language),
           this.t('skill.javascript', language)
         ]

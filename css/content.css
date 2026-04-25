@@ -645,3 +645,108 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ==================== WEBCAM (easter egg) ==================== */
+
+.webcam-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.webcam-intro {
+  font-size: var(--font-size-sm);
+  color: var(--xp-text-gray, #666);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.webcam-stage {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border: var(--border-width) solid #999;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#webcam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.webcam-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  pointer-events: none;
+}
+
+.webcam-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.webcam-btn {
+  flex: 1;
+  min-width: 110px;
+  padding: 6px var(--spacing-md);
+  font-size: var(--font-size-sm);
+  background: var(--gradient-btn-blue, linear-gradient(180deg, #3c81f3 0%, #2d6cd9 100%));
+  color: #fff;
+  border: 1px solid #2158b8;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.webcam-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.webcam-btn:disabled {
+  background: #cccccc;
+  border-color: #999;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.webcam-status {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid #ccc;
+  border-radius: var(--border-radius-sm);
+  background: #f5f5f5;
+  font-family: var(--font-family-monospace, monospace);
+}
+
+.webcam-status[data-kind="live"] {
+  background: #ecf7ec;
+  border-color: #6aa56a;
+  color: #1f5d1f;
+}
+
+.webcam-status[data-kind="error"] {
+  background: #fdecec;
+  border-color: #c46c6c;
+  color: #7a1c1c;
+}
+
+.webcam-status[data-kind="pending"] {
+  background: #fdf6e3;
+  border-color: #c8a843;
+  color: #6a4a06;
+}

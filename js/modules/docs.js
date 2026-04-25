@@ -1,7 +1,7 @@
 /**
  * DOCS MODULE
  *
- * Janela "Meus Documentos" (certificacoes e declaracoes).
+ * Janela "Certificados" (certificacoes e declaracoes).
  *
  * Responsabilidades:
  *   - Renderizar a lista de documentos em ambos os idiomas (vindos de
@@ -13,7 +13,7 @@
  *   A primeira versao abria em iframe inline; isso pode falhar em navegadores
  *   com sandboxing agressivo ou quando o arquivo eh servido via file://.
  *   Optamos por abrir em nova aba (target="_blank"), que eh o comportamento
- *   esperado do "Meus Documentos" no contexto desse portfolio.
+ *   esperado do "Certificados" no contexto desse portfolio.
  */
 
 const Docs = {
@@ -81,7 +81,7 @@ const Docs = {
   },
 
   /**
-   * Abre a janela "Meus Documentos".
+   * Abre a janela "Certificados".
    * Padrao identico ao Paint.open() / Notepad.open(): delega ao WindowManager.
    */
   open() {

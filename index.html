@@ -104,10 +104,10 @@
         <span class="lang en hidden">My Computer</span>
     </a>
     
-    <a class="desktop-icon" href="#" onclick="openDocs(); return false;" role="button" tabindex="0" aria-label="Meus Documentos">
-        <img src="img/Folder_Closed.ico" class="icon" alt="Meus Documentos">
-        <span class="lang pt">Meus Documentos</span>
-        <span class="lang en hidden">My Documents</span>
+    <a class="desktop-icon easter-egg" href="#" onclick="openDocs(); return false;" role="button" tabindex="0" aria-label="Certificados">
+        <img src="img/Folder_Closed.ico" class="icon" alt="Certificados">
+        <span class="lang pt">Certificados</span>
+        <span class="lang en hidden">Certificates</span>
     </a>
     
     <a class="desktop-icon" href="#" onclick="event.preventDefault();" role="button" tabindex="0" aria-label="Lixeira">
@@ -173,7 +173,7 @@
         <span class="lang en hidden">Control Panel</span>
     </a>
     
-    <a class="desktop-icon" href="#" onclick="event.preventDefault();">
+    <a class="desktop-icon easter-egg" href="#" onclick="openWebcam(); return false;" role="button" tabindex="0" aria-label="Câmera e Scanner">
         <img src="img/Camera.ico" class="icon" alt="Câmera">
         <span class="lang pt">Câmera e Scanner</span>
         <span class="lang en hidden">Camera and Scanner</span>
@@ -218,8 +218,8 @@
             <div class="start-menu-separator"></div>
             <div class="start-menu-item">
                 <img src="img/folder.png" alt="Folder">
-                <span class="lang pt">Meus Documentos</span>
-                <span class="lang en hidden">My Documents</span>
+                <span class="lang pt">Certificados</span>
+                <span class="lang en hidden">Certificates</span>
             </div>
             <div class="start-menu-item">
                 <img src="img/folder.png" alt="Folder">
@@ -469,9 +469,34 @@
     </div>
 </div>
 
+<!-- ==================== WEBCAM WINDOW ==================== -->
+<!--
+  Janela "Câmera e Scanner". Conteudo gerenciado por js/modules/webcam.js.
+  Segue o mesmo padrao de docs/paint/notepad: data-window-id, .title-bar,
+  .window-controls, .window-content.
+-->
+<div class="window" id="webcam-window" data-window-id="webcam" style="width: 640px; height: 540px; top: 90px; left: 200px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="img/Camera.ico" alt="Câmera" style="width: 16px; height: 16px;">
+            <span class="window-title lang pt">Câmera e Scanner</span>
+            <span class="window-title lang en hidden">Camera and Scanner</span>
+        </div>
+        <div class="window-controls">
+            <button class="minimize-btn" aria-label="Minimizar"></button>
+            <button class="maximize-btn" aria-label="Maximizar"></button>
+            <button class="close-btn" aria-label="Fechar"></button>
+        </div>
+    </div>
+
+    <div class="window-content">
+        <div id="webcam-content"></div>
+    </div>
+</div>
+
 <!-- ==================== DOCS WINDOW ==================== -->
 <!--
-  Janela "Meus Documentos". Conteudo renderizado por js/modules/docs.js
+  Janela "Certificados". Conteudo renderizado por js/modules/docs.js
   (Docs.render). Segue o mesmo padrao de paint/notepad: data-window-id,
   .title-bar, .window-controls, .window-content.
 -->
@@ -479,8 +504,8 @@
     <div class="title-bar">
         <div class="title-bar-text">
             <img src="img/Folder_Open.ico" alt="Documentos" style="width: 16px; height: 16px;">
-            <span class="window-title lang pt">Meus Documentos</span>
-            <span class="window-title lang en hidden">My Documents</span>
+            <span class="window-title lang pt">Certificados</span>
+            <span class="window-title lang en hidden">Certificates</span>
         </div>
         <div class="window-controls">
             <button class="minimize-btn" aria-label="Minimizar"></button>
@@ -619,9 +644,11 @@
 <script src="js/modules/paint.js"></script>
 <script src="js/modules/notepad.js"></script>
 <script src="js/modules/docs.js"></script>
+<script src="js/modules/webcam.js"></script>
 <script src="js/modules/ratio.js"></script>
 <script src="js/modules/clippy.js"></script>
 <script src="js/modules/minesweeper.js"></script>
+<script src="js/modules/desktopGrid.js"></script>
 <script src="js/main.js"></script>
 
 </body>

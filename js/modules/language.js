@@ -84,6 +84,9 @@ const Language = {
     if (window.Ratio && typeof window.Ratio.render === 'function') {
       window.Ratio.render();
     }
+    if (window.Webcam && typeof window.Webcam.rerender === 'function') {
+      window.Webcam.rerender();
+    }
 
     // Disparar evento de mudança de idioma
     document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));

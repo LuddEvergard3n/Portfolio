@@ -56,10 +56,12 @@
       'WindowManager',
       'Notepad',
       'Docs',
+      'Webcam',
       'Ratio',
       'Accessibility',
       'Clippy',
-      'Minesweeper'
+      'Minesweeper',
+      'DesktopGrid'
     ];
 
     bootOrder.forEach(initModule);

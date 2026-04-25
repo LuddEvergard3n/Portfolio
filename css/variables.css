@@ -148,6 +148,13 @@
   --desktop-icon-size: 46px;
   --taskbar-icon-size: 20px;
   --title-bar-icon-size: 18px;
+
+  /*
+   * Grid de icones do desktop. Fallbacks usados ate que JS sobrescreva
+   * via desktopGrid.js. 3 cols x 7 rows e o layout XP classico.
+   */
+  --desktop-cols: 3;
+  --desktop-rows: 7;
   
   --window-min-width: 600px;
   --window-min-height: 400px;
