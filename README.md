@@ -1,139 +1,49 @@
-# Portfólio Windows XP
+# Windows XP Portfolio
 
-Portfólio pessoal com tema Windows XP. HTML + CSS + JavaScript baunilha, sem
-frameworks, sem bundler, sem etapa de build. Internacionalização PT/EN
-centralizada, janelas arrastáveis/redimensionáveis, três easter eggs
-(Clippy, Campo Minado, Paint).
+Interactive personal portfolio that recreates a Windows XP desktop with draggable windows, bilingual content, keyboard navigation, and small nostalgic applications.
 
-![Version](https://img.shields.io/badge/version-2.5.1-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=000)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-Semantic-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Responsive-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![WebAssembly](https://img.shields.io/badge/WebAssembly-Projects-654FF0?logo=webassembly&logoColor=white)](https://webassembly.org/)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-005A9C?logo=w3c&logoColor=white)](#accessibility)
+[![License](https://img.shields.io/badge/License-MIT-2EA44F)](LICENSE)
 
----
+## Overview
 
-## Índice
+The project uses semantic HTML, CSS, and vanilla JavaScript. It has no runtime dependencies, framework, bundler, or build step. Portuguese and English content is centralized in one internationalization module.
 
-- [Visão geral](#visao-geral)
-- [Tecnologias](#tecnologias)
-- [Estrutura do projeto](#estrutura-do-projeto)
-- [Como executar](#como-executar)
-- [Arquitetura](#arquitetura)
-- [Sistema de conteúdo](#sistema-de-conteudo)
-- [Paginação](#paginacao)
-- [Configuração](#configuracao)
-- [Atalhos de teclado](#atalhos-de-teclado)
-- [Easter eggs](#easter-eggs)
-- [Responsividade](#responsividade)
-- [Acessibilidade](#acessibilidade)
-- [SEO](#seo)
-- [Licença](#licenca)
-- [Contato](#contato)
+**Version:** 2.5.1
 
----
+## Highlights
 
-## Visão geral
+- Windows XP-inspired boot screen, desktop, taskbar, Start menu, and window chrome.
+- Draggable and resizable windows with minimize, maximize, restore, close, and touch support.
+- Runtime Portuguese and English switching, including the document `lang` attribute.
+- Projects grouped into Sites, Projects, and Educational Ecosystem tabs with independent pagination.
+- Dedicated Ratio and Norma section with technical product information.
+- Documents window with SENAI, SCTEC, Cisco, Google, IBM, and ISC2 certificates.
+- Project entries for NebulaKV, Kerana Gallery, ATHENA, and the educational ecosystem.
+- Clippy, Minesweeper, and Paint easter eggs.
+- Keyboard navigation, visible focus, ARIA labels, and screen-reader announcements.
+- CV download and contact modules with a plain static-site architecture.
 
-Simulação leve do desktop do Windows XP no navegador. Decisões de design:
+## Technology
 
-- Zero dependências em runtime. Nenhum framework, nenhuma lib externa.
-- Nenhuma etapa de build. O repositório pode ser servido como está.
-- Um módulo por responsabilidade; estado mantido em objetos globais simples
-  (sem classes, sem reatividade).
-- Strings traduzíveis vivem **em um único lugar** (`js/modules/i18n.js`).
-  `config.js` e os demais módulos consultam o i18n via getters — não há
-  duplicação PT/EN entre data files.
+| Layer | Choice |
+|---|---|
+| Markup | Semantic HTML5 |
+| Styling | CSS3 custom properties, Flexbox, and Grid |
+| Logic | Vanilla JavaScript ES2015+ |
+| Content | Centralized PT/EN providers in `js/modules/i18n.js` |
+| Delivery | Static files; no build step |
+| Module model | Ordered classic scripts and explicit global objects |
 
-### O que está implementado
+The classic-script architecture is intentional: the portfolio also works through `file://` without ES module CORS restrictions.
 
-- Boot screen (animação + som opcional).
-- Taskbar com relógio em tempo real, botão Iniciar, tray de janelas abertas.
-- Menu Iniciar com header de usuário, atalhos fixados e footer de logoff/desligar.
-- Gerenciador de janelas: abrir, fechar, minimizar, maximizar/restaurar,
-  arrastar pela title bar, redimensionar pelos 8 cantos/bordas, touch support.
-- i18n PT/EN com troca em tempo de execução. Atualiza o atributo `lang` da
-  raiz HTML para leitores de tela e SEO.
-- Janela "Sobre Mim" (Bloco de Notas): abre automaticamente após o boot,
-  botão fechar desabilitado por design, conteúdo PT/EN.
-- Seção de projetos com três abas: **Sites**, **Projetos**, **Ecossistema
-  Educacional**. Cada aba pagina independentemente (5 itens por página).
-  Cards suportam flags `featured` e `wip`. ATHENA aparece em destaque em
-  Projetos; Darwin aparece em WIP no Ecossistema.
-- Seção **Ratio** (aba de topo): empresa + produto principal Norma com
-  descrição técnica completa (14 features, decisões de arquitetura,
-  normas ABNT cobertas, contato comercial dedicado).
-- Janela **Meus Documentos**: aberta pelo ícone do desktop, lista as
-  certificações (SENAI/Hackers do Bem, SCTEC/ASCTI) com link para os PDFs.
-- Easter eggs: Clippy (assistente nostálgico), Campo Minado (jogo completo
-  9×9 com 10 minas), Paint (pincel/lápis/borracha/balde, paleta XP, salvar
-  como PNG, Ctrl+Z).
-- Acessibilidade: foco visível, ARIA labels, navegação por Tab/setas,
-  atalhos de teclado, região `sr-only` para leitores de tela.
+## Run locally
 
----
-
-## Tecnologias
-
-| Camada     | Escolha                                             |
-|------------|-----------------------------------------------------|
-| Marcação   | HTML5 semântico                                     |
-| Estilo     | CSS3 com variáveis (`:root`), Flexbox, Grid         |
-| Lógica     | JavaScript ES2015+ (objetos globais, arrow fns)     |
-| Empacote   | Nenhum — arquivos servidos diretamente              |
-| Transporte | `<script src>` em ordem; sem `type="module"`        |
-
-> **Nota:** o projeto usa o padrão "objeto global + `window.Foo = Foo`".
-> Não usa ES Modules (`import`/`export`). A escolha foi intencional para
-> manter o site funcional também via `file://` (sem CORS).
-
----
-
-## Estrutura do projeto
-
-```
-portfolio-xp/
-├── index.html                    # HTML principal (única página)
-├── README.md
-├── css/
-│   ├── variables.css             # Tokens: cores, tamanhos, tipografia, z-index
-│   ├── boot.css                  # Tela de boot + animações
-│   ├── desktop.css               # Desktop, ícones, taskbar, menu Iniciar
-│   ├── window.css                # Janelas, title bar, controles, resize handles
-│   ├── content.css               # Conteúdo do portfólio (abas, cards, skills)
-│   ├── eastereggs.css            # Clippy e Campo Minado
-│   ├── paint.css                 # Paint
-│   └── notepad.css               # Bloco de Notas "Sobre Mim"
-├── js/
-│   ├── main.js                   # Inicializador / orquestrador
-│   ├── config.js                 # Dados pessoais + getters delegando ao i18n
-│   └── modules/
-│       ├── i18n.js               # Traduções + providers de dados por idioma
-│       ├── boot.js               # Boot screen
-│       ├── clock.js              # Relógio da taskbar
-│       ├── language.js           # Troca de idioma (atualiza <html lang>)
-│       ├── startMenu.js          # Menu Iniciar
-│       ├── navigation.js         # Abas Sobre/Projetos/Contato + sub-abas
-│       ├── pagination.js         # Paginação dentro das sub-abas de projetos
-│       ├── window.js             # WindowManager (drag/resize/min/max/close)
-│       ├── notepad.js            # Bloco de Notas "Sobre Mim"
-│       ├── paint.js              # Paint + função open() e openPaint() global
-│       ├── docs.js               # Janela "Meus Documentos" (certificações PDF)
-│       ├── ratio.js              # Seção Ratio (empresa) + destaque da Norma
-│       ├── accessibility.js      # Navegação por teclado no desktop
-│       ├── clippy.js             # Easter egg: Clippy
-│       └── minesweeper.js        # Easter egg: Campo Minado
-└── img/
-    ├── docs/                      # Certificações em PDF (5 arquivos)
-    └── (…)                        # Ícones .ico do XP, wallpaper, áudio de boot
-```
-
-> **Não presentes** (apesar de versões antigas deste README mencionarem):
-> `sitemap.xml` e `robots.txt` não fazem parte do repositório.
-
----
-
-## Como executar
-
-O projeto roda em `file://`, mas um servidor local é recomendado para
-evitar qualquer comportamento diferente de CORS com áudio/ícones.
+The site can be opened directly through `index.html`. A local static server is recommended for consistent audio, icon, and browser behavior.
 
 ```bash
 # Python 3
@@ -146,270 +56,129 @@ npx http-server -p 8000 .
 php -S localhost:8000
 ```
 
-Acesse `http://localhost:8000`.
+Open `http://localhost:8000`.
 
----
+## Architecture
 
-## Arquitetura
+`js/main.js` waits for `DOMContentLoaded` and initializes each module independently. A failure in one module does not prevent unrelated modules from starting.
 
-### Fluxo de inicialização
-
-`main.js` espera `DOMContentLoaded` e chama `init()` em cada módulo em
-ordem fixa, isolando falhas (um módulo que lança erro não impede os demais).
-A ordem é:
-
-```
-i18n → BootScreen → Clock → Language → StartMenu → Navigation
-     → WindowManager → Notepad → Accessibility → Clippy → Minesweeper
+```text
+i18n -> BootScreen -> Clock -> Language -> StartMenu -> Navigation
+     -> WindowManager -> Notepad -> Accessibility -> Clippy -> Minesweeper
 ```
 
-Depois de 300 ms, `main.js` abre o Notepad "Sobre Mim" automaticamente —
-tempo suficiente para a boot screen sair de cena.
+The interface uses one object per responsibility. Translatable strings live in `js/modules/i18n.js`; configuration and rendering modules consume named providers instead of duplicating PT/EN datasets.
 
-### Padrão dos módulos
+`WindowManager.register(id)` is idempotent, preventing duplicate resize handles and document listeners. Minimum window dimensions come from CSS custom properties and are read once during initialization.
 
-```javascript
-const ModuleName = {
-  // Estado do módulo
-  someState: null,
+## Project structure
 
-  // API pública
-  init() { /* registra listeners, lê DOM */ },
-  doSomething() { /* ... */ }
-};
-
-window.ModuleName = ModuleName;
+```text
+portfolio-xp/
+|-- index.html
+|-- robots.txt
+|-- sitemap.xml
+|-- css/
+|   |-- variables.css         Design tokens and window limits
+|   |-- boot.css              Boot animation
+|   |-- desktop.css           Desktop, taskbar, and Start menu
+|   |-- window.css            Window controls and resizing
+|   |-- content.css           Portfolio content and cards
+|   |-- eastereggs.css        Clippy and Minesweeper
+|   |-- paint.css             Paint interface
+|   `-- notepad.css           About window
+|-- js/
+|   |-- main.js               Application initialization
+|   |-- config.js             Personal configuration and i18n getters
+|   `-- modules/
+|       |-- i18n.js           PT/EN strings and content providers
+|       |-- navigation.js     Main and project tabs
+|       |-- pagination.js     Per-tab pagination
+|       |-- window.js         Window manager
+|       |-- docs.js           Certificate browser
+|       |-- ratio.js          Ratio and Norma section
+|       |-- contactForm.js    Contact form behavior
+|       |-- cvDownload.js     CV download behavior
+|       |-- accessibility.js  Keyboard navigation
+|       |-- clippy.js         Clippy easter egg
+|       |-- minesweeper.js    Minesweeper easter egg
+|       `-- paint.js          Paint application
+|-- cv/                       Downloadable CV files
+`-- img/docs/                 Nine certificate PDFs
 ```
 
-### WindowManager
+## Content model
 
-`WindowManager.register(id)` é **idempotente**: chamar duas vezes para o
-mesmo id é no-op. Isso protege contra o erro (corrigido nesta versão) em
-que `main.js` registrava notepad/paint depois de `init()` já ter registrado,
-resultando em handles de resize duplicados e listeners de `document`
-anexados em dobro.
+The project area has three independent collections:
 
-Os limites mínimos de redimensionamento (`--window-min-width` e
-`--window-min-height` em `css/variables.css`) são lidos uma única vez
-em `WindowManager.init()` via `getComputedStyle`. O JS respeita a mesma
-fonte de verdade que o README. Fallbacks: 600×400.
+| Section | Provider |
+|---|---|
+| Sites | `i18n.getSites(lang)` |
+| Projects | `i18n.getProjects(lang)` |
+| Educational Ecosystem | `i18n.getEcosystem(lang)` |
 
-### i18n + config
+Project cards may use `featured`, `wip`, `repo`, and `longDescription` fields. The Ratio/Norma and Documents sections use their own renderers and i18n providers.
 
-```
-i18n.js            config.js                demais módulos
-─────────          ─────────                ──────────────
-translations ◄───── about.pt/en getter ──── window.PORTFOLIO_CONFIG
-getProjects()      projects.pt/en getter
-getSites()         sites.pt/en getter
-getEcosystem()     ecosystem.pt/en getter
-```
+### Add a project
 
-`config.js` não duplica strings. Todo texto traduzível passa por `i18n.t()`
-ou por um provider nomeado (`getProjects`, `getSites`, `getEcosystem`,
-`getAboutData`).
+1. Add Portuguese and English strings to `translations` in `js/modules/i18n.js`.
+2. Add the entry to `getProjects()`, `getSites()`, or `getEcosystem()`.
+3. Reuse existing card flags instead of introducing a new rendering path.
 
----
+### Add a certificate
 
-## Sistema de conteúdo
+1. Place the PDF in `img/docs/` using a URL-safe filename.
+2. Add `docs.<slug>` and `docs.<slug>.meta` strings in both languages.
+3. Add the file entry to `getDocs()`.
 
-A seção "Projetos" possui três abas independentes:
+## Pagination and URLs
 
-| Aba                         | Fonte no i18n          | Provider               |
-|-----------------------------|------------------------|------------------------|
-| Sites                       | `site.*`               | `i18n.getSites(lang)`  |
-| Projetos                    | `project.*`            | `i18n.getProjects(lang)` |
-| Ecossistema Educacional     | `ecosystem.*`          | `i18n.getEcosystem(lang)` |
+Each project tab keeps independent pagination with five items per page. The following hashes restore a specific page:
 
-Os seguintes conteúdos vivem fora das abas:
+- `#projects-page-2`
+- `#sites-page-2`
+- `#ecosystem-page-2`
 
-| Conteúdo             | Fonte no i18n                      | Provider              |
-|----------------------|------------------------------------|-----------------------|
-| Ratio + Norma        | `ratio.*`, `norma.*`               | `Ratio.render()`      |
-| Meus Documentos      | `docs.*`                           | `i18n.getDocs(lang)`  |
+Left and right arrow keys change the active page when focus is not inside a form control.
 
-### Flags de card
+## Keyboard shortcuts
 
-Os providers de projetos podem retornar itens com flags opcionais:
+| Shortcut | Action |
+|---|---|
+| `Tab` | Move through focusable controls |
+| Arrow keys | Move between desktop icons |
+| `Left` / `Right` | Change the active project page |
+| `Enter` | Activate the focused control |
+| `Esc` or `Alt+F4` | Close the active closable window |
+| `Ctrl+Z` | Undo the latest Paint action |
 
-| Flag              | Efeito                                                   |
-|-------------------|----------------------------------------------------------|
-| `featured: true`  | Adiciona classe `.project--featured` + badge "Destaque". Se `longDescription` existir, renderiza em bloco secundário. |
-| `wip: true`       | Badge "Em desenvolvimento" no card (opacidade reduzida). |
-| `repo: <url>`     | Renderiza link secundário "Código-fonte" além do principal. |
-| `longDescription` | Texto estendido mostrado apenas em cards `featured`.     |
+## Accessibility
 
-### Adicionando um projeto
+- Visible `:focus-visible` treatment.
+- ARIA labels and button roles for desktop icons and controls.
+- Keyboard navigation across the desktop, windows, tabs, and pagination.
+- Dynamic root-language updates for screen readers.
+- Selectable and navigable read-only Notepad content.
+- WCAG 2.1 AA contrast for primary text and surfaces.
 
-Edite duas coisas em `js/modules/i18n.js`:
+## Responsive behavior
 
-1. Strings PT e EN na seção `translations`:
-   ```js
-   pt: {
-     'project.meuProjeto': 'Nome do Projeto',
-     'project.meuProjeto.desc': 'Descrição curta.',
-   },
-   en: {
-     'project.meuProjeto': 'Project Name',
-     'project.meuProjeto.desc': 'Short description.',
-   }
-   ```
-
-2. Entrada no array retornado por `getProjects()`:
-   ```js
-   {
-     name: this.t('project.meuProjeto', language),
-     description: this.t('project.meuProjeto.desc', language),
-     url: 'https://exemplo.com',
-     tags: ['HTML', 'CSS', 'JS'],
-     featured: true,                      // opcional
-     longDescription: this.t('project.meuProjeto.long', language)  // se featured
-   }
-   ```
-
-Os mesmos passos valem para `getSites()` e `getEcosystem()` com os
-prefixos `site.` e `ecosystem.`.
-
-### Adicionando uma certificação
-
-Edite duas coisas:
-
-1. Colocar o PDF em `img/docs/` (nome sem acentos/espaços).
-2. Adicionar strings `docs.<slug>` e `docs.<slug>.meta` no i18n PT/EN, e
-   uma entrada no array de `getDocs()`:
-   ```js
-   { title: this.t('docs.slug', language),
-     meta:  this.t('docs.slug.meta', language),
-     file:  'img/docs/meu-certificado.pdf' }
-   ```
-
----
-
-## Paginação
-
-`pagination.js` pagina cada aba independentemente (5 itens por página,
-configurável em `Pagination.itemsPerPage`).
-
-- **Botões**: "Anterior" / "Próxima" renderizados abaixo da lista.
-- **Teclado**: `←` e `→` paginam a aba ativa quando a seção "Projetos"
-  está visível e o foco não está num input/textarea.
-- **Hash na URL**: `#projects-page-2`, `#sites-page-2`,
-  `#ecosystem-page-2` restauram a página na abertura.
-- **Indicador**: "Página N de M" no idioma corrente.
-
----
-
-## Configuração
-
-### Variáveis CSS
-
-Todas as cores e tamanhos vivem em `css/variables.css`:
-
-```css
-:root {
-  --xp-blue-primary: #0058ee;
-  --taskbar-height: 40px;
-  --window-min-width: 600px;
-  --window-min-height: 400px;
-  --transition-normal: 0.3s ease;
-  /* ... */
-}
-```
-
-Alterar o mínimo da janela em CSS afeta também o JS (o módulo lê essas
-variáveis em boot).
-
-### Itens por página
-
-```javascript
-// js/modules/pagination.js
-const Pagination = {
-  itemsPerPage: 5,
-  // ...
-};
-```
-
----
-
-## Atalhos de teclado
-
-| Atalho                   | Ação                                             |
-|--------------------------|--------------------------------------------------|
-| `Tab`                    | Navegar entre elementos focáveis                 |
-| `Setas` (no desktop)     | Navegar entre ícones do desktop                  |
-| `← / →` (em Projetos)    | Paginar a sub-aba ativa                          |
-| `Enter`                  | Ativar elemento focado                           |
-| `Esc`                    | Fechar janela ativa                              |
-| `Alt + F4`               | Fechar janela ativa                              |
-| `Ctrl + Z` (no Paint)    | Desfazer último traço                            |
-
----
-
-## Easter eggs
-
-**Clippy.** Assistente animado com mensagens nostálgicas em PT/EN.
-Clicar no personagem troca a mensagem; clicar no X fecha.
-
-**Campo Minado.** Grade 9×9 com 10 minas. Botão esquerdo revela, botão
-direito alterna bandeira, clicar no rosto reinicia.
-
-**Paint.** Lápis, pincel, borracha e balde; paleta de 28 cores do XP;
-controle de tamanho de traço; Ctrl+Z; salvar como PNG. Inicialização
-tardia — só monta o canvas quando o usuário abre pela primeira vez.
-
----
-
-## Responsividade
-
-Breakpoints principais em `css/content.css` e `css/desktop.css`:
-
-- `max-width: 900px` — tablet: janela ocupa viewport com pequena margem.
-- `max-width: 600px` — mobile: janela fullscreen entre taskbar e topo,
-  controles de paginação empilhados verticalmente.
-
-Touch events estão presentes em drag de janela e no Paint.
-
----
-
-## Acessibilidade
-
-- `role="button"` e `aria-label` em ícones do desktop e controles.
-- Foco visível via `*:focus-visible` (em `variables.css`).
-- Atributo `lang` da raiz HTML é atualizado dinamicamente em
-  `Language.set()` (`pt-BR` ↔ `en`), refletindo no DOM para leitores de
-  tela e SEO.
-- Navegação por teclado cobre: ícones do desktop, controles de janela,
-  abas de navegação, paginação de projetos.
-- O Bloco de Notas é `readonly`, mas o texto é selecionável e navegável.
-- Paleta atende contraste WCAG 2.1 AA para texto sobre fundos principais.
-
----
+- Up to 900 px: windows fit the viewport with reduced margins.
+- Up to 600 px: windows use the available screen between the desktop and taskbar; pagination controls stack vertically.
+- Window dragging and Paint support touch input.
 
 ## SEO
 
-- Meta tags Description / Keywords / Author.
-- Open Graph completo e Twitter Card.
-- `<link rel="canonical">` previne conteúdo duplicado.
-- JSON-LD Schema.org (`@type: Person`) com campos `name`, `jobTitle`,
-  `email`, `telephone`, `sameAs`, `knowsAbout`.
-- Todas as imagens possuem `alt`.
+The page includes canonical metadata, Open Graph and Twitter cards, descriptive alternative text, and Schema.org JSON-LD. `robots.txt` and `sitemap.xml` are included for crawlers.
 
----
+## License
 
-## Licença
+MIT. See [LICENSE](LICENSE).
 
-MIT. Veja `LICENSE`.
+Windows XP is a trademark of Microsoft Corporation. This project is an independent tribute and is not affiliated with Microsoft.
 
----
+## Contact
 
-## Contato
-
-- **Email:** hbrslud@gmail.com
-- **Telefone:** +55 (47) 9 9963-3905 (contato geral) · +55 (47) 9 9783-3118 (Norma)
-- **GitHub:** [@LuddEvergard3n](https://github.com/LuddEvergard3n)
-- **LinkedIn:** [herbertbr-sorg-ludka](https://www.linkedin.com/in/herbertbr-sorg-ludka/)
-
----
-
-Windows XP é marca registrada da Microsoft Corporation. Este projeto é um
-tributo afetivo e não é afiliado à Microsoft.
+- Email: `hbrslud@gmail.com`
+- GitHub: [@LuddEvergard3n](https://github.com/LuddEvergard3n)
+- LinkedIn: [herbertbr-sorg-ludka](https://www.linkedin.com/in/herbertbr-sorg-ludka/)
