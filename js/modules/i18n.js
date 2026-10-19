@@ -126,7 +126,7 @@ const i18n = {
 
       // Ratio (empresa + Norma)
       'ratio.title': 'Ratio Sistemas Educacionais',
-      'ratio.description': 'Empresa própria (CNPJ 65.560.944/0001-69, Blumenau/SC). Infraestrutura digital do conhecimento: ferramentas browser-first para educação e pesquisa acadêmica.',
+      'ratio.description': 'Empresa própria (CNPJ 65.560.944/0001-69, Navegantes/SC). Infraestrutura digital do conhecimento: ferramentas browser-first para educação e pesquisa acadêmica.',
       'ratio.site': 'Site institucional',
       'ratio.site.desc': 'Site da empresa Ratio Sistemas Educacionais. HTML/CSS/JS puros, cinco camadas CSS, três módulos JS. Identidade: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; tipografia Cormorant Garamond + Source Sans 3.',
       'norma.title': 'Norma — Plataforma ABNT',
@@ -340,7 +340,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
 
       // Ratio (company + Norma)
       'ratio.title': 'Ratio Sistemas Educacionais',
-      'ratio.description': 'My company (CNPJ 65.560.944/0001-69, Blumenau/SC, Brazil). Digital infrastructure for knowledge: browser-first tools for education and academic research.',
+      'ratio.description': 'My company (CNPJ 65.560.944/0001-69, Navegantes/SC, Brazil). Digital infrastructure for knowledge: browser-first tools for education and academic research.',
       'ratio.site': 'Institutional site',
       'ratio.site.desc': 'Ratio Sistemas Educacionais company site. Pure HTML/CSS/JS, five CSS layers, three JS modules. Identity: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; typography Cormorant Garamond + Source Sans 3.',
       'norma.title': 'Norma — ABNT Platform',
