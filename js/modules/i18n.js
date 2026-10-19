@@ -13,13 +13,34 @@ const i18n = {
     pt: {
       // Sobre
       'about.title': 'Sobre Mim',
-      'about.description': 'Desenvolvedor focado em sistemas, web e engenharia de software. Trabalho do baixo nível em C++ ao front-end em HTML/CSS/JS, com ênfase em performance, determinismo e código que dura.',
+      'about.description': 'Profissional bilíngue com experiência em produtos digitais, suporte técnico e ao cliente, educação, operações, SaaS e CRM. Uso fluxos assistidos por IA para transformar necessidades reais em soluções práticas, documentadas e verificáveis.',
+
+      // Filosofia de sistemas e decisoes de design
+      'philosophy.heading': 'Como eu trabalho',
+      'philosophy.p1': 'Começo pelo problema e pelo usuário. Organizo requisitos, pesquiso alternativas e uso IA como ferramenta de criação e revisão, sem esconder sua participação no processo.',
+      'philosophy.p2': 'Assumo responsabilidade pelo resultado: testo fluxos críticos, reviso comportamento, documento decisões e mantenho limites claros entre o que foi validado e o que ainda é experimental.',
+      'philosophy.p3': 'Prefiro soluções simples, locais e auditáveis. Evito dependências quando a plataforma já resolve o problema e priorizo acessibilidade, privacidade, desempenho e manutenção.',
+      'philosophy.p4': 'Minha experiência em suporte, ensino e operações ajuda a traduzir necessidades técnicas para pessoas diferentes e a transformar feedback em melhorias práticas.',
 
       // Categorias de skills
-      'skills.programming': 'Linguagens',
-      'skills.web': 'Web',
-      'skills.systems': 'Sistemas e Engenharia',
+      'skills.support': 'Suporte e operações',
+      'skills.communication': 'Comunicação e educação',
+      'skills.product': 'Produtos digitais',
       'skills.ai': 'Inteligência Artificial',
+
+      'skill.technical-support': 'Suporte técnico e Help Desk — diagnóstico, orientação passo a passo, triagem, acompanhamento e documentação de incidentes.',
+      'skill.customer-support': 'Atendimento ao cliente — comunicação por e-mail, chat, telefone e mensagens, inclusive em inglês.',
+      'skill.crm': 'CRM e ATS — Salesforce, Sponte e Starhunter para registros, pipelines, atendimento, recrutamento e acompanhamento.',
+      'skill.remote-work': 'Operações remotas — organização de tarefas, prazos, documentação, rastreabilidade e múltiplos fluxos simultâneos.',
+      'skill.english': 'Inglês C2 — uso profissional, ensino, comunicação internacional, documentação técnica e escrita.',
+      'skill.teaching': 'Ensino — planejamento, adaptação de conteúdo, acompanhamento individual e feedback estruturado.',
+      'skill.recruiting': 'Recrutamento internacional — triagem, entrevistas, apresentação de candidatos e acompanhamento do processo seletivo.',
+      'skill.product-ops': 'Operações de produto — requisitos, conteúdo, suporte, documentação e melhoria contínua de produtos SaaS e educacionais.',
+      'skill.web-tools': 'Tecnologias web — conhecimento prático de HTML, CSS, JavaScript, TypeScript, Git e GitHub.',
+      'skill.accessibility': 'Experiência digital — interfaces responsivas, acessibilidade, funcionamento offline e conteúdo multilíngue.',
+      'skill.ai-workflows': 'Fluxos assistidos por IA — ChatGPT, Claude e Gemini aplicados a pesquisa, escrita, análise, prototipação e revisão.',
+      'skill.testing': 'Testes de software — testes funcionais, regressão, casos-limite, reprodução de defeitos e verificação de correções.',
+      'skill.documentation': 'Documentação técnica — READMEs, decisões, procedimentos, limites conhecidos e instruções de validação.',
 
       // Skills individuais — Linguagens
       'skill.cpp': 'C++ — Programação de sistemas, gerenciamento manual de memória, estruturas de baixo nível. Linguagem principal em projetos como ATHENA (motor de wargaming determinístico) e Mini Deterministic Engine.',
@@ -67,6 +88,10 @@ const i18n = {
       'project.banking.desc': 'Sistema bancário core em COBOL (terminal-based) com ledger imutável e separação de camadas.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
       'project.dashboard.desc': 'Dashboard Angular otimizado para eventos real-time (WebSocket, Signals, virtual scrolling).',
+      'project.nebulakv': 'NebulaKV',
+      'project.nebulakv.desc': 'Banco de dados de strings em memória escrito em Go, com servidor TCP, protocolo RESP2, expiração, journal append-only, autenticação e replicação.',
+      'project.kerana': 'Kerana Gallery',
+      'project.kerana.desc': 'Portal de aprovação de conteúdo para clientes, com planejamento mensal, D1/R2, autenticação e controles de segurança centralizados no Cloudflare Worker.',
 
       // Sites
       'site.law': 'Landing Advocacia Exemplo',
@@ -136,6 +161,8 @@ const i18n = {
       'docs.intro': 'Certificações e declarações de participação em cursos técnicos.',
       'docs.sctec.dev': 'Trilha Rápida — Desenvolvimento de Software',
       'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · 9, 10, 11, 19 e 20 de fevereiro de 2026 · HTML, CSS, JavaScript',
+      'docs.sctec.dev2': 'Trilha Rápida — Desenvolvimento de Software, Segundo Ciclo',
+      'docs.sctec.dev2.meta': 'SCTEC / SCTI-SC · 16h · 13 a 17 de abril de 2026 · HTML, CSS, JavaScript',
       'docs.sctec.dados': 'Trilha Rápida — Análise de Dados',
       'docs.sctec.dados.meta': 'SCTEC / ASCTI · 16h · 23 a 27 de fevereiro de 2026 · Dados, Python, Dashboards',
       'docs.sctec.ia': 'Trilha Rápida — Inteligência Artificial',
@@ -144,6 +171,14 @@ const i18n = {
       'docs.hb.niv.meta': 'SENAI SP / Softex / RNP / MCTI · 80h · 22 de janeiro de 2024 a 12 de março de 2026 · redes, SO Windows/Linux, lógica, scripts',
       'docs.hb.bas': 'Curso Básico — Hackers do Bem',
       'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · 25 de março de 2024 a 25 de março de 2026 · nuvem, ameaças, vulnerabilidades, criptografia, GRC',
+      'docs.cisco.ethical': 'Ethical Hacker',
+      'docs.cisco.ethical.meta': 'Cisco Networking Academy · concluído em 15 de setembro de 2026',
+      'docs.google.cybersecurity': 'Google Cybersecurity',
+      'docs.google.cybersecurity.meta': 'Google Career Certificates / Coursera · 9 cursos · concluído em 18 de setembro de 2026',
+      'docs.ibm.analyst': 'IBM Cybersecurity Analyst',
+      'docs.ibm.analyst.meta': 'IBM Skills Network / Coursera · 14 cursos · concluído em 24 de setembro de 2026',
+      'docs.ibm.isc2': 'IBM and ISC2 Cybersecurity Specialist',
+      'docs.ibm.isc2.meta': 'IBM Skills Network / ISC2 / Coursera · 12 cursos · concluído em 28 de setembro de 2026',
       'docs.open': 'Abrir PDF',
 
       // Webcam
@@ -178,37 +213,48 @@ const i18n = {
       
       // Notepad
       'notepad.title': 'Sobre Mim - Bloco de Notas',
-      'notepad.content': `Prazer, eu sou o Herbert (LuddEvergard3n)
+      'notepad.content': `Prazer, eu sou o Herbert (LuddEvergard3n).
 
-Meu desenvolvimento é focado em sistemas, análise de dados e engenharia de software com ênfase em performance, determinismo e manutenção de longo prazo. Todos os meus projetos seguem uma filosofia imutável:
+Trabalho com produtos digitais, suporte técnico e ao cliente, educação e operações. Tenho inglês C2 e experiência com SaaS, CRM, recrutamento internacional e ensino de inglês e História.
 
-• Deve ser otimizado;
-• Deve ser modular;
-• Deve ser bem documentado e comentado;
+Uso ferramentas de inteligência artificial ao longo dos meus projetos para pesquisar, estruturar, criar e revisar. Meu papel é definir o problema, orientar o processo, testar o resultado, documentar decisões e assumir responsabilidade pelo que publico.
 
-Mexo principalmente com desenvolvimento web, desde sites estáticos até landings mais complexas e bonitas, mas gosto de mexer bastante em C, C++ e Java.
+Este portfólio reúne projetos práticos, certificados verificáveis e ferramentas criadas para necessidades reais. A interface inspirada no Windows XP mantém a experiência familiar, acessível e direta.
 
-A interface desse portfólio foi propositalmente inspirada em sistemas clássicos e UIs de software corporativo, priorizando clareza, estabilidade visual e familiaridade com ambientes legados.
-
-Todos os meus projetos respondem três questões:
-
-• "Por que esse projeto existe";
-• "Qual problema técnico resolve";
-• "O que eu quis demonstrar aqui";
-
-É isso. Se quiser entrar em contato, clique na aba "Contato" na janela ao lado. Vai encontrar todos os meus projetos ali também.`
+Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
     },
     
     en: {
       // About
       'about.title': 'About Me',
-      'about.description': 'Developer focused on systems, web, and software engineering. I work from low-level C++ to front-end HTML/CSS/JS, with emphasis on performance, determinism, and code that lasts.',
+      'about.description': 'Bilingual professional with experience in digital products, technical and customer support, education, operations, SaaS, and CRM. I use AI-assisted workflows to turn real needs into practical, documented, and verifiable solutions.',
+
+      // Systems philosophy and design decisions
+      'philosophy.heading': 'How I work',
+      'philosophy.p1': 'I start with the problem and the user. I organize requirements, research alternatives, and use AI as a creation and review tool without hiding its role in the process.',
+      'philosophy.p2': 'I remain responsible for the result: I test critical workflows, review behaviour, document decisions, and distinguish validated functionality from experimental work.',
+      'philosophy.p3': 'I prefer simple, local, and auditable solutions. I avoid dependencies when the platform already solves the problem and prioritize accessibility, privacy, performance, and maintainability.',
+      'philosophy.p4': 'My background in support, teaching, and operations helps me explain technical subjects to different audiences and turn feedback into practical improvements.',
 
       // Skill categories
-      'skills.programming': 'Languages',
-      'skills.web': 'Web',
-      'skills.systems': 'Systems and Engineering',
-      'skills.ai': 'Artificial Intelligence',
+      'skills.support': 'Support and operations',
+      'skills.communication': 'Communication and education',
+      'skills.product': 'Digital products',
+      'skills.ai': 'AI and quality',
+
+      'skill.technical-support': 'Technical support and Help Desk — diagnosis, step-by-step guidance, triage, follow-up, and incident documentation.',
+      'skill.customer-support': 'Customer support — communication through email, chat, telephone, and messaging platforms, including in English.',
+      'skill.crm': 'CRM and ATS — Salesforce, Sponte, and Starhunter for records, pipelines, customer support, recruitment, and follow-up.',
+      'skill.remote-work': 'Remote operations — task organization, deadlines, documentation, traceability, and simultaneous workflows.',
+      'skill.english': 'C2 English — professional use, teaching, international communication, technical documentation, and writing.',
+      'skill.teaching': 'Teaching — planning, content adaptation, individual progress monitoring, and structured feedback.',
+      'skill.recruiting': 'International recruitment — screening, interviews, candidate presentation, and process follow-up.',
+      'skill.product-ops': 'Product operations — requirements, content, support, documentation, and continuous improvement for SaaS and educational products.',
+      'skill.web-tools': 'Web technologies — working knowledge of HTML, CSS, JavaScript, TypeScript, Git, and GitHub.',
+      'skill.accessibility': 'Digital experience — responsive interfaces, accessibility, offline operation, and multilingual content.',
+      'skill.ai-workflows': 'AI-assisted workflows — ChatGPT, Claude, and Gemini for research, writing, analysis, prototyping, and review.',
+      'skill.testing': 'Software testing — functional, regression, and edge-case testing, defect reproduction, and fix verification.',
+      'skill.documentation': 'Technical documentation — READMEs, decisions, procedures, known limitations, and validation instructions.',
 
       // Individual skills — Languages
       'skill.cpp': 'C++ — Systems programming, manual memory management, low-level structures. Primary language in projects like ATHENA (deterministic wargaming engine) and Mini Deterministic Engine.',
@@ -256,6 +302,10 @@ Todos os meus projetos respondem três questões:
       'project.banking.desc': 'Terminal-based core banking system in COBOL with immutable ledger and layered architecture.',
       'project.dashboard': 'Real-Time Monitoring Dashboard',
       'project.dashboard.desc': 'Optimized Angular dashboard for real-time events (WebSocket, Signals, virtual scrolling).',
+      'project.nebulakv': 'NebulaKV',
+      'project.nebulakv.desc': 'In-memory string database written in Go, with a TCP server, RESP2 protocol, expiration, append-only journal, authentication, and replication.',
+      'project.kerana': 'Kerana Gallery',
+      'project.kerana.desc': 'Client content-approval portal with monthly planning, D1/R2 storage, authentication, and centralized security controls in a Cloudflare Worker.',
 
       // Sites
       'site.law': 'Law Firm Landing Example',
@@ -325,6 +375,8 @@ Todos os meus projetos respondem três questões:
       'docs.intro': 'Certifications and participation declarations for technical courses.',
       'docs.sctec.dev': 'Fast Track — Software Development',
       'docs.sctec.dev.meta': 'SCTEC / ASCTI · 16h · Feb 9, 10, 11, 19, 20, 2026 · HTML, CSS, JavaScript',
+      'docs.sctec.dev2': 'Fast Track — Software Development, Second Cycle',
+      'docs.sctec.dev2.meta': 'SCTEC / SCTI-SC · 16h · Apr 13-17, 2026 · HTML, CSS, JavaScript',
       'docs.sctec.dados': 'Fast Track — Data Analysis',
       'docs.sctec.dados.meta': 'SCTEC / ASCTI · 16h · Feb 23-27, 2026 · Data, Python, Dashboards',
       'docs.sctec.ia': 'Fast Track — Artificial Intelligence',
@@ -333,6 +385,14 @@ Todos os meus projetos respondem três questões:
       'docs.hb.niv.meta': 'SENAI SP / Softex / RNP / MCTI · 80h · Jan 22, 2024 to Mar 12, 2026 · networking, Windows/Linux, logic, scripting',
       'docs.hb.bas': 'Basic Course — Hackers do Bem',
       'docs.hb.bas.meta': 'SENAI SP / Softex / RNP / MCTI · 64h · Mar 25, 2024 to Mar 25, 2026 · cloud, threats, vulnerabilities, cryptography, GRC',
+      'docs.cisco.ethical': 'Ethical Hacker',
+      'docs.cisco.ethical.meta': 'Cisco Networking Academy · completed Sep 15, 2026',
+      'docs.google.cybersecurity': 'Google Cybersecurity',
+      'docs.google.cybersecurity.meta': 'Google Career Certificates / Coursera · 9 courses · completed Sep 18, 2026',
+      'docs.ibm.analyst': 'IBM Cybersecurity Analyst',
+      'docs.ibm.analyst.meta': 'IBM Skills Network / Coursera · 14 courses · completed Sep 24, 2026',
+      'docs.ibm.isc2': 'IBM and ISC2 Cybersecurity Specialist',
+      'docs.ibm.isc2.meta': 'IBM Skills Network / ISC2 / Coursera · 12 courses · completed Sep 28, 2026',
       'docs.open': 'Open PDF',
 
       // Webcam
@@ -367,25 +427,15 @@ Todos os meus projetos respondem três questões:
       
       // Notepad
       'notepad.title': 'About Me - Notepad',
-      'notepad.content': `Nice to meet you, I'm Herbert (LuddEvergard3n)
+      'notepad.content': `Nice to meet you, I'm Herbert (LuddEvergard3n).
 
-My development focuses on systems, data analysis, and software engineering with emphasis on performance, determinism, and long-term maintenance. All my projects follow an immutable philosophy:
+I work with digital products, technical and customer support, education, and operations. I have C2 English and experience with SaaS, CRM, international recruitment, and English and History teaching.
 
-• Must be optimized;
-• Must be modular;
-• Must be well documented and commented;
+I use artificial-intelligence tools throughout my projects for research, structure, creation, and review. My role is to define the problem, guide the process, test the result, document decisions, and remain responsible for what I publish.
 
-I mainly work with web development, from static sites to more complex and beautiful landing pages, but I really enjoy working with C, C++, and Java.
+This portfolio brings together practical projects, verifiable certificates, and tools created for real needs. Its Windows XP-inspired interface keeps the experience familiar, accessible, and direct.
 
-This portfolio's interface was purposefully inspired by classic systems and corporate software UIs, prioritizing clarity, visual stability, and familiarity with legacy environments.
-
-All my projects answer three questions:
-
-• "Why does this project exist";
-• "What technical problem does it solve";
-• "What did I want to demonstrate here";
-
-That's it. If you want to get in touch, click on the "Contact" tab in the window next to it. You'll find all my projects there too.`
+To get in touch, use the "Contact" tab or visit my professional profiles.`
     }
   },
   
@@ -420,7 +470,7 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
   
   /**
    * Constrói a estrutura de skills usando traduções.
-   * Quatro categorias: Linguagens, Web, Sistemas e IA. A ordem de
+   * Quatro categorias profissionais. A ordem de
    * declaração é a ordem de renderização.
    *
    * @param {string} lang - Idioma
@@ -430,39 +480,36 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
     const language = lang || this.currentLanguage;
     return [
       {
-        category: this.t('skills.programming', language),
+        category: this.t('skills.support', language),
         items: [
-          this.t('skill.cpp', language),
-          this.t('skill.c', language),
-          this.t('skill.python', language),
-          this.t('skill.java', language),
-          this.t('skill.javascript', language)
+          this.t('skill.technical-support', language),
+          this.t('skill.customer-support', language),
+          this.t('skill.crm', language),
+          this.t('skill.remote-work', language)
         ]
       },
       {
-        category: this.t('skills.web', language),
+        category: this.t('skills.communication', language),
         items: [
-          this.t('skill.webdev', language),
-          this.t('skill.html5', language),
-          this.t('skill.css3', language),
-          this.t('skill.typescript', language)
+          this.t('skill.english', language),
+          this.t('skill.teaching', language),
+          this.t('skill.recruiting', language)
         ]
       },
       {
-        category: this.t('skills.systems', language),
+        category: this.t('skills.product', language),
         items: [
-          this.t('skill.wasm', language),
-          this.t('skill.determinism', language),
-          this.t('skill.build', language),
-          this.t('skill.docs', language)
+          this.t('skill.product-ops', language),
+          this.t('skill.web-tools', language),
+          this.t('skill.accessibility', language)
         ]
       },
       {
         category: this.t('skills.ai', language),
         items: [
-          this.t('skill.prompt', language),
-          this.t('skill.llm-integration', language),
-          this.t('skill.llm-optimization', language)
+          this.t('skill.ai-workflows', language),
+          this.t('skill.testing', language),
+          this.t('skill.documentation', language)
         ]
       }
     ];
@@ -471,13 +518,22 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
   /**
    * Retorna dados sobre a página "Sobre Mim"
    * @param {string} lang - Idioma
-   * @returns {Object} Objeto com título, descrição e skills
+   * @returns {Object} Objeto com título, descrição, filosofia e skills
    */
   getAboutData(lang = null) {
     const language = lang || this.currentLanguage;
     return {
       title: this.t('about.title', language),
       description: this.t('about.description', language),
+      philosophy: {
+        heading: this.t('philosophy.heading', language),
+        paragraphs: [
+          this.t('philosophy.p1', language),
+          this.t('philosophy.p2', language),
+          this.t('philosophy.p3', language),
+          this.t('philosophy.p4', language)
+        ]
+      },
       skills: this.getSkills(language)
     };
   },
@@ -498,6 +554,18 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         url: 'https://github.com/LuddEvergard3n/ATHENA',
         tags: ['C++17', 'CMake', 'ImGui', 'Monte Carlo', 'Determinism', 'Wargaming'],
         featured: true
+      },
+      {
+        name: this.t('project.nebulakv', language),
+        description: this.t('project.nebulakv.desc', language),
+        url: 'https://github.com/LuddEvergard3n/nebulakv',
+        tags: ['Go', 'RESP2', 'TCP', 'AOF', 'Replication']
+      },
+      {
+        name: this.t('project.kerana', language),
+        description: this.t('project.kerana.desc', language),
+        url: 'https://kerana-gallery.francisorg.chatgpt.site/',
+        tags: ['TypeScript', 'React', 'Cloudflare Workers', 'D1', 'R2']
       },
       {
         name: this.t('project.computabilis', language),
@@ -673,6 +741,26 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
     const language = lang || this.currentLanguage;
     return [
       {
+        title: this.t('docs.ibm.isc2', language),
+        meta: this.t('docs.ibm.isc2.meta', language),
+        file: 'img/docs/ibm-isc2-cybersecurity.pdf'
+      },
+      {
+        title: this.t('docs.ibm.analyst', language),
+        meta: this.t('docs.ibm.analyst.meta', language),
+        file: 'img/docs/ibm-cybersecurity-analyst.pdf'
+      },
+      {
+        title: this.t('docs.google.cybersecurity', language),
+        meta: this.t('docs.google.cybersecurity.meta', language),
+        file: 'img/docs/google-cybersecurity.pdf'
+      },
+      {
+        title: this.t('docs.cisco.ethical', language),
+        meta: this.t('docs.cisco.ethical.meta', language),
+        file: 'img/docs/cisco-ethical-hacker.pdf'
+      },
+      {
         title: this.t('docs.hb.niv', language),
         meta: this.t('docs.hb.niv.meta', language),
         file: 'img/docs/cert-hackers-bem-nivelamento.pdf'
@@ -686,6 +774,11 @@ That's it. If you want to get in touch, click on the "Contact" tab in the window
         title: this.t('docs.sctec.dev', language),
         meta: this.t('docs.sctec.dev.meta', language),
         file: 'img/docs/sctec-dev-software.pdf'
+      },
+      {
+        title: this.t('docs.sctec.dev2', language),
+        meta: this.t('docs.sctec.dev2.meta', language),
+        file: 'img/docs/sctec-dev-software-segundo-ciclo.pdf'
       },
       {
         title: this.t('docs.sctec.dados', language),

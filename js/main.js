@@ -58,6 +58,7 @@
       'Docs',
       'Webcam',
       'Ratio',
+      'ContactForm',
       'Accessibility',
       'Clippy',
       'Minesweeper',

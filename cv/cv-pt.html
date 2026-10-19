@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herbert B. R. S. Ludka — Currículo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --c-bg:         #FAFAF8;
+      --c-text:       #1C1C1E;
+      --c-muted:      #4B4B52;
+      --c-accent:     #1A3A5C;
+      --c-accent-mid: #2E6B9E;
+      --c-rule:       #C8C8C8;
+      --c-rule-soft:  #E2E2DC;
+      --c-tag-bg:     #E8EEF4;
+      --c-tag-text:   #1A3A5C;
+      --font-head: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Karla', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 10.5pt; }
+
+    body {
+      font-family: var(--font-body);
+      background: #E0E0DC;
+      color: var(--c-text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--c-accent-mid); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: var(--c-bg);
+      padding: 13mm 17mm;
+      box-shadow: 0 4px 32px rgba(0,0,0,.18);
+    }
+
+    /* --- Cabeçalho --- */
+    .header {
+      border-bottom: 2.5px solid var(--c-accent);
+      padding-bottom: 9px;
+      margin-bottom: 12px;
+    }
+
+    .header__name {
+      font-family: var(--font-head);
+      font-size: 26pt;
+      font-weight: 700;
+      color: var(--c-accent);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .header__title {
+      font-size: 9.5pt;
+      font-weight: 500;
+      color: var(--c-muted);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .header__contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px 14px;
+      font-size: 8.5pt;
+      color: var(--c-muted);
+    }
+
+    /* --- Seções --- */
+    .section { margin-bottom: 12px; }
+
+    .section__title {
+      font-family: var(--font-head);
+      font-size: 12pt;
+      font-weight: 600;
+      color: var(--c-accent);
+      border-bottom: 1px solid var(--c-rule);
+      padding-bottom: 2px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .summary { font-size: 9.5pt; line-height: 1.6; }
+
+    /* --- Entradas --- */
+    .entry { margin-bottom: 8px; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1px 8px;
+      margin-bottom: 1px;
+    }
+
+    .entry__left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 4px;
+    }
+
+    .entry__role    { font-weight: 600; font-size: 9.5pt; color: var(--c-text); }
+    .entry__company { font-weight: 400; font-size: 9.5pt; color: var(--c-accent-mid); }
+
+    .entry__regime {
+      font-size: 7.5pt;
+      color: var(--c-muted);
+      border: 1px solid var(--c-rule);
+      border-radius: 2px;
+      padding: 0 4px;
+      line-height: 1.5;
+    }
+
+    .entry__period {
+      font-size: 8.5pt;
+      color: var(--c-muted);
+      white-space: nowrap;
+      font-style: italic;
+    }
+
+    .entry__sub {
+      font-size: 8pt;
+      color: var(--c-muted);
+      margin-bottom: 2px;
+    }
+
+    .entry ul { padding-left: 13px; list-style: disc; }
+
+    .entry li {
+      font-size: 8.5pt;
+      color: var(--c-text);
+      margin-bottom: 1.5px;
+      line-height: 1.5;
+    }
+
+    /* Entrada compacta: sem bullets, só uma linha de descrição */
+    .entry__inline-desc {
+      font-size: 8.5pt;
+      color: var(--c-muted);
+      font-style: italic;
+      margin-top: 1px;
+    }
+
+    /* --- Projetos --- */
+    .project__name  { font-weight: 600; font-size: 9.5pt; color: var(--c-text); }
+    .project__stack { font-size: 8pt; color: var(--c-muted); font-style: italic; }
+    .project__desc  { font-size: 8.5pt; margin-top: 1px; line-height: 1.5; }
+
+    /* --- Separador interno --- */
+    .sub-rule { border: none; border-top: 1px solid var(--c-rule-soft); margin: 6px 0; }
+
+    /* --- Habilidades --- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 4px 10px;
+      font-size: 8.5pt;
+    }
+
+    .skills-grid .label { font-weight: 600; color: var(--c-accent); padding-top: 2px; }
+    .skills-grid .tags  { display: flex; flex-wrap: wrap; gap: 2px 4px; }
+
+    .tag {
+      background: var(--c-tag-bg);
+      color: var(--c-tag-text);
+      font-size: 8pt;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    /* --- Dois colunas --- */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+    .two-col .section { margin-bottom: 0; }
+
+    /* --- Listas de formação --- */
+    .edu-list { list-style: none; padding: 0; }
+
+    .edu-list li {
+      font-size: 8.5pt;
+      padding: 2.5px 0;
+      border-bottom: 1px dashed var(--c-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .edu-list li:last-child { border-bottom: none; }
+    .edu-list .edu-name { font-weight: 500; }
+    .edu-list .edu-meta { font-size: 8pt; color: var(--c-muted); text-align: right; white-space: nowrap; }
+
+    /* --- Print --- */
+    @media print {
+      body { background: white; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { margin: 0; box-shadow: none; width: 100%; padding: 10mm 14mm; }
+    }
+
+    @page { size: A4; margin: 0; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- CABEÇALHO -->
+  <header class="header">
+    <div class="header__name">Herbert Basilio Rodrigues Sorg Ludka</div>
+    <div class="header__title">Produtos Digitais &nbsp;|&nbsp; Suporte Técnico &nbsp;|&nbsp; Operações &nbsp;|&nbsp; Inglês C2</div>
+    <div class="header__contact">
+      <span>Meia Praia, Navegantes — SC</span>
+      <span>+55 (47) 9963-3905</span>
+      <span>hbrslud@gmail.com</span>
+      <span><a href="https://github.com/LuddEvergard3n">github.com/LuddEvergard3n</a></span>
+    </div>
+  </header>
+
+  <!-- RESUMO -->
+  <section class="section">
+    <h2 class="section__title">Resumo Profissional</h2>
+    <p class="summary">
+      Profissional bilíngue com experiência em produtos digitais, suporte técnico e ao cliente, educação, operações, SaaS e CRM. Utiliza fluxos assistidos por IA para organizar requisitos, pesquisar, prototipar, testar e documentar soluções práticas. Inglês C2 em uso profissional, com experiência em ensino e comunicação internacional.
+    </p>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="section">
+    <h2 class="section__title">Experiência Profissional</h2>
+
+    <!-- Ratio -->
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Especialista em Produtos Digitais</span>
+          <span class="entry__company">— Ratio Sistemas Educacionais</span>
+        </div>
+        <span class="entry__period">2026 – presente</span>
+      </div>
+      <div class="entry__sub">Blumenau, SC · CNPJ 65.560.944/0001-69</div>
+      <ul>
+        <li>Planeja e mantém produtos digitais educacionais com fluxos estruturados e assistidos por IA.</li>
+        <li>Gerencia a Norma, plataforma SaaS para estruturação de trabalhos acadêmicos e geração de DOCX e PDF.</li>
+        <li>Organiza requisitos, conteúdo, testes, documentação, suporte e melhoria contínua dos produtos.</li>
+        <li>Mantém aplicações educacionais acessíveis, multilíngues e disponíveis offline.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <!-- Kerana Studio -->
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Assistente de Operações</span>
+          <span class="entry__company">— Kerana Studio</span>
+        </div>
+        <span class="entry__period">Mai. 2025 – Mai. 2026</span>
+      </div>
+      <ul>
+        <li>Gerenciamento de clientes, leads, registros, contas e pendências em CRM.</li>
+        <li>Atendimento por e-mail e chat, inclusive em inglês, e coordenação de rotinas administrativas e de conteúdo.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Recrutador Internacional</span>
+          <span class="entry__company">— Your Future Europa</span>
+        </div>
+        <span class="entry__period">Jul. 2025 – Dez. 2025</span>
+      </div>
+      <ul>
+        <li>Triagem, entrevistas, apresentação de candidatos e acompanhamento de processos internacionais.</li>
+        <li>Gestão de registros em CRM/ATS e comunicação profissional em inglês.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <!-- Desk Support -->
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Suporte Técnico (Desk Support)</span>
+          <span class="entry__company">— Freelance</span>
+        </div>
+        <span class="entry__period">2024 – 2025</span>
+      </div>
+      <ul>
+        <li>Diagnóstico e resolução de falhas em hardware e software para usuários finais e pequenas empresas.</li>
+        <li>Configuração de redes locais, instalação de sistemas operacionais, manutenção preventiva e orientação sobre segurança digital.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <!-- Ensino -->
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Professor de Inglês</span>
+          <span class="entry__company">— Wizard by Pearson</span>
+        </div>
+        <span class="entry__period">Out. 2024 – Jun. 2025</span>
+      </div>
+      <div class="entry__inline-desc">
+        Ensino para crianças, adolescentes e adultos, acompanhamento de desempenho e registros acadêmicos no Sponte CRM.
+      </div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">Professor de Inglês</span><span class="entry__company">— Voo Idiomas</span></div>
+        <span class="entry__period">Jan. 2026 – Abr. 2026</span>
+      </div>
+      <div class="entry__inline-desc">Aulas para diferentes perfis, atividades digitais, acompanhamento individual e feedback personalizado.</div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">Professor Particular de Inglês e História</span><span class="entry__company">— Autônomo</span></div>
+        <span class="entry__period">2021 – presente</span>
+      </div>
+      <div class="entry__inline-desc">Aulas personalizadas, materiais próprios, reforço escolar e preparação para exames.</div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">Assistente Administrativo</span><span class="entry__company">— Opus Log Serviços Ltda.</span></div>
+        <span class="entry__period">Abr. 2022 – Jun. 2022</span>
+      </div>
+      <div class="entry__inline-desc">Organização de documentos e planilhas, atendimento de demandas internas e acompanhamento de solicitações.</div>
+    </div>
+
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="section">
+    <h2 class="section__title">Projetos Relevantes</h2>
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ATHENA Core — Motor de Wargaming Determinístico</span>
+        <span class="entry__period">2026</span>
+      </div>
+      <div class="project__stack">C++17 &middot; Dear ImGui &middot; GLFW/OpenGL3 &middot; PDF nativo &middot; Make</div>
+      <p class="project__desc">Motor de simulação tática com análise Monte Carlo. 1.238 plataformas militares em 168 JSONs, 25 categorias, 9+ nações. Seis subsistemas integrados: Movement, Combat, Logistics, Detection, C2, Tactical AI. Reprodutibilidade bit-exact por seed; IEEE-754 strict; geração de PDF sem biblioteca auxiliar; zero dependências externas. Binários Linux x86_64: GUI 2,2 MB / CLI 707 KB.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">Monte Carlo Pricing Simulator</span>
+        <span class="entry__period">2026</span>
+      </div>
+      <div class="project__stack">C++17 &middot; Dear ImGui &middot; ImPlot &middot; OpenMP &middot; CMake FetchContent</div>
+      <p class="project__desc">Simulador de precificação com modelos GBM (Black-Scholes terminal log-normal) e Merton Jump Diffusion (1976). Estatísticas online via algoritmo de Welford: O(n) tempo, O(1) memória. Simulação em background thread; UI nunca bloqueia. OpenMP: 5 M caminhos em ~1 s (8 núcleos). Exportação CSV e JSON.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ARES — Economic Simulation Core</span>
+        <span class="entry__period">2025</span>
+      </div>
+      <div class="project__stack">C &middot; Java 8 (JNI, Swing) &middot; COBOL (GnuCOBOL)</div>
+      <p class="project__desc">Simulador econômico em três camadas explícitas: engine Monte Carlo em C (JNI), orquestração e GUI em Java (Swing, Java 8+), relatórios financeiros formais em COBOL. Comunicação Java-COBOL via CSV; sem frameworks. Seed determinística; empacotável como .exe via Launch4j.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ATLAS Enterprise v5.0</span>
+        <span class="entry__period">2025 – 2026</span>
+      </div>
+      <div class="project__stack">JavaScript ES6+ &middot; WebAssembly (Emscripten) &middot; Service Workers &middot; IndexedDB &middot; Canvas 2D</div>
+      <p class="project__desc">Sistema de gestão financeira enterprise 100% client-side, offline-first. Cálculos de alta performance via WASM (C compilado com Emscripten). Módulos: Monte Carlo, DCF, FIRE, stress test, KPIs executivos. Multi-workspace com capabilities por tipo. Zero telemetria; dados nunca saem do dispositivo.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">Mini Deterministic Simulation Engine</span>
+        <span class="entry__period">2025</span>
+      </div>
+      <div class="project__stack">C++20 &middot; SDL2 &middot; PCG32 &middot; CMake &middot; CTest</div>
+      <p class="project__desc">Engine com timestep fixo, RNG determinístico portável (PCG32), replay bit-identical por seed+inputs e suite de testes que verifica determinismo por comparação byte-a-byte do estado. Arquitetura em camadas: core (sem UI), RNG, replay, UI (SDL2).</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">Portfólio XP &nbsp;&middot;&nbsp; Mini Core Banking (COBOL) &nbsp;&middot;&nbsp; Norma — Plataforma ABNT</span>
+        <span class="entry__period">2025 – 2026</span>
+      </div>
+      <p class="project__desc">
+        <strong>Portfólio XP:</strong> simulação do desktop Windows XP no navegador com gerenciador de janelas completo (drag, resize, minimizar/maximizar), i18n PT/EN, easter eggs funcionais, zero dependências e zero build step.
+        <strong>Mini Core Banking:</strong> sistema bancário COBOL com ledger imutável append-only, saldo contábil vs. disponível e persistência estilo VSAM.
+        <strong>Norma:</strong> plataforma comercial de documentação ABNT client-side com backend Vercel + Neon + Stripe.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="section">
+    <h2 class="section__title">Competências</h2>
+    <div class="skills-grid">
+      <span class="label">Suporte</span><div class="tags"><span class="tag">Help Desk</span><span class="tag">Atendimento ao cliente</span><span class="tag">SaaS</span><span class="tag">Documentação técnica</span></div>
+      <span class="label">Operações</span><div class="tags"><span class="tag">CRM</span><span class="tag">Salesforce</span><span class="tag">Sponte</span><span class="tag">Starhunter</span><span class="tag">Trabalho remoto</span></div>
+      <span class="label">IA e qualidade</span><div class="tags"><span class="tag">Fluxos assistidos por IA</span><span class="tag">Testes funcionais</span><span class="tag">QA</span><span class="tag">Pesquisa e revisão</span></div>
+      <span class="label">Digital</span><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub</span><span class="tag">Google Workspace</span><span class="tag">Microsoft Office</span></div>
+      <span class="label">Idiomas</span><div class="tags"><span class="tag">Português — nativo</span><span class="tag">Inglês — C2</span><span class="tag">Espanhol — A1</span><span class="tag">Italiano — A1</span></div>
+    </div>
+  </section>
+
+  <!-- FORMAÇÃO + CERTIFICAÇÕES -->
+  <div class="two-col">
+
+    <section class="section">
+      <h2 class="section__title">Formação</h2>
+      <ul class="edu-list">
+        <li><span class="edu-name">Especialização em História do Brasil (800h)</span><span class="edu-meta">FACULESTE · conclusão prevista: 2027</span></li>
+        <li><span class="edu-name">MBA Executivo em Cibersegurança (700h)</span><span class="edu-meta">FACULESTE · conclusão prevista: 2027</span></li>
+        <li>
+          <span class="edu-name">Licenciatura em História</span>
+          <span class="edu-meta">UNIVALI · 2023 – 2026 (cursando)</span>
+        </li>
+        <li>
+          <span class="edu-name">Ensino Médio</span>
+          <span class="edu-meta">Colégio Confepi · 2021</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">Certificações</h2>
+      <ul class="edu-list">
+        <li><span class="edu-name">IBM and ISC2 Cybersecurity Specialist</span><span class="edu-meta">IBM / ISC2 · 2026</span></li>
+        <li><span class="edu-name">IBM Cybersecurity Analyst</span><span class="edu-meta">IBM · 2026</span></li>
+        <li><span class="edu-name">Google Cybersecurity</span><span class="edu-meta">Google · 2026</span></li>
+        <li><span class="edu-name">Ethical Hacker</span><span class="edu-meta">Cisco Networking Academy · 2026</span></li>
+        <li><span class="edu-name">Cibersegurança — Básico e Nivelamento (144h)</span><span class="edu-meta">Hackers do Bem / SENAI · 2026</span></li>
+      </ul>
+    </section>
+
+  </div>
+
+</div>
+</body>
+</html>

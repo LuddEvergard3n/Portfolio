@@ -153,45 +153,86 @@ const Navigation = {
   },
   
   /**
-   * Renderiza as skills dinamicamente com base no CONFIG
+   * Renderiza a aba "Sobre Mim" inteira: descricao + filosofia + skills.
+   * Idempotente — substitui innerHTML do container, sem listeners
+   * remanescentes.
    */
   renderSkills() {
-    const config = window.PORTFOLIO_CONFIG;
-    if (!config) return;
-    
-    // Renderizar skills em PT
-    this.renderSkillsList('skills-container-pt', config.about.pt.skills);
-    
-    // Renderizar skills em EN
-    this.renderSkillsList('skills-container-en', config.about.en.skills);
+    const i18n = window.i18n;
+    if (!i18n) return;
+
+    this.renderAboutContent('skills-container-pt', i18n.getAboutData('pt'));
+    this.renderAboutContent('skills-container-en', i18n.getAboutData('en'));
   },
-  
+
   /**
-   * Renderiza lista de skills
-   * @param {string} containerId - ID do container
+   * Renderiza o conteudo completo do Sobre Mim em um container.
+   *
+   * @param {string} containerId
+   * @param {Object} data - Estrutura retornada por i18n.getAboutData()
+   */
+  renderAboutContent(containerId, data) {
+    const container = document.getElementById(containerId);
+    if (!container || !data) return;
+
+    container.innerHTML = '';
+
+    // Descricao curta (cabecalho da aba)
+    const desc = document.createElement('p');
+    desc.className = 'about-description';
+    desc.textContent = data.description;
+    container.appendChild(desc);
+
+    // Bloco de filosofia
+    if (data.philosophy && Array.isArray(data.philosophy.paragraphs)) {
+      const phBlock = document.createElement('section');
+      phBlock.className = 'about-philosophy';
+
+      const phTitle = document.createElement('h3');
+      phTitle.textContent = data.philosophy.heading;
+      phBlock.appendChild(phTitle);
+
+      data.philosophy.paragraphs.forEach(paragraph => {
+        const p = document.createElement('p');
+        p.textContent = paragraph;
+        phBlock.appendChild(p);
+      });
+
+      container.appendChild(phBlock);
+    }
+
+    // Skills (mantem renderizacao anterior)
+    this.renderSkillsList(container, data.skills);
+  },
+
+  /**
+   * Renderiza lista de skills em um container ja existente.
+   * Aceita HTMLElement (preferido) ou string (id) para compatibilidade.
+   *
+   * @param {HTMLElement|string} target
    * @param {Array} skills - Array de categorias de skills
    */
-  renderSkillsList(containerId, skills) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
+  renderSkillsList(target, skills) {
+    const container = (typeof target === 'string')
+      ? document.getElementById(target)
+      : target;
+    if (!container || !Array.isArray(skills)) return;
+
     skills.forEach(category => {
       const categoryDiv = document.createElement('div');
       categoryDiv.className = 'skill-category';
-      
+
       const title = document.createElement('h3');
       title.textContent = category.category;
       categoryDiv.appendChild(title);
-      
+
       const list = document.createElement('ul');
       category.items.forEach(item => {
         const li = document.createElement('li');
         li.textContent = item;
         list.appendChild(li);
       });
-      
+
       categoryDiv.appendChild(list);
       container.appendChild(categoryDiv);
     });

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herbert B. R. S. Ludka — Resume</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --c-bg:         #FAFAF8;
+      --c-text:       #1C1C1E;
+      --c-muted:      #4B4B52;
+      --c-accent:     #1A3A5C;
+      --c-accent-mid: #2E6B9E;
+      --c-rule:       #C8C8C8;
+      --c-rule-soft:  #E2E2DC;
+      --c-tag-bg:     #E8EEF4;
+      --c-tag-text:   #1A3A5C;
+      --font-head: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Karla', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 10.5pt; }
+
+    body {
+      font-family: var(--font-body);
+      background: #E0E0DC;
+      color: var(--c-text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--c-accent-mid); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: var(--c-bg);
+      padding: 13mm 17mm;
+      box-shadow: 0 4px 32px rgba(0,0,0,.18);
+    }
+
+    .header {
+      border-bottom: 2.5px solid var(--c-accent);
+      padding-bottom: 9px;
+      margin-bottom: 12px;
+    }
+
+    .header__name {
+      font-family: var(--font-head);
+      font-size: 26pt;
+      font-weight: 700;
+      color: var(--c-accent);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .header__title {
+      font-size: 9.5pt;
+      font-weight: 500;
+      color: var(--c-muted);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .header__contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px 14px;
+      font-size: 8.5pt;
+      color: var(--c-muted);
+    }
+
+    .section { margin-bottom: 12px; }
+
+    .section__title {
+      font-family: var(--font-head);
+      font-size: 12pt;
+      font-weight: 600;
+      color: var(--c-accent);
+      border-bottom: 1px solid var(--c-rule);
+      padding-bottom: 2px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .summary { font-size: 9.5pt; line-height: 1.6; }
+
+    .entry { margin-bottom: 8px; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1px 8px;
+      margin-bottom: 1px;
+    }
+
+    .entry__left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 4px;
+    }
+
+    .entry__role    { font-weight: 600; font-size: 9.5pt; color: var(--c-text); }
+    .entry__company { font-weight: 400; font-size: 9.5pt; color: var(--c-accent-mid); }
+
+    .entry__regime {
+      font-size: 7.5pt;
+      color: var(--c-muted);
+      border: 1px solid var(--c-rule);
+      border-radius: 2px;
+      padding: 0 4px;
+      line-height: 1.5;
+    }
+
+    .entry__period {
+      font-size: 8.5pt;
+      color: var(--c-muted);
+      white-space: nowrap;
+      font-style: italic;
+    }
+
+    .entry__sub {
+      font-size: 8pt;
+      color: var(--c-muted);
+      margin-bottom: 2px;
+    }
+
+    .entry ul { padding-left: 13px; list-style: disc; }
+
+    .entry li {
+      font-size: 8.5pt;
+      color: var(--c-text);
+      margin-bottom: 1.5px;
+      line-height: 1.5;
+    }
+
+    .entry__inline-desc {
+      font-size: 8.5pt;
+      color: var(--c-muted);
+      font-style: italic;
+      margin-top: 1px;
+    }
+
+    .project__name  { font-weight: 600; font-size: 9.5pt; color: var(--c-text); }
+    .project__stack { font-size: 8pt; color: var(--c-muted); font-style: italic; }
+    .project__desc  { font-size: 8.5pt; margin-top: 1px; line-height: 1.5; }
+
+    .sub-rule { border: none; border-top: 1px solid var(--c-rule-soft); margin: 6px 0; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 4px 10px;
+      font-size: 8.5pt;
+    }
+
+    .skills-grid .label { font-weight: 600; color: var(--c-accent); padding-top: 2px; }
+    .skills-grid .tags  { display: flex; flex-wrap: wrap; gap: 2px 4px; }
+
+    .tag {
+      background: var(--c-tag-bg);
+      color: var(--c-tag-text);
+      font-size: 8pt;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+    .two-col .section { margin-bottom: 0; }
+
+    .edu-list { list-style: none; padding: 0; }
+
+    .edu-list li {
+      font-size: 8.5pt;
+      padding: 2.5px 0;
+      border-bottom: 1px dashed var(--c-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .edu-list li:last-child { border-bottom: none; }
+    .edu-list .edu-name { font-weight: 500; }
+    .edu-list .edu-meta { font-size: 8pt; color: var(--c-muted); text-align: right; white-space: nowrap; }
+
+    @media print {
+      body { background: white; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { margin: 0; box-shadow: none; width: 100%; padding: 10mm 14mm; }
+    }
+
+    @page { size: A4; margin: 0; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header__name">Herbert Basilio Rodrigues Sorg Ludka</div>
+    <div class="header__title">Digital Products &nbsp;|&nbsp; Technical Support &nbsp;|&nbsp; Operations &nbsp;|&nbsp; C2 English</div>
+    <div class="header__contact">
+      <span>Meia Praia, Navegantes — SC, Brazil</span>
+      <span>+55 (47) 9963-3905</span>
+      <span>hbrslud@gmail.com</span>
+      <span><a href="https://github.com/LuddEvergard3n">github.com/LuddEvergard3n</a></span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2 class="section__title">Professional Summary</h2>
+    <p class="summary">
+      Bilingual professional with experience in digital products, technical and customer support, education, operations, SaaS, and CRM. Uses AI-assisted workflows to organize requirements, research, prototype, test, and document practical solutions. C2 English in professional use, with teaching and international communication experience.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Professional Experience</h2>
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Digital Product Specialist</span>
+          <span class="entry__company">— Ratio Sistemas Educacionais</span>
+        </div>
+        <span class="entry__period">2026 – present</span>
+      </div>
+      <div class="entry__sub">Blumenau, SC · CNPJ 65.560.944/0001-69</div>
+      <ul>
+        <li>Plans and maintains educational digital products through structured, AI-assisted workflows.</li>
+        <li>Manages Norma, a SaaS platform for structuring academic documents and generating DOCX and PDF files.</li>
+        <li>Organizes requirements, content, testing, documentation, support, and continuous product improvement.</li>
+        <li>Maintains accessible, multilingual educational applications with offline support.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Operations Assistant</span>
+          <span class="entry__company">— Kerana Studio</span>
+        </div>
+        <span class="entry__period">May 2025 – May 2026</span>
+      </div>
+      <ul>
+        <li>Managed clients, leads, records, accounts, and pending items in CRM systems.</li>
+        <li>Provided email and chat support, including in English, and coordinated administrative and content workflows.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">International Recruiter</span>
+          <span class="entry__company">— Your Future Europa</span>
+        </div>
+        <span class="entry__period">Jul 2025 – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Screened, interviewed, and presented candidates for international recruitment processes.</li>
+        <li>Managed CRM/ATS records and communicated professionally in English.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">Technical Support (Desk Support)</span>
+          <span class="entry__company">— Freelance</span>
+        </div>
+        <span class="entry__period">2024 – 2025</span>
+      </div>
+      <ul>
+        <li>Hardware and software troubleshooting for end users and small businesses.</li>
+        <li>LAN setup, OS installation, preventive maintenance, and digital security guidance.</li>
+      </ul>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left">
+          <span class="entry__role">English Teacher</span>
+          <span class="entry__company">— Wizard by Pearson</span>
+        </div>
+        <span class="entry__period">Oct 2024 – Jun 2025</span>
+      </div>
+      <div class="entry__inline-desc">
+        Taught children, teenagers, and adults; monitored performance and managed academic records through Sponte CRM.
+      </div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">English Teacher</span><span class="entry__company">— Voo Idiomas</span></div>
+        <span class="entry__period">Jan 2026 – Apr 2026</span>
+      </div>
+      <div class="entry__inline-desc">Taught different learner profiles using digital activities, individual monitoring, and personalized feedback.</div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">Private English and History Teacher</span><span class="entry__company">— Self-employed</span></div>
+        <span class="entry__period">2021 – present</span>
+      </div>
+      <div class="entry__inline-desc">Personalized lessons, original materials, school reinforcement, and examination preparation.</div>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <div class="entry__left"><span class="entry__role">Administrative Assistant</span><span class="entry__company">— Opus Log Serviços Ltda.</span></div>
+        <span class="entry__period">Apr 2022 – Jun 2022</span>
+      </div>
+      <div class="entry__inline-desc">Organized documents and spreadsheets, handled internal requests, and followed pending items through resolution.</div>
+    </div>
+
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Selected Projects</h2>
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ATHENA Core — Deterministic Wargaming Engine</span>
+        <span class="entry__period">2026</span>
+      </div>
+      <div class="project__stack">C++17 &middot; Dear ImGui &middot; GLFW/OpenGL3 &middot; Native PDF &middot; Make</div>
+      <p class="project__desc">Tactical simulation engine with Monte Carlo analysis. 1,238 military platforms across 168 JSON files, 25 categories, 9+ nations. Six integrated subsystems: Movement, Combat, Logistics, Detection, C2, Tactical AI. Bit-exact reproducibility per seed; IEEE-754 strict; PDF generation without external libraries; zero external dependencies. Linux x86_64 binaries: GUI 2.2 MB / CLI 707 KB.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">Monte Carlo Pricing Simulator</span>
+        <span class="entry__period">2026</span>
+      </div>
+      <div class="project__stack">C++17 &middot; Dear ImGui &middot; ImPlot &middot; OpenMP &middot; CMake FetchContent</div>
+      <p class="project__desc">Pricing simulator with GBM (Black-Scholes terminal log-normal) and Merton Jump Diffusion (1976) models. Online statistics via Welford's algorithm: O(n) time, O(1) memory. Background-thread simulation; UI never blocks. OpenMP: 5M paths in ~1s on 8 cores. CSV and JSON export.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ARES — Economic Simulation Core</span>
+        <span class="entry__period">2025</span>
+      </div>
+      <div class="project__stack">C &middot; Java 8 (JNI, Swing) &middot; COBOL (GnuCOBOL)</div>
+      <p class="project__desc">Three-layer economic simulator: Monte Carlo engine in C (JNI), orchestration and GUI in Java (Swing, Java 8+), formal financial reports in COBOL. Java-COBOL communication via CSV; no frameworks. Deterministic seed; packageable as .exe via Launch4j.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">ATLAS Enterprise v5.0</span>
+        <span class="entry__period">2025 – 2026</span>
+      </div>
+      <div class="project__stack">JavaScript ES6+ &middot; WebAssembly (Emscripten) &middot; Service Workers &middot; IndexedDB &middot; Canvas 2D</div>
+      <p class="project__desc">100% client-side, offline-first enterprise financial management system. High-performance computation via WASM (C compiled with Emscripten). Modules: Monte Carlo, DCF, FIRE, stress test, executive KPIs. Multi-workspace with capabilities by type. Zero telemetry; data never leaves the device.</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">Mini Deterministic Simulation Engine</span>
+        <span class="entry__period">2025</span>
+      </div>
+      <div class="project__stack">C++20 &middot; SDL2 &middot; PCG32 &middot; CMake &middot; CTest</div>
+      <p class="project__desc">Engine with fixed timestep, portable deterministic RNG (PCG32), bit-identical replay per seed+inputs, and a test suite that verifies determinism via byte-by-byte state comparison. Layered architecture: core (no UI), RNG, replay, UI (SDL2).</p>
+    </div>
+
+    <hr class="sub-rule">
+
+    <div class="entry">
+      <div class="entry__header">
+        <span class="project__name">XP Portfolio &nbsp;&middot;&nbsp; Mini Core Banking (COBOL) &nbsp;&middot;&nbsp; Norma — ABNT Platform</span>
+        <span class="entry__period">2025 – 2026</span>
+      </div>
+      <p class="project__desc">
+        <strong>XP Portfolio:</strong> Windows XP desktop simulation in the browser with full window manager (drag, resize, minimize/maximize), PT/EN i18n, working easter eggs, zero dependencies, zero build step.
+        <strong>Mini Core Banking:</strong> COBOL banking system with append-only immutable ledger, accounting balance vs. available balance, and VSAM-style persistence.
+        <strong>Norma:</strong> commercial client-side ABNT documentation platform with a Vercel + Neon + Stripe backend.
+      </p>
+    </div>
+
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Skills</h2>
+    <div class="skills-grid">
+      <span class="label">Support</span><div class="tags"><span class="tag">Help Desk</span><span class="tag">Customer support</span><span class="tag">SaaS</span><span class="tag">Technical documentation</span></div>
+      <span class="label">Operations</span><div class="tags"><span class="tag">CRM</span><span class="tag">Salesforce</span><span class="tag">Sponte</span><span class="tag">Starhunter</span><span class="tag">Remote work</span></div>
+      <span class="label">AI and quality</span><div class="tags"><span class="tag">AI-assisted workflows</span><span class="tag">Functional testing</span><span class="tag">QA</span><span class="tag">Research and review</span></div>
+      <span class="label">Digital</span><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub</span><span class="tag">Google Workspace</span><span class="tag">Microsoft Office</span></div>
+      <span class="label">Languages</span><div class="tags"><span class="tag">Portuguese — native</span><span class="tag">English — C2</span><span class="tag">Spanish — A1</span><span class="tag">Italian — A1</span></div>
+    </div>
+  </section>
+
+  <div class="two-col">
+
+    <section class="section">
+      <h2 class="section__title">Education</h2>
+      <ul class="edu-list">
+        <li><span class="edu-name">Postgraduate Specialisation in Brazilian History (800h)</span><span class="edu-meta">FACULESTE · expected 2027</span></li>
+        <li><span class="edu-name">Executive MBA in Cybersecurity (700h)</span><span class="edu-meta">FACULESTE · expected 2027</span></li>
+        <li>
+          <span class="edu-name">B.A. in History (Teaching Track)</span>
+          <span class="edu-meta">UNIVALI · 2023 – 2026 (in progress)</span>
+        </li>
+        <li>
+          <span class="edu-name">High School</span>
+          <span class="edu-meta">Colégio Confepi · 2021</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">Certifications</h2>
+      <ul class="edu-list">
+        <li><span class="edu-name">IBM and ISC2 Cybersecurity Specialist</span><span class="edu-meta">IBM / ISC2 · 2026</span></li>
+        <li><span class="edu-name">IBM Cybersecurity Analyst</span><span class="edu-meta">IBM · 2026</span></li>
+        <li><span class="edu-name">Google Cybersecurity</span><span class="edu-meta">Google · 2026</span></li>
+        <li><span class="edu-name">Ethical Hacker</span><span class="edu-meta">Cisco Networking Academy · 2026</span></li>
+        <li><span class="edu-name">Cybersecurity — Basic and Foundation (144h)</span><span class="edu-meta">Hackers do Bem / SENAI · 2026</span></li>
+      </ul>
+    </section>
+
+  </div>
+
+</div>
+</body>
+</html>

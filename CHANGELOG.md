@@ -1,108 +1,154 @@
-# Changelog — 2.6.4 → 2.7.0
+# 2026-10-19 — Professional profile and credentials
 
-Quatro features pequenas mas independentes.
+- Repositioned the public profile around digital products, technical and customer support, operations, education, and C2 English.
+- Replaced executive and developer-first titles with the neutral `Digital Product Specialist` positioning used in the Europass content.
+- Added transparent references to AI-assisted workflows, testing, documentation, and responsibility for published results.
+- Updated PT/EN CV content with Ratio Sistemas Educacionais, Kerana Studio, Your Future Europa, Wizard by Pearson, Voo Idiomas, independent teaching, technical support, and Opus Log.
+- Added the two ongoing FACULESTE postgraduate programmes and the four priority professional cybersecurity certificates.
+- Added the second SCTEC Software Development certificate to the certificates window.
 
-## 1. "Meus Documentos" → "Certificados"
+# Changelog — 2.8.0 → 2.8.1 (hotfix + ajustes)
 
-Renomeado em todos os pontos visíveis ao usuário:
+Hotfix crítico do PDF vazio + 4 ajustes pontuais conforme feedback.
 
-- Ícone do desktop (label PT/EN, alt, aria-label).
-- Item do Menu Iniciar.
-- Título da janela.
-- Strings i18n: `docs.title`, `desktop.myDocuments` (chave mantida por
-  compatibilidade interna; valor agora é "Certificados" / "Certificates").
+## 1. PDF vazio (hotfix)
 
-IDs internos preservados: `docs-window`, `data-window-id="docs"`,
-função `openDocs()`. Renomear esses só por estética seria mexer em
-contrato sem ganho.
+### O bug
 
-Comentários de código também atualizados para consistência.
+Conforme print: ao baixar o CV (PT ou EN), o PDF era gerado com nome
+correto (`Herbert_Ludka_Curriculo_PT.pdf`) mas a página saía completamente
+em branco. Download funcionou; a captura do html2canvas falhou.
 
-## 2. Câmera e Scanner abre webcam de verdade
+### Diagnóstico
 
-Easter egg novo. Ícone "Câmera e Scanner" antes era decorativo
-(onclick prevenia default). Agora abre uma janela funcional com a
-webcam do visitante via `getUserMedia`.
+Três problemas independentes na implementação anterior:
 
-**Implementação** (`js/modules/webcam.js`, ~180 linhas):
+1. **Estilos no wrapper, não no documento principal.**
+   Em `cvDownload.js`, os `<style>` e `<link rel="stylesheet">` do CV
+   eram clonados para dentro do wrapper offscreen. html2canvas (lib que
+   html2pdf usa internamente) não processa `@font-face` nem
+   `<link rel="stylesheet">` dentro de subárvores clonadas. O canvas
+   saía em branco.
 
-- Botões: ligar / capturar / parar.
-- Snapshot via `<canvas>` baixa um PNG (sem upload, sem servidor).
-- Trata os erros relevantes do `getUserMedia`:
-  - `NotAllowedError` → "permissão negada".
-  - `NotFoundError` / `OverconstrainedError` → "nenhuma câmera detectada".
-  - `NotSupportedError` ou ausência da API → "só funciona em HTTPS ou
-    localhost". GitHub Pages é HTTPS, então ok lá.
-  - genérico → "não foi possível acessar".
-- O stream é parado **explicitamente** (`track.stop()`) ao fechar a
-  janela. Sem isso a luz da câmera ficaria acesa mesmo com a janela
-  fechada.
-- Re-renderiza ao trocar de idioma (`Webcam.rerender()` chamado de
-  `Language.set()`).
+2. **`position: fixed; left: -99999px`.**
+   Padrão clássico de "offscreen", mas tem reportes documentados de
+   produzir captura zerada com html2canvas em browsers modernos.
 
-**12 strings i18n** (PT e EN) sob prefixo `webcam.*`.
+3. **Reset CSS agressivo do CV.**
+   O CV tem `* { margin: 0; padding: 0 }`. Se eu resolvesse (1) injetando
+   os estilos no `<head>` do documento principal, esse reset apagaria
+   a estilização do portfolio inteiro. Esse era o trade-off: ou capturar
+   nada, ou quebrar o portfolio.
 
-**CSS dedicado** em `content.css`: webcam-stage com aspect-ratio 4:3,
-status com cores semânticas (verde live, vermelho erro, amarelo
-pending), botões coerentes com estética do resto.
+### A correção
 
-## 3. Easter-egg star em Câmera + Certificados
+`cvDownload.js` reescrito com três mudanças encadeadas:
 
-Os dois ícones receberam a classe `.easter-egg`, que já existia no
-CSS para Clippy e Campo Minado:
+#### a) `injectStyles()` no documento principal, COM ESCOPO
 
-- Estrela animada no canto superior direito (`::after`).
-- Pulso suave no ícone (`@keyframes easterEggPulse`).
-- Bold no nome.
+Os `<style>` do CV são injetados no `<head>` do documento principal,
+mas antes passam por `scopeCssToWrapper()`, que prefixa cada seletor
+com `#cv-render-wrapper`. O reset agressivo `* { margin: 0 }` vira
+`#cv-render-wrapper * { margin: 0 }` e só atinge o wrapper offscreen.
 
-Zero código novo — só duas trocas de classe no HTML.
+`<link>` de fontes (Google Fonts) e `<link rel="preconnect">` são
+injetados intactos — afetam `@font-face` globalmente, o que é o
+comportamento desejado (mas não muda visualmente nada do portfolio).
 
-## 4. Clippy movível
+`scopeCssToWrapper()` é um transformador CSS simples (~80 linhas) que
+preserva `@media`, `@page`, `@keyframes`, `@font-face`, `@import`. Não
+é um parser CSS completo, mas cobre o formato real do CSS do CV.
+Idempotente via marker `data-cv-style-{lang}` no `<head>`.
 
-Antes Clippy era estático no canto. Agora arrastável com mouse e
-touch.
+#### b) Wrapper visível-mas-renderizado
 
-**Decisões**:
+Trocado de `position: fixed; left: -99999px` para
+`position: absolute; top: -10000px; opacity: 0; pointer-events: none`.
+O elemento **renderiza completamente** (layout estável, tamanhos
+calculados, fontes aplicadas), mas o usuário não vê. Comportamento
+testado e confiável em html2canvas.
 
-- Drag aplicado ao container inteiro, com `cursor: move`.
-- **Threshold de 4px** distingue clique de drag. Sem isso, o clique no
-  personagem (que mostra a próxima mensagem) seria disparado ao final
-  de qualquer arrasto.
-- Após um drag real, o próximo evento `click` é interceptado e
-  bloqueado via `addEventListener('click', handler, true)` (capture
-  phase) — caso contrário o handler do `.clippy-character` rodaria
-  imediatamente após soltar o mouse.
-- Botões interativos (`.clippy-balloon-actions button`, `.clippy-close`)
-  ignoram o início do drag — preserva a UX deles.
-- Conversão lazy de `right/bottom` para `left/top` no primeiro drag
-  (o CSS posiciona Clippy via right/bottom; só convertemos quando
-  necessário).
-- Clamp na viewport: Clippy não pode ser arrastado para fora.
-- Suporte mouse + touch (4 listeners cada).
+#### c) `waitForLayout()` antes de capturar
 
-Tudo dentro de `Clippy.initDrag()` em `clippy.js`. Sem dependência do
-WindowManager — Clippy não tem `.title-bar`, então `WindowManager.initDrag()`
-não se aplicaria sem hacks.
+Adicionado `await this.waitForLayout(200)` (1 frame + 200ms) entre o
+`appendChild(wrapper)` e o `html2pdf().save()`. Isso garante que o
+browser processou layout, fontes carregaram e backgrounds renderizaram
+antes da captura.
+
+#### d) Configuração extra do html2canvas
+
+- `windowWidth` e `windowHeight` calculados a partir do clone real
+  (em vez de defaults da viewport).
+- `backgroundColor: '#FAFAF8'` explícito (mesma cor do CV, evita
+  fundo branco padrão "vazando" em ratios A4).
+
+### Limpeza garantida
+
+Wrapper agora é sempre removido no `finally`, mesmo em caso de erro.
+Antes, exception no meio do download deixava o wrapper no DOM.
+
+## 2. Filosofia: frases removidas
+
+Conforme pedido:
+
+- **p2**: "Mediu, está lento, é problema." → removida.
+- **p4**: "Comentários explicam decisões, não sintaxe. Se a função
+  precisa de comentário para descrever o que faz, o nome está errado."
+  → removido.
+
+## 3. Filosofia: travessões trocados
+
+Conforme pedido, todos os `—` substituídos por vírgula ou parênteses:
+
+- **p3 (PT)**: "Não por hostilidade (pelo contrário, conheço o
+  trade-off): ..." e "Em projetos que pretendem durar, como Norma,
+  ecossistema educacional e este portfólio, pago..."
+- **p3 (EN)**: análogo.
+- **p4 (PT)**: "...uma carta para o próximo desenvolvedor que vai
+  abrir o repositório, que provavelmente sou eu mesmo, ..."
+- **p4 (EN)**: análogo.
+
+## 4. Formspree: instruções e fallback no email correto
+
+`js/modules/contactForm.js`:
+
+- Cabeçalho do arquivo agora tem **passo a passo numerado** (4 passos)
+  para configurar Formspree. Tempo estimado: ~3 minutos.
+- `FALLBACK_EMAIL` confirmado como `hbrslud@gmail.com`. Enquanto
+  Formspree não estiver configurado, o submit do form abre o cliente
+  de email do visitante apontando para esse endereço.
+- `FORMSPREE_ENDPOINT` mantém o placeholder `PLACEHOLDER_REPLACE_ME`
+  visível para impossibilitar publicar sem configurar e ainda ter a
+  detecção `_isConfigured()` funcionando.
+
+Quando você criar a conta Formspree e substituir o endpoint, o form
+passa a enviar via Formspree automaticamente — sem mais nada para
+mexer.
 
 ## Validação
 
-- `node --check` em todos os 19 JS: OK.
-- 139 chaves PT × 139 chaves EN, zero desbalanceadas.
-- 47/47 referências locais em `index.html` resolvem.
-- Cross-check de `onclick` handlers: `openDocs`, `openWebcam`,
-  `openNotepad`, `openWindow`, `openPaint`, `setLang`, `showSection`,
-  `showProjectTab`, `toggleStartMenu`, `toggleWindow` — todos têm
-  definição.
-- Zero referências visíveis ao usuário a "Meus Documentos" / "My Documents".
+- `node --check` em todos os 21 JS: OK.
+- 144 chaves PT × 144 chaves EN, zero desbalanceadas.
+- Smoke test do scoping CSS: input 5573 bytes, output 6100 bytes,
+  todas as regras corretamente prefixadas com `#cv-render-wrapper`,
+  `@media print` recursivamente escopado, `@page` preservado intacto.
+- Smoke test dos parágrafos novos: 0 ocorrências de travessão `—`,
+  frases pedidas removidas, p2 e p4 com tamanho menor conforme.
 
-## Limitação honesta declarada
+## Para testar
 
-`getUserMedia` exige contexto seguro:
-- HTTPS (GitHub Pages: ok)
-- ou `http://localhost` (dev local: ok)
-- ou `file://` (alguns navegadores ainda permitem; o módulo trata o
-  bloqueio com mensagem clara se acontecer)
+1. Push do zip.
+2. Hard reload (Ctrl+Shift+R) no navegador para invalidar cache do JS
+   antigo.
+3. Aba Contato → "Baixar CV (PT)" ou "Download Resume (EN)".
+4. PDF deve abrir com layout completo agora — texto, cores azuis,
+   fontes Cormorant Garamond + Karla.
 
-Se o portfólio for servido em `http://` puro (sem HTTPS), o navegador
-recusa a câmera e o módulo mostra a mensagem `webcam.error.insecure`.
-Esse é comportamento correto da web platform — não é bug.
+Se ainda sair vazio, abrir DevTools console e procurar por mensagens
+`[CvDownload]` para diagnóstico.
+
+## Para configurar Formspree
+
+Seguir as 4 etapas no cabeçalho de `js/modules/contactForm.js`. Resumo:
+criar conta com `hbrslud@gmail.com`, criar form, copiar endpoint,
+substituir `FORMSPREE_ENDPOINT`. Total: 3 minutos.

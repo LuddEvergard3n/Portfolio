@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap do portfolio.
+
+  Manter manual eh adequado: portfolio tem URL unica (SPA com hash
+  para abas), entao o crawler nao precisa de listagem extensa.
+  Hashes (#projects, #ratio etc.) NAO sao indexados separadamente
+  por crawlers — sao interpretados como ancoras na mesma URL.
+
+  Editar a data de lastmod ao publicar mudancas significativas.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://luddevergard3n.github.io/Portfolio/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://luddevergard3n.github.io/Portfolio/cv/cv-pt.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://luddevergard3n.github.io/Portfolio/cv/cv-en.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
