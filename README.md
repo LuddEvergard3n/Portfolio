@@ -13,20 +13,21 @@ Interactive personal portfolio that recreates a Windows XP desktop with draggabl
 
 The project uses semantic HTML, CSS, and vanilla JavaScript. It has no runtime dependencies, framework, bundler, or build step. Portuguese and English content is centralized in one internationalization module.
 
-**Version:** 2.5.1
+**Version:** 2.9.0
 
 ## Highlights
 
-- Windows XP-inspired boot screen, desktop, taskbar, Start menu, and window chrome.
+- Windows XP-inspired boot screen, desktop, taskbar, Start menu, and window chrome. The boot runs once per browser session and can be skipped with Escape.
 - Draggable and resizable windows with minimize, maximize, restore, close, and touch support.
 - Runtime Portuguese and English switching, including the document `lang` attribute.
-- Projects grouped into Sites, Projects, and Educational Ecosystem tabs with independent pagination.
+- A short first-visit profile with direct links to highlighted work, the CV, and contact details.
+- Projects grouped into Highlights, Sites, Projects, and Educational Ecosystem tabs. Complete collections keep independent pagination.
 - Dedicated Ratio and Norma section with technical product information.
 - Documents window with SENAI, SCTEC, Cisco, Google, IBM, and ISC2 certificates.
 - Project entries for NebulaKV, Kerana Gallery, ATHENA, and the educational ecosystem.
 - Clippy, Minesweeper, and Paint easter eggs.
 - Keyboard navigation, visible focus, ARIA labels, and screen-reader announcements.
-- CV download and contact modules with a plain static-site architecture.
+- Pre-generated PT/EN PDF resumes and a mailto contact form that does not transmit data automatically.
 
 ## Technology
 
@@ -98,26 +99,27 @@ portfolio-xp/
 |       |-- docs.js           Certificate browser
 |       |-- ratio.js          Ratio and Norma section
 |       |-- contactForm.js    Contact form behavior
-|       |-- cvDownload.js     CV download behavior
+|       |-- cvDownload.js     Legacy browser PDF generator; retained but not loaded
 |       |-- accessibility.js  Keyboard navigation
 |       |-- clippy.js         Clippy easter egg
 |       |-- minesweeper.js    Minesweeper easter egg
 |       `-- paint.js          Paint application
-|-- cv/                       Downloadable CV files
+|-- cv/                       Readable HTML resumes and static PDF downloads
 `-- img/docs/                 Nine certificate PDFs
 ```
 
 ## Content model
 
-The project area has three independent collections:
+The project area has four collections:
 
 | Section | Provider |
 |---|---|
+| Highlights | `i18n.getFeatured(lang)` |
 | Sites | `i18n.getSites(lang)` |
 | Projects | `i18n.getProjects(lang)` |
 | Educational Ecosystem | `i18n.getEcosystem(lang)` |
 
-Project cards may use `featured`, `wip`, `repo`, and `longDescription` fields. The Ratio/Norma and Documents sections use their own renderers and i18n providers.
+The Highlights collection reuses entries from the complete providers and adds Norma. Project cards may use `featured`, `wip`, `repo`, and `longDescription` fields. The Ratio/Norma and Documents sections use their own renderers and i18n providers.
 
 ### Add a project
 

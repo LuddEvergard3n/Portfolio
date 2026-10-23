@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Portfólio de Herbert Sorg Ludka — produtos digitais, suporte técnico, operações, educação, IA aplicada e projetos web.">
+    <meta name="description" content="Portfólio de Herbert Sorg Ludka com produtos digitais, suporte técnico, operações, educação e projetos web.">
     <meta name="keywords" content="Herbert Sorg Ludka, LuddEvergard3n, produtos digitais, suporte técnico, Help Desk, customer support, IA aplicada, SaaS, CRM, educação, Ratio Sistemas Educacionais, Norma">
     <meta name="author" content="Herbert Basilio Rodrigues Sorg Ludka">
     <meta name="robots" content="index, follow">
@@ -13,8 +13,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://luddevergard3n.github.io/Portfolio/">
     <meta property="og:title" content="Herbert Sorg Ludka — Produtos Digitais, Suporte e Operações">
-    <meta property="og:description" content="Portfólio interativo em estética Windows XP. Sistemas de alta performance, simulação determinística e plataformas web em produção.">
-    <meta property="og:image" content="https://luddevergard3n.github.io/Portfolio/img/bliss.jpg">
+    <meta property="og:description" content="Produtos digitais, suporte técnico, operações e projetos práticos em um portfólio inspirado no Windows XP.">
+    <meta property="og:image" content="https://luddevergard3n.github.io/Portfolio/img/portfolio-share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:locale:alternate" content="en_US">
 
@@ -22,8 +24,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://luddevergard3n.github.io/Portfolio/">
     <meta name="twitter:title" content="Herbert Sorg Ludka — Produtos Digitais, Suporte e Operações">
-    <meta name="twitter:description" content="Portfólio interativo em estética Windows XP. Sistemas de alta performance, simulação determinística e plataformas web em produção.">
-    <meta name="twitter:image" content="https://luddevergard3n.github.io/Portfolio/img/bliss.jpg">
+    <meta name="twitter:description" content="Produtos digitais, suporte técnico, operações e projetos práticos em um portfólio inspirado no Windows XP.">
+    <meta name="twitter:image" content="https://luddevergard3n.github.io/Portfolio/img/portfolio-share.png">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -35,7 +37,7 @@
       "url": "https://luddevergard3n.github.io/Portfolio/",
       "image": "https://luddevergard3n.github.io/Portfolio/img/pfp.jpg",
       "jobTitle": "Digital Product Specialist",
-      "description": "Profissional bilíngue com experiência em produtos digitais, suporte técnico, educação, operações, SaaS, CRM e fluxos assistidos por inteligência artificial.",
+      "description": "Profissional bilíngue com experiência em produtos digitais, suporte técnico, educação, operações, SaaS e CRM.",
       "email": "hbrslud@gmail.com",
       "telephone": "+55-47-9-9963-3905",
       "address": {
@@ -76,10 +78,10 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/boot.css">
+    <link rel="stylesheet" href="css/boot.css?v=20261023b">
     <link rel="stylesheet" href="css/desktop.css">
-    <link rel="stylesheet" href="css/window.css">
-    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/window.css?v=20261023b">
+    <link rel="stylesheet" href="css/content.css?v=20261023b">
     <link rel="stylesheet" href="css/eastereggs.css">
     <link rel="stylesheet" href="css/paint.css">
     <link rel="stylesheet" href="css/notepad.css">
@@ -105,6 +107,7 @@
     </div>
     <div class="boot-copyright">Copyright &copy; Microsoft Corporation</div>
     <div class="boot-ms-logo">Microsoft</div>
+    <button type="button" id="skip-boot" class="boot-skip">Esc para pular / skip</button>
 </div>
 
 <!-- ==================== DESKTOP ICONS ==================== -->
@@ -322,19 +325,19 @@
 
     <!-- Navigation Tabs -->
     <div class="nav-bar">
-        <button class="nav-tab active" onclick="showSection('about', event)">
+        <button class="nav-tab active" data-section="about" onclick="showSection('about', event)">
             <span class="lang pt">Sobre</span>
             <span class="lang en hidden">About</span>
         </button>
-        <button class="nav-tab" onclick="showSection('projects', event)">
+        <button class="nav-tab" data-section="projects" onclick="showSection('projects', event)">
             <span class="lang pt">Projetos</span>
             <span class="lang en hidden">Projects</span>
         </button>
-        <button class="nav-tab" onclick="showSection('ratio', event)">
+        <button class="nav-tab" data-section="ratio" onclick="showSection('ratio', event)">
             <span class="lang pt">Ratio</span>
             <span class="lang en hidden">Ratio</span>
         </button>
-        <button class="nav-tab" onclick="showSection('contact', event)">
+        <button class="nav-tab" data-section="contact" onclick="showSection('contact', event)">
             <span class="lang pt">Contato</span>
             <span class="lang en hidden">Contact</span>
         </button>
@@ -345,9 +348,29 @@
         <!-- ==================== ABOUT SECTION ==================== -->
         <div id="about" class="section">
             <div class="lang pt">
+                <section class="quick-profile" aria-labelledby="quick-profile-title-pt">
+                    <h2 id="quick-profile-title-pt">Herbert Sorg Ludka</h2>
+                    <p class="quick-profile-role">Produtos digitais, suporte técnico e operações</p>
+                    <p class="quick-profile-meta">Inglês C2 | Navegantes, SC | Trabalho remoto</p>
+                    <div class="quick-profile-actions">
+                        <button type="button" onclick="showSection('projects'); showProjectTab('featured')">Ver destaques</button>
+                        <a href="cv/Herbert_Ludka_Curriculo_PT.pdf" download>Baixar currículo</a>
+                        <button type="button" onclick="showSection('contact')">Entrar em contato</button>
+                    </div>
+                </section>
                 <div id="skills-container-pt"></div>
             </div>
             <div class="lang en hidden">
+                <section class="quick-profile" aria-labelledby="quick-profile-title-en">
+                    <h2 id="quick-profile-title-en">Herbert Sorg Ludka</h2>
+                    <p class="quick-profile-role">Digital products, technical support and operations</p>
+                    <p class="quick-profile-meta">C2 English | Navegantes, Brazil | Remote work</p>
+                    <div class="quick-profile-actions">
+                        <button type="button" onclick="showSection('projects'); showProjectTab('featured')">View highlights</button>
+                        <a href="cv/Herbert_Ludka_Resume_EN.pdf" download>Download resume</a>
+                        <button type="button" onclick="showSection('contact')">Contact me</button>
+                    </div>
+                </section>
                 <div id="skills-container-en"></div>
             </div>
         </div>
@@ -359,13 +382,18 @@
                 
                 <!-- Project Tabs -->
                 <div class="project-tabs">
-                    <button class="project-tab-btn active" onclick="showProjectTab('sites', event)">Sites</button>
+                    <button class="project-tab-btn active" onclick="showProjectTab('featured', event)">Destaques</button>
+                    <button class="project-tab-btn" onclick="showProjectTab('sites', event)">Sites</button>
                     <button class="project-tab-btn" onclick="showProjectTab('projects', event)">Projetos</button>
                     <button class="project-tab-btn" onclick="showProjectTab('ecosystem', event)">Ecossistema Educacional</button>
                 </div>
+
+                <div class="project-tab-content active" id="tab-featured-pt">
+                    <div id="featured-list-pt"></div>
+                </div>
                 
                 <!-- Sites Tab -->
-                <div class="project-tab-content active" id="tab-sites-pt">
+                <div class="project-tab-content" id="tab-sites-pt">
                     <div id="sites-list-pt"></div>
                 </div>
                 
@@ -385,13 +413,18 @@
                 
                 <!-- Project Tabs -->
                 <div class="project-tabs">
-                    <button class="project-tab-btn active" onclick="showProjectTab('sites', event)">Sites</button>
+                    <button class="project-tab-btn active" onclick="showProjectTab('featured', event)">Highlights</button>
+                    <button class="project-tab-btn" onclick="showProjectTab('sites', event)">Sites</button>
                     <button class="project-tab-btn" onclick="showProjectTab('projects', event)">Projects</button>
                     <button class="project-tab-btn" onclick="showProjectTab('ecosystem', event)">Educational Ecosystem</button>
                 </div>
+
+                <div class="project-tab-content active" id="tab-featured-en">
+                    <div id="featured-list-en"></div>
+                </div>
                 
                 <!-- Sites Tab -->
-                <div class="project-tab-content active" id="tab-sites-en">
+                <div class="project-tab-content" id="tab-sites-en">
                     <div id="sites-list-en"></div>
                 </div>
                 
@@ -450,14 +483,14 @@
                 <div class="cv-download-block">
                     <h3>Currículo</h3>
                     <div class="cv-download-buttons">
-                        <button type="button" class="cv-download-btn" onclick="downloadCvPt()">Baixar CV (PT)</button>
-                        <button type="button" class="cv-download-btn" onclick="downloadCvEn()">Download Resume (EN)</button>
+                        <a class="cv-download-btn" href="cv/Herbert_Ludka_Curriculo_PT.pdf" download>Baixar CV (PT)</a>
+                        <a class="cv-download-btn" href="cv/Herbert_Ludka_Resume_EN.pdf" download>Download Resume (EN)</a>
                     </div>
                 </div>
 
                 <div class="contact-form-block">
-                    <h3>Enviar mensagem</h3>
-                    <p class="contact-form-help">Mensagens chegam direto no meu email. Use para propostas, dúvidas técnicas ou contato profissional.</p>
+                    <h3>Escrever email</h3>
+                    <p class="contact-form-help">Preencha os campos para abrir seu aplicativo de email com a mensagem pronta. Nada será enviado automaticamente.</p>
                     <form id="contact-form-pt" class="contact-form" data-lang="pt" novalidate>
                         <label class="contact-form-row">
                             <span>Nome</span>
@@ -474,7 +507,7 @@
                         <!-- Honeypot anti-spam: campo invisivel que humanos nao preenchem -->
                         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                         <div class="contact-form-actions">
-                            <button type="submit" class="contact-form-submit">Enviar</button>
+                            <button type="submit" class="contact-form-submit">Abrir email</button>
                             <span class="contact-form-status" data-kind=""></span>
                         </div>
                     </form>
@@ -507,14 +540,14 @@
                 <div class="cv-download-block">
                     <h3>Resume</h3>
                     <div class="cv-download-buttons">
-                        <button type="button" class="cv-download-btn" onclick="downloadCvPt()">Baixar CV (PT)</button>
-                        <button type="button" class="cv-download-btn" onclick="downloadCvEn()">Download Resume (EN)</button>
+                        <a class="cv-download-btn" href="cv/Herbert_Ludka_Curriculo_PT.pdf" download>Baixar CV (PT)</a>
+                        <a class="cv-download-btn" href="cv/Herbert_Ludka_Resume_EN.pdf" download>Download Resume (EN)</a>
                     </div>
                 </div>
 
                 <div class="contact-form-block">
-                    <h3>Send a message</h3>
-                    <p class="contact-form-help">Messages arrive directly in my inbox. Use this for proposals, technical questions, or professional contact.</p>
+                    <h3>Write an email</h3>
+                    <p class="contact-form-help">Fill in the fields to open your email app with a ready-to-send message. Nothing is sent automatically.</p>
                     <form id="contact-form-en" class="contact-form" data-lang="en" novalidate>
                         <label class="contact-form-row">
                             <span>Name</span>
@@ -530,7 +563,7 @@
                         </label>
                         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                         <div class="contact-form-actions">
-                            <button type="submit" class="contact-form-submit">Send</button>
+                            <button type="submit" class="contact-form-submit">Open email</button>
                             <span class="contact-form-status" data-kind=""></span>
                         </div>
                     </form>
@@ -708,14 +741,14 @@
 </div>
 
 <!-- ==================== SCRIPTS ==================== -->
-<script src="js/modules/i18n.js"></script>
+<script src="js/modules/i18n.js?v=20261023b"></script>
 <script src="js/config.js"></script>
-<script src="js/modules/boot.js"></script>
+<script src="js/modules/boot.js?v=20261023b"></script>
 <script src="js/modules/clock.js"></script>
 <script src="js/modules/language.js"></script>
 <script src="js/modules/startMenu.js"></script>
-<script src="js/modules/pagination.js"></script>
-<script src="js/modules/navigation.js"></script>
+<script src="js/modules/pagination.js?v=20261023b"></script>
+<script src="js/modules/navigation.js?v=20261023b"></script>
 <script src="js/modules/window.js"></script>
 <script src="js/modules/accessibility.js"></script>
 <script src="js/modules/paint.js"></script>
@@ -723,8 +756,7 @@
 <script src="js/modules/docs.js"></script>
 <script src="js/modules/webcam.js"></script>
 <script src="js/modules/ratio.js"></script>
-<script src="js/modules/cvDownload.js"></script>
-<script src="js/modules/contactForm.js"></script>
+<script src="js/modules/contactForm.js?v=20261023b"></script>
 <script src="js/modules/clippy.js"></script>
 <script src="js/modules/minesweeper.js"></script>
 <script src="js/modules/desktopGrid.js"></script>

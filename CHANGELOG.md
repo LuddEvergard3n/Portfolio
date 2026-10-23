@@ -1,3 +1,13 @@
+# 2026-10-23 - Faster first visit and clearer project selection
+
+- Added a short bilingual profile with direct links to highlighted projects, static resumes, and contact details.
+- Added a Highlights project tab while preserving every existing project in its original collection.
+- Expanded Computabilis with its real use case, mobile focus, bilingual interface, charts, and accounting context.
+- Replaced browser-generated resume downloads with pre-generated PT/EN PDF files.
+- Made the boot screen run once per session, added Escape and button shortcuts, and respected reduced-motion preferences.
+- Clarified that the contact form opens the visitor's email application and does not send data automatically.
+- Updated sharing metadata and added a dedicated Windows XP-style preview image.
+
 # 2026-10-19 — Professional profile and credentials
 
 - Repositioned the public profile around digital products, technical and customer support, operations, education, and C2 English.

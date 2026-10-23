@@ -122,7 +122,8 @@ const Pagination = {
    * @param {string} containerId - ID do container
    */
   renderProjects(containerId = 'projects-list-pt') {
-    const projects = window.i18n.getProjects();
+    const lang = containerId.endsWith('-en') ? 'en' : 'pt';
+    const projects = window.i18n.getProjects(lang);
     const paginated = this.paginate(projects, this.currentProjectsPage);
     
     const container = document.getElementById(containerId);
@@ -133,15 +134,14 @@ const Pagination = {
     
     // Renderizar items
     paginated.items.forEach(project => {
-      const card = this.createProjectCard(project);
+      const card = this.createProjectCard(project, lang);
       container.appendChild(card);
     });
     
     // Atualizar controles de paginação
     this.updatePaginationControls('projects', paginated, containerId);
     
-    // Atualizar URL hash
-    window.location.hash = `projects-page-${paginated.currentPage}`;
+    this.updateHash('projects', paginated.currentPage, containerId);
     
     // Animação fade-in
     this.animateFadeIn(container);
@@ -152,7 +152,8 @@ const Pagination = {
    * @param {string} containerId - ID do container
    */
   renderSites(containerId = 'sites-list-pt') {
-    const sites = window.i18n.getSites();
+    const lang = containerId.endsWith('-en') ? 'en' : 'pt';
+    const sites = window.i18n.getSites(lang);
     const paginated = this.paginate(sites, this.currentSitesPage);
     
     const container = document.getElementById(containerId);
@@ -163,15 +164,14 @@ const Pagination = {
     
     // Renderizar items
     paginated.items.forEach(site => {
-      const card = this.createProjectCard(site); // Usa mesma estrutura
+      const card = this.createProjectCard(site, lang); // Usa mesma estrutura
       container.appendChild(card);
     });
     
     // Atualizar controles de paginação
     this.updatePaginationControls('sites', paginated, containerId);
     
-    // Atualizar URL hash
-    window.location.hash = `sites-page-${paginated.currentPage}`;
+    this.updateHash('sites', paginated.currentPage, containerId);
     
     // Animação fade-in
     this.animateFadeIn(container);
@@ -182,7 +182,8 @@ const Pagination = {
    * @param {string} containerId - ID do container
    */
   renderEcosystem(containerId = 'ecosystem-list-pt') {
-    const ecosystem = window.i18n.getEcosystem();
+    const lang = containerId.endsWith('-en') ? 'en' : 'pt';
+    const ecosystem = window.i18n.getEcosystem(lang);
     const paginated = this.paginate(ecosystem, this.currentEcosystemPage);
     
     const container = document.getElementById(containerId);
@@ -193,18 +194,47 @@ const Pagination = {
     
     // Renderizar items
     paginated.items.forEach(site => {
-      const card = this.createProjectCard(site); // Usa mesma estrutura
+      const card = this.createProjectCard(site, lang); // Usa mesma estrutura
       container.appendChild(card);
     });
     
     // Atualizar controles de paginação
     this.updatePaginationControls('ecosystem', paginated, containerId);
     
-    // Atualizar URL hash
-    window.location.hash = `ecosystem-page-${paginated.currentPage}`;
+    this.updateHash('ecosystem', paginated.currentPage, containerId);
     
     // Animação fade-in
     this.animateFadeIn(container);
+  },
+
+  /**
+   * Renderiza a seleção curta sem paginação.
+   * @param {string} containerId - ID do container
+   */
+  renderFeatured(containerId = 'featured-list-pt') {
+    const lang = containerId.endsWith('-en') ? 'en' : 'pt';
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+    window.i18n.getFeatured(lang).forEach(item => {
+      container.appendChild(this.createProjectCard(item, lang));
+    });
+    this.animateFadeIn(container);
+  },
+
+  /**
+   * Atualiza o hash apenas para a aba que o visitante esta vendo.
+   * @param {string} type - Nome da colecao
+   * @param {number} page - Pagina atual
+   * @param {string} containerId - Container renderizado
+   */
+  updateHash(type, page, containerId) {
+    const lang = containerId.endsWith('-en') ? 'en' : 'pt';
+    const tab = document.getElementById(`tab-${type}-${lang}`);
+    if (tab && tab.classList.contains('active')) {
+      history.replaceState(null, '', `#${type}-page-${page}`);
+    }
   },
   
   /**
@@ -219,12 +249,13 @@ const Pagination = {
    *   - `repo`            → adiciona um segundo link "Codigo-fonte".
    *
    * @param {Object} item - Projeto, site ou item do ecossistema
+   * @param {string} lang - Idioma do container
    * @returns {HTMLElement}
    */
-  createProjectCard(item) {
+  createProjectCard(item, lang = null) {
     const card = document.createElement('div');
     card.className = 'project';
-    const lang = window.Language ? window.Language.getCurrent() : 'pt';
+    const cardLang = lang || (window.Language ? window.Language.getCurrent() : 'pt');
 
     if (item.featured) card.classList.add('project--featured');
     if (item.wip) card.classList.add('project--wip');
@@ -245,7 +276,7 @@ const Pagination = {
     if (item.wip) {
       const badgeWip = document.createElement('span');
       badgeWip.className = 'project-badge project-badge--wip';
-      badgeWip.textContent = window.i18n.t('ecosystem.wip', lang);
+      badgeWip.textContent = window.i18n.t('ecosystem.wip', cardLang);
       header.appendChild(badgeWip);
     }
 
@@ -286,7 +317,7 @@ const Pagination = {
     link.className = 'project-link';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.textContent = lang === 'pt' ? 'Ver projeto' : 'View project';
+    link.textContent = cardLang === 'pt' ? 'Ver projeto' : 'View project';
     linksWrap.appendChild(link);
 
     if (item.repo && item.repo !== item.url) {
@@ -295,7 +326,7 @@ const Pagination = {
       repoLink.className = 'project-link project-link--secondary';
       repoLink.target = '_blank';
       repoLink.rel = 'noopener noreferrer';
-      repoLink.textContent = lang === 'pt' ? 'Código-fonte' : 'Source code';
+      repoLink.textContent = cardLang === 'pt' ? 'Código-fonte' : 'Source code';
       linksWrap.appendChild(repoLink);
     }
 

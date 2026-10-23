@@ -5,36 +5,73 @@
  */
 
 const BootScreen = {
+  timers: [],
+  bootScreen: null,
+
   /**
    * Inicializa a tela de boot
    */
   init() {
     const bootScreen = document.getElementById('boot-screen');
     if (!bootScreen) return;
-    
+    this.bootScreen = bootScreen;
+
+    let alreadySeen = false;
+    try {
+      alreadySeen = sessionStorage.getItem('portfolio-boot-seen') === '1';
+      sessionStorage.setItem('portfolio-boot-seen', '1');
+    } catch (_) {
+      // sessionStorage pode estar bloqueado; o boot continua normalmente.
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (alreadySeen || reducedMotion) {
+      bootScreen.classList.add('hidden');
+      return;
+    }
+
+    const skipButton = document.getElementById('skip-boot');
+    if (skipButton) skipButton.addEventListener('click', () => this.skip());
+    document.addEventListener('keydown', this.handleKeydown);
+
     // Tentar tocar som de boot imediatamente
     this.playStartupSound();
-    
+
     // Fallback: tocar ao primeiro clique se falhar
-    const tryPlayOnClick = () => {
+    const tryPlayOnClick = (event) => {
+      if (event.target.closest('#skip-boot')) return;
       this.playStartupSound();
-      document.removeEventListener('click', tryPlayOnClick);
     };
-    
-    // Adicionar listener para primeiro clique
-    setTimeout(() => {
+    this.timers.push(setTimeout(() => {
       document.addEventListener('click', tryPlayOnClick, { once: true });
-    }, 100);
-    
-    // Fade out após 2.5 segundos
-    setTimeout(() => {
+    }, 100));
+
+    this.timers.push(setTimeout(() => {
       bootScreen.classList.add('fade-out');
-    }, 2500);
-    
-    // Remover do DOM após 3 segundos
-    setTimeout(() => {
+    }, 2500));
+
+    this.timers.push(setTimeout(() => {
       bootScreen.classList.add('hidden');
-    }, 3000);
+      document.removeEventListener('keydown', this.handleKeydown);
+    }, 3000));
+  },
+
+  /**
+   * Fecha o boot imediatamente.
+   */
+  skip() {
+    this.timers.forEach(clearTimeout);
+    this.timers = [];
+    if (this.bootScreen) this.bootScreen.classList.add('hidden');
+    document.removeEventListener('keydown', this.handleKeydown);
+  },
+
+  /**
+   * Permite pular o boot pelo teclado.
+   * @param {KeyboardEvent} event
+   */
+  handleKeydown(event) {
+    if (event.key === 'Escape') BootScreen.skip();
   },
   
   /**
@@ -67,6 +104,7 @@ const BootScreen = {
    * Mostra dica visual de que o som está bloqueado
    */
   showAudioHint() {
+    if (!this.bootScreen || this.bootScreen.classList.contains('hidden')) return;
     const hint = document.createElement('div');
     hint.style.cssText = `
       position: fixed;

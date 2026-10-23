@@ -31,6 +31,9 @@ const Navigation = {
     if (event && event.target) {
       const tab = event.target.closest('.nav-tab');
       if (tab) tab.classList.add('active');
+    } else {
+      const tab = document.querySelector(`.nav-tab[data-section="${sectionId}"]`);
+      if (tab) tab.classList.add('active');
     }
     
     // Atualizar barra de endereço
@@ -76,6 +79,12 @@ const Navigation = {
           Pagination.renderSites('sites-list-' + lang);
         } else if (tabId === 'ecosystem') {
           Pagination.renderEcosystem('ecosystem-list-' + lang);
+        } else if (tabId === 'featured') {
+          Pagination.renderFeatured('featured-list-' + lang);
+          const projects = document.getElementById('projects');
+          if (projects && !projects.classList.contains('hidden')) {
+            history.replaceState(null, '', '#highlights');
+          }
         }
       }
     }
@@ -248,6 +257,8 @@ const Navigation = {
     // Inicializar paginação
     if (window.Pagination) {
       Pagination.init();
+      Pagination.renderFeatured('featured-list-pt');
+      Pagination.renderFeatured('featured-list-en');
       // Renderizar primeira página de sites, projetos e ecosystem em ambos idiomas
       Pagination.renderSites('sites-list-pt');
       Pagination.renderSites('sites-list-en');
@@ -263,7 +274,7 @@ const Navigation = {
     }
 
     // Mostrar primeira aba de projetos
-    this.showProjectTab('sites');
+    this.showProjectTab('featured');
   }
 };
 

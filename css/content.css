@@ -14,6 +14,63 @@
 
 /* ==================== CATEGORIAS DE SKILLS ==================== */
 
+.quick-profile {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: linear-gradient(180deg, #f8fbff 0%, #e8f1ff 100%);
+  border: 1px solid #7f9db9;
+  border-radius: var(--border-radius-md);
+}
+
+.quick-profile h2 {
+  margin-bottom: 4px;
+  color: #003399;
+}
+
+.quick-profile-role {
+  margin-bottom: 4px;
+  color: var(--xp-text-dark);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+}
+
+.quick-profile-meta {
+  margin-bottom: var(--spacing-md);
+  color: var(--xp-text-gray);
+  font-size: var(--font-size-sm);
+}
+
+.quick-profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.quick-profile-actions button,
+.quick-profile-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  color: #000;
+  background: linear-gradient(180deg, #fff 0%, #ece9d8 100%);
+  border: 1px solid #7f9db9;
+  border-radius: 3px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quick-profile-actions button:hover,
+.quick-profile-actions a:hover,
+.quick-profile-actions button:focus-visible,
+.quick-profile-actions a:focus-visible {
+  border-color: #0058ee;
+  outline: 1px solid #0058ee;
+  outline-offset: 1px;
+}
+
 .skill-category {
   margin-bottom: var(--spacing-xl);
   background: #f9f9f9;
@@ -856,6 +913,9 @@
 }
 
 .cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   min-width: 160px;
   padding: 8px var(--spacing-md);
@@ -867,6 +927,7 @@
   border-radius: 3px;
   cursor: pointer;
   transition: filter var(--transition-fast);
+  text-decoration: none;
 }
 
 .cv-download-btn:hover {
@@ -1061,6 +1122,16 @@
 
   .about-description {
     font-size: var(--font-size-md);
+  }
+
+  .quick-profile-actions {
+    flex-direction: column;
+  }
+
+  .quick-profile-actions button,
+  .quick-profile-actions a {
+    width: 100%;
+    min-height: 44px;
   }
 
   /* Taskbar compacta em mobile */

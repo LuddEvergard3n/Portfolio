@@ -171,6 +171,34 @@ body {
   animation: fadeIn 1.2s ease-out;
 }
 
+.boot-skip {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  color: #ddd;
+  background: transparent;
+  border: 1px solid #777;
+  font: 12px Tahoma, sans-serif;
+  cursor: pointer;
+}
+
+.boot-skip:hover,
+.boot-skip:focus-visible {
+  color: #fff;
+  border-color: #fff;
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-screen,
+  .boot-progress-inner {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ==================== RESPONSIVO ==================== */
 
 @media (max-width: 600px) {
@@ -198,5 +226,9 @@ body {
   
   .boot-ms-logo {
     right: 15px;
+  }
+
+  .boot-skip {
+    bottom: 18px;
   }
 }

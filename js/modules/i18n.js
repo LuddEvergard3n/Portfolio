@@ -28,19 +28,19 @@ const i18n = {
       'skills.product': 'Produtos digitais',
       'skills.ai': 'Inteligência Artificial',
 
-      'skill.technical-support': 'Suporte técnico e Help Desk — diagnóstico, orientação passo a passo, triagem, acompanhamento e documentação de incidentes.',
-      'skill.customer-support': 'Atendimento ao cliente — comunicação por e-mail, chat, telefone e mensagens, inclusive em inglês.',
-      'skill.crm': 'CRM e ATS — Salesforce, Sponte e Starhunter para registros, pipelines, atendimento, recrutamento e acompanhamento.',
-      'skill.remote-work': 'Operações remotas — organização de tarefas, prazos, documentação, rastreabilidade e múltiplos fluxos simultâneos.',
-      'skill.english': 'Inglês C2 — uso profissional, ensino, comunicação internacional, documentação técnica e escrita.',
-      'skill.teaching': 'Ensino — planejamento, adaptação de conteúdo, acompanhamento individual e feedback estruturado.',
-      'skill.recruiting': 'Recrutamento internacional — triagem, entrevistas, apresentação de candidatos e acompanhamento do processo seletivo.',
-      'skill.product-ops': 'Operações de produto — requisitos, conteúdo, suporte, documentação e melhoria contínua de produtos SaaS e educacionais.',
-      'skill.web-tools': 'Tecnologias web — conhecimento prático de HTML, CSS, JavaScript, TypeScript, Git e GitHub.',
-      'skill.accessibility': 'Experiência digital — interfaces responsivas, acessibilidade, funcionamento offline e conteúdo multilíngue.',
-      'skill.ai-workflows': 'Fluxos assistidos por IA — ChatGPT, Claude e Gemini aplicados a pesquisa, escrita, análise, prototipação e revisão.',
-      'skill.testing': 'Testes de software — testes funcionais, regressão, casos-limite, reprodução de defeitos e verificação de correções.',
-      'skill.documentation': 'Documentação técnica — READMEs, decisões, procedimentos, limites conhecidos e instruções de validação.',
+      'skill.technical-support': 'Suporte técnico e Help Desk: diagnóstico, orientação passo a passo, triagem, acompanhamento e documentação de incidentes.',
+      'skill.customer-support': 'Atendimento ao cliente por e-mail, chat, telefone e mensagens, inclusive em inglês.',
+      'skill.crm': 'CRM e ATS: Salesforce, Sponte e Starhunter para registros, pipelines, atendimento, recrutamento e acompanhamento.',
+      'skill.remote-work': 'Operações remotas com organização de tarefas, prazos, documentação, rastreabilidade e múltiplos fluxos simultâneos.',
+      'skill.english': 'Inglês C2 para uso profissional, ensino, comunicação internacional, documentação técnica e escrita.',
+      'skill.teaching': 'Ensino com planejamento, adaptação de conteúdo, acompanhamento individual e feedback estruturado.',
+      'skill.recruiting': 'Recrutamento internacional com triagem, entrevistas, apresentação de candidatos e acompanhamento do processo seletivo.',
+      'skill.product-ops': 'Operações de produto: requisitos, conteúdo, suporte, documentação e melhoria contínua de produtos SaaS e educacionais.',
+      'skill.web-tools': 'Conhecimento prático de HTML, CSS, JavaScript, TypeScript, Git e GitHub.',
+      'skill.accessibility': 'Interfaces responsivas, acessibilidade, funcionamento offline e conteúdo multilíngue.',
+      'skill.ai-workflows': 'Uso de ChatGPT, Claude e Gemini em pesquisa, escrita, análise, prototipação e revisão.',
+      'skill.testing': 'Testes funcionais, regressão, casos-limite, reprodução de defeitos e verificação de correções.',
+      'skill.documentation': 'Documentação técnica com READMEs, decisões, procedimentos, limites conhecidos e instruções de validação.',
 
       // Skills individuais — Linguagens
       'skill.cpp': 'C++ — Programação de sistemas, gerenciamento manual de memória, estruturas de baixo nível. Linguagem principal em projetos como ATHENA (motor de wargaming determinístico) e Mini Deterministic Engine.',
@@ -71,7 +71,8 @@ const i18n = {
       'project.athena.desc': 'Motor de wargaming determinístico em C++17. 1238 plataformas militares, simulação Monte Carlo com Sobol indices, 6 sistemas de simulação (movimento, combate, logística, detecção, C2, IA tática). Zero dependências externas, bit-exact reproducibility, sem machine learning — regras explícitas e auditáveis.',
       'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinismo em precisão IEEE-754 (sem fast-math). ImGui embutido, geração de relatórios PDF sem lib externa. Dados auditáveis (Jane\'s, IISS, SIPRI). Builds Linux, Windows (MinGW) e macOS. Versão atual: 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
-      'project.computabilis.desc': 'Sistema de gestão financeira pessoal fácil.',
+      'project.computabilis.desc': 'Calculadora financeira pessoal feita para uso cotidiano no celular, com gráficos e recursos contábeis em português e inglês.',
+      'project.computabilis.long': 'Criei o Computabilis para ajudar minha companheira, estudante de contabilidade, a organizar os cálculos do início e do fim do mês. O projeto evolui a partir do uso real e do feedback dela.',
       'project.studium': 'Studium',
       'project.studium.desc': 'Ferramenta de auxílio na concentração para estudar.',
       'project.atlas': 'ATLAS',
@@ -242,19 +243,19 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'skills.product': 'Digital products',
       'skills.ai': 'AI and quality',
 
-      'skill.technical-support': 'Technical support and Help Desk — diagnosis, step-by-step guidance, triage, follow-up, and incident documentation.',
-      'skill.customer-support': 'Customer support — communication through email, chat, telephone, and messaging platforms, including in English.',
-      'skill.crm': 'CRM and ATS — Salesforce, Sponte, and Starhunter for records, pipelines, customer support, recruitment, and follow-up.',
-      'skill.remote-work': 'Remote operations — task organization, deadlines, documentation, traceability, and simultaneous workflows.',
-      'skill.english': 'C2 English — professional use, teaching, international communication, technical documentation, and writing.',
-      'skill.teaching': 'Teaching — planning, content adaptation, individual progress monitoring, and structured feedback.',
-      'skill.recruiting': 'International recruitment — screening, interviews, candidate presentation, and process follow-up.',
-      'skill.product-ops': 'Product operations — requirements, content, support, documentation, and continuous improvement for SaaS and educational products.',
-      'skill.web-tools': 'Web technologies — working knowledge of HTML, CSS, JavaScript, TypeScript, Git, and GitHub.',
-      'skill.accessibility': 'Digital experience — responsive interfaces, accessibility, offline operation, and multilingual content.',
-      'skill.ai-workflows': 'AI-assisted workflows — ChatGPT, Claude, and Gemini for research, writing, analysis, prototyping, and review.',
-      'skill.testing': 'Software testing — functional, regression, and edge-case testing, defect reproduction, and fix verification.',
-      'skill.documentation': 'Technical documentation — READMEs, decisions, procedures, known limitations, and validation instructions.',
+      'skill.technical-support': 'Technical support and Help Desk: diagnosis, step-by-step guidance, triage, follow-up, and incident documentation.',
+      'skill.customer-support': 'Customer support by email, chat, telephone, and messaging, including professional communication in English.',
+      'skill.crm': 'CRM and ATS: Salesforce, Sponte, and Starhunter for records, pipelines, customer support, recruitment, and follow-up.',
+      'skill.remote-work': 'Remote operations with task organization, deadlines, documentation, traceability, and simultaneous workflows.',
+      'skill.english': 'C2 English for professional use, teaching, international communication, technical documentation, and writing.',
+      'skill.teaching': 'Teaching with planning, content adaptation, individual progress monitoring, and structured feedback.',
+      'skill.recruiting': 'International recruitment with screening, interviews, candidate presentation, and process follow-up.',
+      'skill.product-ops': 'Product operations: requirements, content, support, documentation, and continuous improvement for SaaS and educational products.',
+      'skill.web-tools': 'Working knowledge of HTML, CSS, JavaScript, TypeScript, Git, and GitHub.',
+      'skill.accessibility': 'Responsive interfaces, accessibility, offline operation, and multilingual content.',
+      'skill.ai-workflows': 'Use of ChatGPT, Claude, and Gemini for research, writing, analysis, prototyping, and review.',
+      'skill.testing': 'Functional, regression, and edge-case testing, defect reproduction, and fix verification.',
+      'skill.documentation': 'Technical documentation covering READMEs, decisions, procedures, known limitations, and validation instructions.',
 
       // Individual skills — Languages
       'skill.cpp': 'C++ — Systems programming, manual memory management, low-level structures. Primary language in projects like ATHENA (deterministic wargaming engine) and Mini Deterministic Engine.',
@@ -285,7 +286,8 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'project.athena.desc': 'Deterministic wargaming engine in C++17. 1,238 military platforms, Monte Carlo simulation with Sobol indices, 6 simulation systems (movement, combat, logistics, detection, C2, tactical AI). Zero external dependencies, bit-exact reproducibility, no machine learning — explicit and auditable rules.',
       'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinism at IEEE-754 strict precision (no fast-math). ImGui embedded, PDF report generation without external libs. Auditable data (Jane\'s, IISS, SIPRI). Builds on Linux, Windows (MinGW), and macOS. Current version: 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
-      'project.computabilis.desc': 'Easy personal financial management system.',
+      'project.computabilis.desc': 'A mobile-first personal finance calculator with charts and accounting tools in Portuguese and English.',
+      'project.computabilis.long': 'I created Computabilis to help my partner, an accounting student, handle the calculations she makes at the beginning and end of each month. The project evolves through real use and her feedback.',
       'project.studium': 'Studium',
       'project.studium.desc': 'Tool to help concentration while studying.',
       'project.atlas': 'ATLAS',
@@ -570,6 +572,7 @@ To get in touch, use the "Contact" tab or visit my professional profiles.`
       {
         name: this.t('project.computabilis', language),
         description: this.t('project.computabilis.desc', language),
+        longDescription: this.t('project.computabilis.long', language),
         url: 'https://luddevergard3n.github.io/Computabilis/',
         tags: ['HTML', 'CSS', 'JavaScript']
       },
@@ -620,6 +623,33 @@ To get in touch, use the "Contact" tab or visit my professional profiles.`
         description: this.t('project.dashboard.desc', language),
         url: 'https://github.com/LuddEvergard3n/realtime-monitoring-dashboard',
         tags: ['Angular', 'TypeScript', 'WebSocket', 'Signals']
+      }
+    ];
+  },
+
+  /**
+   * Retorna uma seleção curta para a primeira visita.
+   * Reutiliza os dados completos para manter uma única fonte de verdade.
+   * @param {string} lang - Idioma
+   * @returns {Array} Projetos destacados
+   */
+  getFeatured(lang = null) {
+    const language = lang || this.currentLanguage;
+    const projects = this.getProjects(language);
+    const ecosystem = this.getEcosystem(language);
+    const normaUrl = window.PORTFOLIO_CONFIG.ratio.norma.url;
+
+    return [
+      projects[0],
+      projects[2],
+      { ...projects[3], featured: true },
+      projects[1],
+      ecosystem[5],
+      {
+        name: this.t('norma.title', language),
+        description: this.t('norma.subtitle', language),
+        url: normaUrl,
+        tags: ['SaaS', 'DOCX', 'PDF', 'ABNT']
       }
     ];
   },
