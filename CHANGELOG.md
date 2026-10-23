@@ -1,3 +1,7 @@
+# 2026-10-23 - Ratio institutional URL
+
+- Replaced the former Ratio site address with `https://ratiosistemas.com/` in the public link and structured data.
+
 # 2026-10-23 - Direct contact form delivery
 
 - Connected the Portuguese and English contact forms to Formspree.

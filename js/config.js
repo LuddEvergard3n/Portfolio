@@ -78,7 +78,7 @@ const CONFIG = {
   // URLs sao constantes; textos saem do i18n via Ratio.render() em ratio.js.
   ratio: {
     company: {
-      url: 'https://ratio-systems.hbludka.workers.dev/'
+      url: 'https://ratiosistemas.com/'
     },
     norma: {
       url: 'https://www.norma-app.com.br/',
