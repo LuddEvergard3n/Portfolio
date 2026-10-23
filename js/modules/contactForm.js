@@ -1,12 +1,11 @@
 /**
  * CONTACT FORM MODULE
  *
- * Monta um link mailto com os dados preenchidos e abre o aplicativo
- * de email do visitante. Nenhum dado e transmitido automaticamente.
+ * Sends the bilingual contact forms to Formspree without leaving the site.
  */
 
 const ContactForm = {
-  FALLBACK_EMAIL: 'hbrslud@gmail.com',
+  ENDPOINT: 'https://formspree.io/f/xpppagng',
 
   /**
    * Inicializa: registra submit handler nos dois forms (PT/EN).
@@ -21,10 +20,11 @@ const ContactForm = {
   /**
    * @private
    */
-  _handleSubmit(event, form) {
+  async _handleSubmit(event, form) {
     event.preventDefault();
 
     const lang = form.dataset.lang || 'pt';
+    const submitButton = form.querySelector('.contact-form-submit');
 
     // Honeypot: se o campo invisivel foi preenchido, eh bot. Silenciar
     // sem dar feedback (bots aprendem com erros).
@@ -40,23 +40,44 @@ const ContactForm = {
     }
 
     const data = new FormData(form);
-    const name = (data.get('name') || '').toString().trim();
-    const email = (data.get('email') || '').toString().trim();
-    const message = (data.get('message') || '').toString().trim();
-    const subject = encodeURIComponent(
-      lang === 'en'
-        ? `Portfolio contact from ${name}`
-        : `Contato pelo portfolio de ${name}`
-    );
-    const body = encodeURIComponent(
-      `${message}\n\n${name} <${email}>`
-    );
-    window.location.href = `mailto:${this.FALLBACK_EMAIL}?subject=${subject}&body=${body}`;
+    data.set('_subject', lang === 'en'
+      ? 'New portfolio contact'
+      : 'Novo contato pelo portfólio');
 
-    const status = lang === 'en'
-      ? 'Opening your email app...'
-      : 'Abrindo seu aplicativo de email...';
-    this._setStatus(form, status, 'pending');
+    if (submitButton) submitButton.disabled = true;
+    this._setStatus(
+      form,
+      lang === 'en' ? 'Sending...' : 'Enviando...',
+      'pending'
+    );
+
+    try {
+      const response = await fetch(this.ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
+      });
+
+      if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
+
+      form.reset();
+      this._setStatus(
+        form,
+        lang === 'en' ? 'Message sent successfully.' : 'Mensagem enviada com sucesso.',
+        'success'
+      );
+    } catch (error) {
+      console.error('[ContactForm] Submission failed:', error);
+      this._setStatus(
+        form,
+        lang === 'en'
+          ? 'Unable to send. Please try again.'
+          : 'Não foi possível enviar. Tente novamente.',
+        'error'
+      );
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   },
 
   /**

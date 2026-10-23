@@ -27,7 +27,7 @@ The project uses semantic HTML, CSS, and vanilla JavaScript. It has no runtime d
 - Project entries for NebulaKV, Kerana Gallery, ATHENA, and the educational ecosystem.
 - Clippy, Minesweeper, and Paint easter eggs.
 - Keyboard navigation, visible focus, ARIA labels, and screen-reader announcements.
-- Pre-generated PT/EN PDF resumes and a mailto contact form that does not transmit data automatically.
+- Pre-generated PT/EN PDF resumes and a bilingual contact form delivered through Formspree.
 
 ## Technology
 
