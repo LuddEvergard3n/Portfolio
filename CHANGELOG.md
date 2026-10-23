@@ -4,6 +4,10 @@
 - Added in-page sending, success, and error states without introducing a new dependency.
 - Updated the public copy and README to reflect direct delivery.
 
+# 2026-10-23 - Simpler portfolio title
+
+- Replaced the profile role line and sharing titles with `Portfólio` / `Portfolio`.
+
 # 2026-10-23 - Faster first visit and clearer project selection
 
 - Added a short bilingual profile with direct links to highlighted projects, static resumes, and contact details.
