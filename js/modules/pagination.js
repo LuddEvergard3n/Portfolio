@@ -283,9 +283,11 @@ const Pagination = {
     card.appendChild(header);
 
     // Descricao principal
-    const description = document.createElement('p');
-    description.textContent = item.description;
-    card.appendChild(description);
+    if (item.description) {
+      const description = document.createElement('p');
+      description.textContent = item.description;
+      card.appendChild(description);
+    }
 
     // Descricao estendida (apenas featured que fornecer)
     if (item.featured && item.longDescription) {

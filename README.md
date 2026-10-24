@@ -13,21 +13,23 @@ Interactive personal portfolio that recreates a Windows XP desktop with draggabl
 
 The project uses semantic HTML, CSS, and vanilla JavaScript. It has no runtime dependencies, framework, bundler, or build step. Portuguese and English content is centralized in one internationalization module.
 
-**Version:** 2.9.0
+**Version:** 2.10.0
 
 ## Highlights
 
-- Windows XP-inspired boot screen, desktop, taskbar, Start menu, and window chrome. The boot runs once per browser session and can be skipped with Escape.
+- Windows XP-inspired boot screen, desktop, taskbar, Start menu, and window chrome. The short boot runs once per browser session and can be skipped with Escape.
 - Draggable and resizable windows with minimize, maximize, restore, close, and touch support.
-- Runtime Portuguese and English switching, including the document `lang` attribute.
+- Runtime Portuguese and English switching from the taskbar, including the document `lang` attribute.
 - A short first-visit profile with direct links to highlighted work, the CV, and contact details.
-- Projects grouped into Highlights, Sites, Projects, and Educational Ecosystem tabs. Complete collections keep independent pagination.
+- Projects grouped into Highlights, Sites, Projects, and Educational Ecosystem tabs. Four highlights use short, verifiable case-study summaries.
 - Dedicated Ratio and Norma section with technical product information.
 - Documents window with SENAI, SCTEC, Cisco, Google, IBM, and ISC2 certificates.
 - Project entries for NebulaKV, Kerana Gallery, ATHENA, and the educational ecosystem.
 - Clippy, Minesweeper, and Paint easter eggs.
 - Keyboard navigation, visible focus, ARIA labels, and screen-reader announcements.
-- Pre-generated PT/EN PDF resumes and a bilingual contact form delivered through Formspree.
+- Pre-generated PT/EN PDF resumes and a bilingual contact form delivered through Formspree, with a plain HTML fallback.
+- Mobile layouts use readable content sizing, simplified browser chrome, and touch targets sized for direct interaction.
+- Large Windows icon sources are preserved while optimized WebP copies are served by the page.
 
 ## Technology
 
@@ -58,6 +60,16 @@ php -S localhost:8000
 ```
 
 Open `http://localhost:8000`.
+
+## Test
+
+The smoke test uses only Node.js standard-library modules:
+
+```bash
+node tests/smoke.mjs
+```
+
+It checks first-visit behavior, contact-form fallback, taskbar language controls, mobile rules, case-study content, and optimized icon assets.
 
 ## Architecture
 
@@ -104,6 +116,7 @@ portfolio-xp/
 |       |-- clippy.js         Clippy easter egg
 |       |-- minesweeper.js    Minesweeper easter egg
 |       `-- paint.js          Paint application
+|-- tests/                    Dependency-free smoke checks
 |-- cv/                       Readable HTML resumes and static PDF downloads
 `-- img/docs/                 Nine certificate PDFs
 ```
@@ -119,7 +132,7 @@ The project area has four collections:
 | Projects | `i18n.getProjects(lang)` |
 | Educational Ecosystem | `i18n.getEcosystem(lang)` |
 
-The Highlights collection reuses entries from the complete providers and adds Norma. Project cards may use `featured`, `wip`, `repo`, and `longDescription` fields. The Ratio/Norma and Documents sections use their own renderers and i18n providers.
+The Highlights collection reuses entries from the complete providers and adds Norma. Featured `longDescription` values use short Context, Contribution, Result, and Status summaries. Project cards may also use `wip` and `repo`. The Ratio/Norma and Documents sections use their own renderers and i18n providers.
 
 ### Add a project
 
@@ -166,7 +179,8 @@ Left and right arrow keys change the active page when focus is not inside a form
 ## Responsive behavior
 
 - Up to 900 px: windows fit the viewport with reduced margins.
-- Up to 600 px: windows use the available screen between the desktop and taskbar; pagination controls stack vertically.
+- Up to 700 px: content uses a readable mobile type scale, project tabs scroll horizontally, and primary controls expose 44 px touch targets.
+- Up to 600 px: windows use the available screen between the desktop and the taller mobile taskbar; decorative browser toolbar and address rows are hidden.
 - Window dragging and Paint support touch input.
 
 ## SEO

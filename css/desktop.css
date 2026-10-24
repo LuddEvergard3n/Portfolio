@@ -207,6 +207,10 @@
   white-space: nowrap;
 }
 
+.taskbar-item[hidden] {
+  display: none;
+}
+
 .taskbar-item img {
   width: var(--taskbar-icon-size);
   height: var(--taskbar-icon-size);
@@ -238,6 +242,33 @@
   color: var(--xp-white);
   font-size: 13px;
   font-weight: normal;
+}
+
+.lang-switch.taskbar-lang-switch {
+  margin-left: 0;
+  gap: 2px;
+}
+
+.lang-switch.taskbar-lang-switch button {
+  min-width: 30px;
+  height: 28px;
+  padding: 0 6px;
+  color: var(--xp-white);
+  background: #0d55b5;
+  border: 1px solid #8fc5ff;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.lang-switch.taskbar-lang-switch button.active {
+  color: #003b7a;
+  background: #fff;
+}
+
+.lang-switch.taskbar-lang-switch button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
 }
 
 /* ==================== MENU INICIAR ==================== */
@@ -442,12 +473,54 @@
 }
 
 @media (max-width: 600px) {
+  :root {
+    --taskbar-height: 48px;
+  }
+
+  .taskbar {
+    height: var(--taskbar-height);
+  }
+
+  .taskbar-programs {
+    min-width: 0;
+    margin-left: var(--spacing-xs);
+    gap: 2px;
+  }
+
+  .taskbar-item {
+    min-width: 36px;
+    min-height: 44px;
+    padding: 3px 7px;
+    justify-content: center;
+  }
+
   .taskbar-item span {
     display: none;
   }
   
   .start-button span {
     display: none;
+  }
+
+  .start-button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 3px 9px;
+  }
+
+  .system-tray {
+    padding: 2px 4px;
+    gap: 4px;
+  }
+
+  .lang-switch.taskbar-lang-switch button {
+    min-width: 44px;
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .system-tray .time {
+    font-size: 11px;
   }
   
   .start-menu-body {

@@ -479,15 +479,47 @@ strong {
     transform: none !important;
   }
   
-  .toolbar {
-    flex-wrap: wrap;
+  .toolbar,
+  .address-bar {
+    display: none;
   }
-  
-  .address-bar input {
+
+  .title-bar {
+    min-height: 44px;
+  }
+
+  .title-bar-left {
     min-width: 0;
+  }
+
+  .title-bar-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .minimize-btn,
+  .maximize-btn,
+  .close-btn {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .nav-bar {
+    gap: 4px;
+    overflow-x: auto;
+    padding: 4px;
+  }
+
+  .nav-tab {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
   }
   
   .content {
-    padding: var(--spacing-md);
+    padding: 14px;
   }
 }

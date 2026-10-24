@@ -48,12 +48,12 @@ const BootScreen = {
 
     this.timers.push(setTimeout(() => {
       bootScreen.classList.add('fade-out');
-    }, 2500));
+    }, 1100));
 
     this.timers.push(setTimeout(() => {
       bootScreen.classList.add('hidden');
       document.removeEventListener('keydown', this.handleKeydown);
-    }, 3000));
+    }, 1500));
   },
 
   /**

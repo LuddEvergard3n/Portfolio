@@ -13,11 +13,11 @@ const i18n = {
     pt: {
       // Sobre
       'about.title': 'Sobre Mim',
-      'about.description': 'Profissional bilíngue com experiência em produtos digitais, suporte técnico e ao cliente, educação, operações, SaaS e CRM. Uso fluxos assistidos por IA para transformar necessidades reais em soluções práticas, documentadas e verificáveis.',
+      'about.description': 'Trabalho com produtos digitais, suporte técnico e ao cliente, educação e operações. Minha experiência combina atendimento, organização, documentação e ferramentas criadas para necessidades reais.',
 
       // Filosofia de sistemas e decisoes de design
       'philosophy.heading': 'Como eu trabalho',
-      'philosophy.p1': 'Começo pelo problema e pelo usuário. Organizo requisitos, pesquiso alternativas e uso IA como ferramenta de criação e revisão, sem esconder sua participação no processo.',
+      'philosophy.p1': 'Começo pelo problema e pela pessoa que vai usar o resultado. Organizo o que precisa ser resolvido, comparo caminhos e monto a solução em etapas curtas.',
       'philosophy.p2': 'Assumo responsabilidade pelo resultado: testo fluxos críticos, reviso comportamento, documento decisões e mantenho limites claros entre o que foi validado e o que ainda é experimental.',
       'philosophy.p3': 'Prefiro soluções simples, locais e auditáveis. Evito dependências quando a plataforma já resolve o problema e priorizo acessibilidade, privacidade, desempenho e manutenção.',
       'philosophy.p4': 'Minha experiência em suporte, ensino e operações ajuda a traduzir necessidades técnicas para pessoas diferentes e a transformar feedback em melhorias práticas.',
@@ -26,7 +26,7 @@ const i18n = {
       'skills.support': 'Suporte e operações',
       'skills.communication': 'Comunicação e educação',
       'skills.product': 'Produtos digitais',
-      'skills.ai': 'Inteligência Artificial',
+      'skills.ai': 'Validação e documentação',
 
       'skill.technical-support': 'Suporte técnico e Help Desk: diagnóstico, orientação passo a passo, triagem, acompanhamento e documentação de incidentes.',
       'skill.customer-support': 'Atendimento ao cliente por e-mail, chat, telefone e mensagens, inclusive em inglês.',
@@ -38,7 +38,7 @@ const i18n = {
       'skill.product-ops': 'Operações de produto: requisitos, conteúdo, suporte, documentação e melhoria contínua de produtos SaaS e educacionais.',
       'skill.web-tools': 'Conhecimento prático de HTML, CSS, JavaScript, TypeScript, Git e GitHub.',
       'skill.accessibility': 'Interfaces responsivas, acessibilidade, funcionamento offline e conteúdo multilíngue.',
-      'skill.ai-workflows': 'Uso de ChatGPT, Claude e Gemini em pesquisa, escrita, análise, prototipação e revisão.',
+      'skill.ai-workflows': 'Uso IA quando ela poupa trabalho em pesquisa ou prototipação; depois confiro, testo e reescrevo o que for necessário.',
       'skill.testing': 'Testes funcionais, regressão, casos-limite, reprodução de defeitos e verificação de correções.',
       'skill.documentation': 'Documentação técnica com READMEs, decisões, procedimentos, limites conhecidos e instruções de validação.',
 
@@ -69,10 +69,10 @@ const i18n = {
       // Projetos
       'project.athena': 'ATHENA',
       'project.athena.desc': 'Motor de wargaming determinístico em C++17. 1238 plataformas militares, simulação Monte Carlo com Sobol indices, 6 sistemas de simulação (movimento, combate, logística, detecção, C2, IA tática). Zero dependências externas, bit-exact reproducibility, sem machine learning — regras explícitas e auditáveis.',
-      'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinismo em precisão IEEE-754 (sem fast-math). ImGui embutido, geração de relatórios PDF sem lib externa. Dados auditáveis (Jane\'s, IISS, SIPRI). Builds Linux, Windows (MinGW) e macOS. Versão atual: 1.1.2 "Database".',
+      'project.athena.long': 'Contexto: simulações táticas complexas precisam ser reproduzíveis e auditáveis.\nMinha participação: defini requisitos, organizei arquitetura, dados e critérios de validação, além de testar os fluxos críticos.\nResultado: motor C++17 com 1.238 plataformas, seis subsistemas, Monte Carlo e reprodução bit-exact.\nEstado: projeto técnico publicado, versão 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
       'project.computabilis.desc': 'Calculadora financeira pessoal feita para uso cotidiano no celular, com gráficos e recursos contábeis em português e inglês.',
-      'project.computabilis.long': 'Criei o Computabilis para ajudar minha companheira, estudante de contabilidade, a organizar os cálculos do início e do fim do mês. O projeto evolui a partir do uso real e do feedback dela.',
+      'project.computabilis.long': 'Contexto: minha companheira, estudante de contabilidade, precisava organizar cálculos recorrentes no celular.\nMinha participação: transformei o uso cotidiano dela em fluxos simples, bilíngues e fáceis de revisar.\nResultado: calculadora financeira com gráficos e recursos contábeis usada no início e no fim do mês.\nEstado: em evolução com base no uso real e no feedback dela.',
       'project.studium': 'Studium',
       'project.studium.desc': 'Ferramenta de auxílio na concentração para estudar.',
       'project.atlas': 'ATLAS',
@@ -93,6 +93,7 @@ const i18n = {
       'project.nebulakv.desc': 'Banco de dados de strings em memória escrito em Go, com servidor TCP, protocolo RESP2, expiração, journal append-only, autenticação e replicação.',
       'project.kerana': 'Kerana Gallery',
       'project.kerana.desc': 'Portal de aprovação de conteúdo para clientes, com planejamento mensal, D1/R2, autenticação e controles de segurança centralizados no Cloudflare Worker.',
+      'project.kerana.long': 'Contexto: clientes precisavam revisar materiais e acompanhar o planejamento mensal em um só lugar.\nMinha participação: organizei requisitos, fluxos de aprovação, testes e documentação operacional.\nResultado: portal publicado com autenticação, armazenamento D1/R2 e controles centralizados no Cloudflare Worker.\nEstado: solução publicada e mantida para uso com clientes.',
 
       // Sites
       'site.law': 'Landing Advocacia Exemplo',
@@ -132,6 +133,7 @@ const i18n = {
       'ratio.site.desc': 'Site da empresa Ratio Sistemas Educacionais. HTML/CSS/JS puros, cinco camadas CSS, três módulos JS. Identidade: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; tipografia Cormorant Garamond + Source Sans 3.',
       'norma.title': 'Norma — Plataforma ABNT',
       'norma.subtitle': 'Estruturação documental acadêmica 100% no navegador',
+      'norma.case.long': 'Contexto: estudantes perdem tempo ajustando trabalhos às normas acadêmicas.\nMinha participação: organizei requisitos, fluxos de documento, testes e manutenção do produto.\nResultado: plataforma que estrutura o trabalho e gera DOCX e PDF diretamente no navegador.\nEstado: produto comercial publicado e em evolução.',
       'norma.what.title': 'O que é',
       'norma.what.text': 'Norma é uma aplicação web estática (HTML + ES Modules) que gera documentos .docx conformes NBR 14724:2011 inteiramente no navegador. O servidor nunca toca o conteúdo do documento — ele só autentica o usuário e registra downloads.',
       'norma.who.title': 'Para quem',
@@ -218,7 +220,7 @@ const i18n = {
 
 Trabalho com produtos digitais, suporte técnico e ao cliente, educação e operações. Tenho inglês C2 e experiência com SaaS, CRM, recrutamento internacional e ensino de inglês e História.
 
-Uso ferramentas de inteligência artificial ao longo dos meus projetos para pesquisar, estruturar, criar e revisar. Meu papel é definir o problema, orientar o processo, testar o resultado, documentar decisões e assumir responsabilidade pelo que publico.
+Quando IA ajuda a pesquisar ou acelerar um rascunho, eu uso. Depois confiro, testo e reescrevo o que for necessário antes de publicar.
 
 Este portfólio reúne projetos práticos, certificados verificáveis e ferramentas criadas para necessidades reais. A interface inspirada no Windows XP mantém a experiência familiar, acessível e direta.
 
@@ -228,11 +230,11 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
     en: {
       // About
       'about.title': 'About Me',
-      'about.description': 'Bilingual professional with experience in digital products, technical and customer support, education, operations, SaaS, and CRM. I use AI-assisted workflows to turn real needs into practical, documented, and verifiable solutions.',
+      'about.description': 'I work with digital products, technical and customer support, education, and operations. My background combines service, organization, documentation, and tools built for real needs.',
 
       // Systems philosophy and design decisions
       'philosophy.heading': 'How I work',
-      'philosophy.p1': 'I start with the problem and the user. I organize requirements, research alternatives, and use AI as a creation and review tool without hiding its role in the process.',
+      'philosophy.p1': 'I start with the problem and the person who will use the result. I organize what needs to be solved, compare approaches, and build the solution in short stages.',
       'philosophy.p2': 'I remain responsible for the result: I test critical workflows, review behaviour, document decisions, and distinguish validated functionality from experimental work.',
       'philosophy.p3': 'I prefer simple, local, and auditable solutions. I avoid dependencies when the platform already solves the problem and prioritize accessibility, privacy, performance, and maintainability.',
       'philosophy.p4': 'My background in support, teaching, and operations helps me explain technical subjects to different audiences and turn feedback into practical improvements.',
@@ -241,7 +243,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'skills.support': 'Support and operations',
       'skills.communication': 'Communication and education',
       'skills.product': 'Digital products',
-      'skills.ai': 'AI and quality',
+      'skills.ai': 'Validation and documentation',
 
       'skill.technical-support': 'Technical support and Help Desk: diagnosis, step-by-step guidance, triage, follow-up, and incident documentation.',
       'skill.customer-support': 'Customer support by email, chat, telephone, and messaging, including professional communication in English.',
@@ -253,7 +255,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'skill.product-ops': 'Product operations: requirements, content, support, documentation, and continuous improvement for SaaS and educational products.',
       'skill.web-tools': 'Working knowledge of HTML, CSS, JavaScript, TypeScript, Git, and GitHub.',
       'skill.accessibility': 'Responsive interfaces, accessibility, offline operation, and multilingual content.',
-      'skill.ai-workflows': 'Use of ChatGPT, Claude, and Gemini for research, writing, analysis, prototyping, and review.',
+      'skill.ai-workflows': 'I use AI when it saves time in research or prototyping; then I check, test, and rewrite whatever is needed.',
       'skill.testing': 'Functional, regression, and edge-case testing, defect reproduction, and fix verification.',
       'skill.documentation': 'Technical documentation covering READMEs, decisions, procedures, known limitations, and validation instructions.',
 
@@ -284,10 +286,10 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       // Projects
       'project.athena': 'ATHENA',
       'project.athena.desc': 'Deterministic wargaming engine in C++17. 1,238 military platforms, Monte Carlo simulation with Sobol indices, 6 simulation systems (movement, combat, logistics, detection, C2, tactical AI). Zero external dependencies, bit-exact reproducibility, no machine learning — explicit and auditable rules.',
-      'project.athena.long': 'Advanced Tactical & Heuristic Engagement & Network Analyzer. Determinism at IEEE-754 strict precision (no fast-math). ImGui embedded, PDF report generation without external libs. Auditable data (Jane\'s, IISS, SIPRI). Builds on Linux, Windows (MinGW), and macOS. Current version: 1.1.2 "Database".',
+      'project.athena.long': 'Context: complex tactical simulations need to be reproducible and auditable.\nMy contribution: I defined requirements, organized the architecture, data, and validation criteria, and tested critical workflows.\nResult: a C++17 engine with 1,238 platforms, six subsystems, Monte Carlo analysis, and bit-exact replay.\nStatus: published technical project, version 1.1.2 "Database".',
       'project.computabilis': 'Computabilis',
       'project.computabilis.desc': 'A mobile-first personal finance calculator with charts and accounting tools in Portuguese and English.',
-      'project.computabilis.long': 'I created Computabilis to help my partner, an accounting student, handle the calculations she makes at the beginning and end of each month. The project evolves through real use and her feedback.',
+      'project.computabilis.long': 'Context: my partner, an accounting student, needed to organize recurring calculations on her phone.\nMy contribution: I turned her daily use into simple, bilingual, and easy-to-review workflows.\nResult: a financial calculator with charts and accounting tools used at the beginning and end of each month.\nStatus: evolving through real use and her feedback.',
       'project.studium': 'Studium',
       'project.studium.desc': 'Tool to help concentration while studying.',
       'project.atlas': 'ATLAS',
@@ -308,6 +310,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'project.nebulakv.desc': 'In-memory string database written in Go, with a TCP server, RESP2 protocol, expiration, append-only journal, authentication, and replication.',
       'project.kerana': 'Kerana Gallery',
       'project.kerana.desc': 'Client content-approval portal with monthly planning, D1/R2 storage, authentication, and centralized security controls in a Cloudflare Worker.',
+      'project.kerana.long': 'Context: clients needed one place to review materials and follow monthly planning.\nMy contribution: I organized requirements, approval workflows, testing, and operational documentation.\nResult: a published portal with authentication, D1/R2 storage, and centralized controls in a Cloudflare Worker.\nStatus: published and maintained for client use.',
 
       // Sites
       'site.law': 'Law Firm Landing Example',
@@ -347,6 +350,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'ratio.site.desc': 'Ratio Sistemas Educacionais company site. Pure HTML/CSS/JS, five CSS layers, three JS modules. Identity: ivory #F3EBDD, navy #1A2230, bronze #8A6A3B; typography Cormorant Garamond + Source Sans 3.',
       'norma.title': 'Norma — ABNT Platform',
       'norma.subtitle': 'Academic document structuring, 100% in the browser',
+      'norma.case.long': 'Context: students lose time adjusting academic work to formatting standards.\nMy contribution: I organized requirements, document workflows, testing, and product maintenance.\nResult: a platform that structures academic work and generates DOCX and PDF directly in the browser.\nStatus: published commercial product under active development.',
       'norma.what.title': 'What it is',
       'norma.what.text': 'Norma is a static web application (HTML + ES Modules) that generates .docx documents compliant with NBR 14724:2011 entirely in the browser. The server never touches document content — it only authenticates users and records downloads.',
       'norma.who.title': 'Who it\'s for',
@@ -433,7 +437,7 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
 
 I work with digital products, technical and customer support, education, and operations. I have C2 English and experience with SaaS, CRM, international recruitment, and English and History teaching.
 
-I use artificial-intelligence tools throughout my projects for research, structure, creation, and review. My role is to define the problem, guide the process, test the result, document decisions, and remain responsible for what I publish.
+When AI helps with research or speeds up a draft, I use it. Then I check, test, and rewrite whatever is needed before publishing.
 
 This portfolio brings together practical projects, verifiable certificates, and tools created for real needs. Its Windows XP-inspired interface keeps the experience familiar, accessible, and direct.
 
@@ -566,6 +570,7 @@ To get in touch, use the "Contact" tab or visit my professional profiles.`
       {
         name: this.t('project.kerana', language),
         description: this.t('project.kerana.desc', language),
+        longDescription: this.t('project.kerana.long', language),
         url: 'https://kerana-gallery.francisorg.chatgpt.site/',
         tags: ['TypeScript', 'React', 'Cloudflare Workers', 'D1', 'R2']
       },
@@ -640,17 +645,19 @@ To get in touch, use the "Contact" tab or visit my professional profiles.`
     const normaUrl = window.PORTFOLIO_CONFIG.ratio.norma.url;
 
     return [
-      projects[0],
-      projects[2],
-      { ...projects[3], featured: true },
-      projects[1],
-      ecosystem[5],
+      { ...projects[0], description: '' },
+      { ...projects[2], description: '', featured: true },
+      { ...projects[3], description: '', featured: true },
       {
         name: this.t('norma.title', language),
-        description: this.t('norma.subtitle', language),
+        description: '',
+        longDescription: this.t('norma.case.long', language),
         url: normaUrl,
-        tags: ['SaaS', 'DOCX', 'PDF', 'ABNT']
-      }
+        tags: ['SaaS', 'DOCX', 'PDF', 'ABNT'],
+        featured: true
+      },
+      projects[1],
+      ecosystem[5]
     ];
   },
   

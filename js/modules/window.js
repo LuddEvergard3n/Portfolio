@@ -82,6 +82,7 @@ const WindowManager = {
     // Atualizar taskbar
     const taskbarItem = document.querySelector(`[data-window-id="${id}"].taskbar-item`);
     if (taskbarItem) {
+      taskbarItem.hidden = false;
       taskbarItem.classList.add('active');
     }
   },
@@ -101,6 +102,7 @@ const WindowManager = {
     const taskbarItem = document.querySelector(`[data-window-id="${id}"].taskbar-item`);
     if (taskbarItem) {
       taskbarItem.classList.remove('active');
+      if (id !== 'main') taskbarItem.hidden = true;
     }
   },
   

@@ -49,14 +49,19 @@ const Language = {
     // Atualizar botões
     document.querySelectorAll('.lang-switch button').forEach(btn => {
       btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
     });
     
-    if (event && event.target) {
-      event.target.classList.add('active');
+    if (event && event.currentTarget) {
+      event.currentTarget.classList.add('active');
+      event.currentTarget.setAttribute('aria-pressed', 'true');
     } else {
       // Se não houver evento, atualizar manualmente
       const btn = document.querySelector(`.lang-switch button[onclick*="${lang}"]`);
-      if (btn) btn.classList.add('active');
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+      }
     }
     
     // Resetar paginação e re-renderizar a aba ativa

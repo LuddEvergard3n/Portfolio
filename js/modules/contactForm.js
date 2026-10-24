@@ -5,8 +5,6 @@
  */
 
 const ContactForm = {
-  ENDPOINT: 'https://formspree.io/f/xpppagng',
-
   /**
    * Inicializa: registra submit handler nos dois forms (PT/EN).
    */
@@ -52,7 +50,7 @@ const ContactForm = {
     );
 
     try {
-      const response = await fetch(this.ENDPOINT, {
+      const response = await fetch(form.action, {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' }

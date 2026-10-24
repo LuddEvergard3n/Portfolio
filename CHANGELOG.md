@@ -1,3 +1,14 @@
+# 2026-10-24 - Mobile, first visit, and portfolio evidence
+
+- Improved mobile readability, touch targets, project-tab navigation, and taskbar spacing while preserving the Windows XP design.
+- Moved the PT/EN switch to the taskbar.
+- Shortened the first-session boot and stopped opening Notepad automatically.
+- Reduced repeated AI-focused wording and kept one plain-language disclosure in the professional profile.
+- Added short Context, Contribution, Result, and Status summaries to ATHENA, Kerana Gallery, Computabilis, and Norma.
+- Added native HTML fallback and Formspree processing disclosure to both contact forms.
+- Replaced nine oversized ICO references with optimized WebP copies while retaining the originals.
+- Added a dependency-free smoke test for the updated behavior.
+
 # 2026-10-23 - Ratio institutional URL
 
 - Replaced the former Ratio site address with `https://ratiosistemas.com/` in the public link and structured data.

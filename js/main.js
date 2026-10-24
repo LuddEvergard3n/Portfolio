@@ -67,11 +67,6 @@
 
     bootOrder.forEach(initModule);
 
-    // Abrir Notepad automaticamente após o boot.
-    // 300ms é um delay para a animacao da boot screen nao sobrepor.
-    if (window.Notepad && typeof window.Notepad.open === 'function') {
-      setTimeout(() => window.Notepad.open(), 300);
-    }
   });
 
   // Menu de contexto nativo: bloqueamos apenas dentro das células do

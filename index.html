@@ -78,10 +78,10 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/boot.css?v=20261023b">
-    <link rel="stylesheet" href="css/desktop.css">
-    <link rel="stylesheet" href="css/window.css?v=20261023b">
-    <link rel="stylesheet" href="css/content.css?v=20261023b">
+    <link rel="stylesheet" href="css/boot.css?v=20261024">
+    <link rel="stylesheet" href="css/desktop.css?v=20261024">
+    <link rel="stylesheet" href="css/window.css?v=20261024">
+    <link rel="stylesheet" href="css/content.css?v=20261024">
     <link rel="stylesheet" href="css/eastereggs.css">
     <link rel="stylesheet" href="css/paint.css">
     <link rel="stylesheet" href="css/notepad.css">
@@ -114,13 +114,13 @@
 <div class="desktop-icons" role="navigation" aria-label="Desktop icons">
     <!-- Linha 1 -->
     <a class="desktop-icon" href="#" onclick="event.preventDefault();" role="button" tabindex="0" aria-label="Meu Computador">
-        <img src="img/My_Computer.ico" class="icon" alt="Meu Computador">
+        <img src="img/my-computer.webp" class="icon" alt="Meu Computador">
         <span class="lang pt">Meu Computador</span>
         <span class="lang en hidden">My Computer</span>
     </a>
     
     <a class="desktop-icon easter-egg" href="#" onclick="openDocs(); return false;" role="button" tabindex="0" aria-label="Certificados">
-        <img src="img/Folder_Closed.ico" class="icon" alt="Certificados">
+        <img src="img/folder-closed.webp" class="icon" alt="Certificados">
         <span class="lang pt">Certificados</span>
         <span class="lang en hidden">Certificates</span>
     </a>
@@ -177,38 +177,38 @@
     
     <!-- Linha 4 -->
     <a class="desktop-icon" href="#" onclick="event.preventDefault();">
-        <img src="img/My_Network_Places.ico" class="icon" alt="Meus Locais de Rede">
+        <img src="img/network-places.webp" class="icon" alt="Meus Locais de Rede">
         <span class="lang pt">Meus Locais de Rede</span>
         <span class="lang en hidden">My Network Places</span>
     </a>
     
     <a class="desktop-icon" href="#" onclick="event.preventDefault();">
-        <img src="img/System_Properties.ico" class="icon" alt="Painel de Controle">
+        <img src="img/system-properties.webp" class="icon" alt="Painel de Controle">
         <span class="lang pt">Painel de Controle</span>
         <span class="lang en hidden">Control Panel</span>
     </a>
     
     <a class="desktop-icon easter-egg" href="#" onclick="openWebcam(); return false;" role="button" tabindex="0" aria-label="Câmera e Scanner">
-        <img src="img/Camera.ico" class="icon" alt="Câmera">
+        <img src="img/camera.webp" class="icon" alt="Câmera">
         <span class="lang pt">Câmera e Scanner</span>
         <span class="lang en hidden">Camera and Scanner</span>
     </a>
     
     <!-- Linha 5 -->
     <a class="desktop-icon" href="#" onclick="event.preventDefault();">
-        <img src="img/Game_Controller.ico" class="icon" alt="Controles de Jogo">
+        <img src="img/game-controller.webp" class="icon" alt="Controles de Jogo">
         <span class="lang pt">Controles de Jogo</span>
         <span class="lang en hidden">Game Controllers</span>
     </a>
     
     <a class="desktop-icon" href="#" onclick="event.preventDefault();">
-        <img src="img/Phone.ico" class="icon" alt="Telefone">
+        <img src="img/phone.webp" class="icon" alt="Telefone">
         <span class="lang pt">Telefone e Modem</span>
         <span class="lang en hidden">Phone and Modem</span>
     </a>
     
     <a class="desktop-icon" href="#" onclick="event.preventDefault();">
-        <img src="img/User_Support.ico" class="icon" alt="Suporte">
+        <img src="img/user-support.webp" class="icon" alt="Suporte">
         <span class="lang pt">Central de Ajuda</span>
         <span class="lang en hidden">Help and Support</span>
     </a>
@@ -308,11 +308,6 @@
         <button class="toolbar-btn"><span class="lang pt">Início</span><span class="lang en hidden">Home</span></button>
         <div class="toolbar-sep"></div>
         <button class="toolbar-btn"><span class="lang pt">Favoritos</span><span class="lang en hidden">Favorites</span></button>
-        <div class="toolbar-sep"></div>
-        <div class="lang-switch">
-            <button class="active" onclick="setLang('pt', event)">PT</button>
-            <button onclick="setLang('en', event)">EN</button>
-        </div>
     </div>
 
     <!-- Address Bar -->
@@ -491,7 +486,8 @@
                 <div class="contact-form-block">
                     <h3>Escrever email</h3>
                     <p class="contact-form-help">Preencha os campos para enviar sua mensagem diretamente.</p>
-                    <form id="contact-form-pt" class="contact-form" data-lang="pt" novalidate>
+                    <p class="contact-form-privacy">O envio é processado pelo <a href="https://formspree.io/" target="_blank" rel="noopener noreferrer">Formspree</a> para entregar a mensagem.</p>
+                    <form id="contact-form-pt" class="contact-form" data-lang="pt" action="https://formspree.io/f/xpppagng" method="POST">
                         <label class="contact-form-row">
                             <span>Nome</span>
                             <input type="text" name="name" required maxlength="120" autocomplete="name">
@@ -548,7 +544,8 @@
                 <div class="contact-form-block">
                     <h3>Write an email</h3>
                     <p class="contact-form-help">Fill in the fields to send your message directly.</p>
-                    <form id="contact-form-en" class="contact-form" data-lang="en" novalidate>
+                    <p class="contact-form-privacy">Submissions are processed by <a href="https://formspree.io/" target="_blank" rel="noopener noreferrer">Formspree</a> to deliver the message.</p>
+                    <form id="contact-form-en" class="contact-form" data-lang="en" action="https://formspree.io/f/xpppagng" method="POST">
                         <label class="contact-form-row">
                             <span>Name</span>
                             <input type="text" name="name" required maxlength="120" autocomplete="name">
@@ -588,7 +585,7 @@
 <div class="window" id="webcam-window" data-window-id="webcam" style="width: 580px; height: 640px; top: 60px; left: 200px; display: none;">
     <div class="title-bar">
         <div class="title-bar-text">
-            <img src="img/Camera.ico" alt="Câmera" style="width: 16px; height: 16px;">
+            <img src="img/camera.webp" alt="Câmera" style="width: 16px; height: 16px;">
             <span class="window-title lang pt">Câmera e Scanner</span>
             <span class="window-title lang en hidden">Camera and Scanner</span>
         </div>
@@ -613,7 +610,7 @@
 <div class="window" id="docs-window" data-window-id="docs" style="width: 720px; height: 560px; top: 70px; left: 180px; display: none;">
     <div class="title-bar">
         <div class="title-bar-text">
-            <img src="img/Folder_Open.ico" alt="Documentos" style="width: 16px; height: 16px;">
+            <img src="img/folder-open.webp" alt="Documentos" style="width: 16px; height: 16px;">
             <span class="window-title lang pt">Certificados</span>
             <span class="window-title lang en hidden">Certificates</span>
         </div>
@@ -729,38 +726,42 @@
             <span class="lang pt">Meu Portfólio</span>
             <span class="lang en hidden">My Portfolio</span>
         </div>
-        <div class="taskbar-item active" data-window-id="notepad" onclick="toggleWindow('notepad')">
+        <div class="taskbar-item" data-window-id="notepad" onclick="toggleWindow('notepad')" hidden>
             <img src="img/notepad-icon.webp" alt="Notepad">
             <span class="lang pt">Sobre Mim</span>
             <span class="lang en hidden">About Me</span>
         </div>
     </div>
     <div class="system-tray">
+        <div class="lang-switch taskbar-lang-switch" role="group" aria-label="Idioma / Language">
+            <button type="button" class="active" aria-label="Português" aria-pressed="true" onclick="setLang('pt', event)">PT</button>
+            <button type="button" aria-label="English" aria-pressed="false" onclick="setLang('en', event)">EN</button>
+        </div>
         <span class="time" id="clock">00:00</span>
     </div>
 </div>
 
 <!-- ==================== SCRIPTS ==================== -->
-<script src="js/modules/i18n.js?v=20261023b"></script>
+<script src="js/modules/i18n.js?v=20261024"></script>
 <script src="js/config.js?v=20261023b"></script>
-<script src="js/modules/boot.js?v=20261023b"></script>
+<script src="js/modules/boot.js?v=20261024"></script>
 <script src="js/modules/clock.js"></script>
-<script src="js/modules/language.js"></script>
+<script src="js/modules/language.js?v=20261024"></script>
 <script src="js/modules/startMenu.js"></script>
-<script src="js/modules/pagination.js?v=20261023b"></script>
+<script src="js/modules/pagination.js?v=20261024"></script>
 <script src="js/modules/navigation.js?v=20261023b"></script>
-<script src="js/modules/window.js"></script>
+<script src="js/modules/window.js?v=20261024"></script>
 <script src="js/modules/accessibility.js"></script>
 <script src="js/modules/paint.js"></script>
 <script src="js/modules/notepad.js"></script>
 <script src="js/modules/docs.js"></script>
 <script src="js/modules/webcam.js"></script>
 <script src="js/modules/ratio.js"></script>
-<script src="js/modules/contactForm.js?v=20261023c"></script>
+<script src="js/modules/contactForm.js?v=20261024"></script>
 <script src="js/modules/clippy.js"></script>
 <script src="js/modules/minesweeper.js"></script>
 <script src="js/modules/desktopGrid.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20261024"></script>
 
 </body>
 </html>
