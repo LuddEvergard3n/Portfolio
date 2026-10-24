@@ -124,6 +124,8 @@ const i18n = {
       'ecosystem.aristoteles.desc': 'Sistema de Filosofia para EM e início do ES. 9 módulos, 42 lições, 37 textos primários anotados. Foco em prática filosófica: reconstruir argumentos, classificar posições, identificar objeções. 70-90h de conteúdo.',
       'ecosystem.darwin': 'Darwin',
       'ecosystem.darwin.desc': 'Atlas dos Processos da Vida — sistema de Biologia por escalas (molecular → ecológica) e relações. 6 módulos v1: célula, DNA/hereditariedade, respiração/fotossíntese, sistemas do corpo, ecologia, evolução.',
+      'ecosystem.cicero': 'Cícero',
+      'ecosystem.cicero.desc': 'Guia para a vida adulta destinado a brasileiros de 16 a 24 anos, com 65 trilhas em sete áreas, busca, progresso local, recursos de acessibilidade e funcionamento como PWA.',
       'ecosystem.wip': 'Em desenvolvimento',
 
       // Ratio (empresa + Norma)
@@ -341,6 +343,8 @@ Se quiser conversar, use a aba "Contato" ou consulte meus perfis profissionais.`
       'ecosystem.aristoteles.desc': 'Philosophy system for high school and early college. 9 modules, 42 lessons, 37 annotated primary texts. Focus on philosophical practice: reconstruct arguments, classify positions, identify objections. 70-90h of content.',
       'ecosystem.darwin': 'Darwin',
       'ecosystem.darwin.desc': 'Atlas of Life Processes — Biology system by scales (molecular → ecological) and relations. 6 v1 modules: cell, DNA/heredity, respiration/photosynthesis, body systems, ecology, evolution.',
+      'ecosystem.cicero': 'Cícero',
+      'ecosystem.cicero.desc': 'A practical adult-life guide for Brazilians aged 16 to 24, with 65 learning paths across seven areas, search, local progress tracking, accessibility features, and PWA support.',
       'ecosystem.wip': 'Work in progress',
 
       // Ratio (company + Norma)
@@ -764,6 +768,13 @@ To get in touch, use the "Contact" tab or visit my professional profiles.`
         repo: 'https://github.com/LuddEvergard3n/darwin',
         tags: ['Biology', 'Scales', 'Processes'],
         wip: true
+      },
+      {
+        name: this.t('ecosystem.cicero', language),
+        description: this.t('ecosystem.cicero.desc', language),
+        url: 'https://luddevergard3n.github.io/Cicero/',
+        repo: 'https://github.com/LuddEvergard3n/Cicero',
+        tags: ['Adult Life', '65 Paths', 'Local-first', 'PWA']
       }
     ];
   },

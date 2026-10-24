@@ -1,3 +1,7 @@
+# 2026-10-24 - Cícero ecosystem entry
+
+- Added Cícero to the educational ecosystem in Portuguese and English, with its public site and repository links.
+
 # 2026-10-24 - Icon transparency fix
 
 - Rebuilt the optimized desktop icons through the native Windows ICO decoder so their transparency masks are preserved.
