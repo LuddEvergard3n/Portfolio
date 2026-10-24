@@ -13,7 +13,7 @@ Interactive personal portfolio that recreates a Windows XP desktop with draggabl
 
 The project uses semantic HTML, CSS, and vanilla JavaScript. It has no runtime dependencies, framework, bundler, or build step. Portuguese and English content is centralized in one internationalization module.
 
-**Version:** 2.10.0
+**Version:** 2.10.1
 
 ## Highlights
 

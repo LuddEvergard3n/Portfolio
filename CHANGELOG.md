@@ -1,3 +1,8 @@
+# 2026-10-24 - Icon transparency fix
+
+- Rebuilt the optimized desktop icons through the native Windows ICO decoder so their transparency masks are preserved.
+- Versioned the icon URLs to prevent browsers from reusing the broken cached images.
+
 # 2026-10-24 - Mobile, first visit, and portfolio evidence
 
 - Improved mobile readability, touch targets, project-tab navigation, and taskbar spacing while preserving the Windows XP design.
